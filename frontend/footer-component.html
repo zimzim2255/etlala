@@ -1,0 +1,137 @@
+<link rel="stylesheet" href="/frontend/style/footer-styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <!-- Shop Online Column -->
+        <div class="footer-column">
+            <h4 class="footer-column-title">Shop Online</h4>
+            <ul class="footer-links">
+                <li><a href="#" class="footer-link">Collectors' Items</a></li>
+                <li><a href="#" class="footer-link">Pendants</a></li>
+                <li><a href="#" class="footer-link">Rings</a></li>
+                <li><a href="#" class="footer-link">Accessories</a></li>
+                <li><a href="#" class="footer-link">Bracelets</a></li>
+                <li><a href="#" class="footer-link">Chokers & Colliers</a></li>
+            </ul>
+        </div>
+
+        <!-- More Products Column -->
+        <div class="footer-column">
+            <h4 class="footer-column-title">&nbsp;</h4>
+            <ul class="footer-links">
+                <li><a href="#" class="footer-link">Cufflinks</a></li>
+                <li><a href="#" class="footer-link">Earrings</a></li>
+                <li><a href="#" class="footer-link">Men's Accessories</a></li>
+                <li><a href="#" class="footer-link">Pendant Tools</a></li>
+                <li><a href="#" class="footer-link">Pendants of the Year</a></li>
+                <li><a href="#" class="footer-link">Zodiac</a></li>
+            </ul>
+        </div>
+
+        <!-- Secure Purchases Column -->
+        <div class="footer-column">
+            <h4 class="footer-column-title">Secure Purchases</h4>
+            <ul class="footer-links">
+                <li><a href="#" class="footer-link">FAQs</a></li>
+                <li><a href="#" class="footer-link">Payment & Security</a></li>
+                <li><a href="#" class="footer-link">Shipping & Returns</a></li>
+                <li><a href="#" class="footer-link">Care & Repair</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact Us Column -->
+        <div class="footer-column">
+            <h4 class="footer-column-title">Contact Us</h4>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-label">E:</span>
+                    <a href="mailto:etlala@.com" class="contact-value">etlala@.com</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">T:</span>
+                    <a href="tel:++212000000" class="contact-value">+212000000000</a>
+                </div>
+            </div>
+            <div class="footer-column" style="margin-top: 30px;">
+                <h4 class="footer-column-title">Join The Team</h4>
+            </div>
+        </div>
+
+        <!-- Newsletter Section (Full Width) -->
+        <div class="footer-column" style="grid-column: 1 / -1; margin-top: 20px;">
+            <div class="newsletter-section">
+                <h3 class="newsletter-title">Etlala</h3>
+                <form class="newsletter-form" action="#" method="post">
+                    <input 
+                        type="email" 
+                        class="newsletter-input" 
+                        placeholder="Email" 
+                        required 
+                        aria-label="Email address"
+                    >
+                    <button type="submit" class="newsletter-button">Subscribe</button>
+                </form>
+                <div class="social-links">
+                    <a href="#" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Vimeo">
+                        <i class="fab fa-vimeo-v"></i>
+                    </a>
+                    <a href="#" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <div class="footer-bottom-left">
+            <p class="commercial-register">Commercial Register Number tr612220300</p>
+            <div class="footer-bottom-links">
+                <p class="copyright-text">Evolution Ltd. &nbsp;&nbsp;© 2024-2025</p>
+                <a href="#" class="footer-bottom-link">Terms & Conditions</a>
+                <a href="#" class="footer-bottom-link">Privacy Policy</a>
+                <a href="#" class="footer-bottom-link">Sitemap</a>
+            </div>
+        </div>
+        <div class="footer-bottom-right">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/American_Express_logo_%282018%29.svg/1200px-American_Express_logo_%282018%29.svg.png" alt="American Express" class="payment-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/2560px-PayPal.svg.png" alt="PayPal" class="payment-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Visa" class="payment-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png" alt="Mastercard" class="payment-icon">
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTopBtn" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+        </svg>
+    </button>
+</footer>
+
+<script>
+    // Scroll to top functionality
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    
+    if (scrollTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+</script>

@@ -1,0 +1,74 @@
+.text-trail {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.text-trail canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Hero text trail container */
+.hero-text-trail-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-text-trail-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Make the original hero text invisible but keep it for accessibility */
+.p-style-196a0414.with-trail {
+  opacity: 0;
+  position: relative;
+}
+
+/* Position the trail effect */
+.div-style-2a9291c9 {
+  position: relative;
+}
+
+.hero-trail-effect {
+  position: absolute;
+  top: -10px;
+  left: -5px;
+  width: 100%;
+  max-width: 650px;
+  height: 160px;
+  pointer-events: auto;
+  z-index: 2;
+  mix-blend-mode: normal;
+}
+
+.hero-trail-effect canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent !important;
+}
+
+@media (max-width: 768px) {
+  .hero-trail-effect {
+    max-width: 100%;
+    height: 130px;
+    top: -5px;
+    left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-trail-effect {
+    height: 100px;
+    top: 0;
+  }
+}

@@ -1,0 +1,2136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Lato:wght@400;500;600;700&display=swap" />
+    <!-- Added Montserrat for condensed, geometric headings like the 'ICONIC. MIN..' sample -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" />
+        <link rel="stylesheet" href="./frontend/style/style.css"/>
+        <link rel="stylesheet" href="./frontend/style/navbar-styles.css"/>
+        <link rel="stylesheet" href="./frontend/style/footer-styles.css"/>
+        <link rel="stylesheet" href="./frontend/style/scroll-reveal.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+        <script src="./frontend/src/scroll-reveal.js"></script>
+        <script src="./frontend/src/main.js"></script>
+        <script>
+          // Ensure any product card images using external links are swapped to local Etlala assets
+          document.addEventListener('DOMContentLoaded', function(){
+            try {
+              const localMap = {
+                'Body Butter Care': './frontend/public/Etlala_Whithening_night_cream.webp',
+                'Jar Cream Care': './frontend/public/Etlala_Anti_Strech_marks_Serum.webp',
+                'Skincare Tube': './frontend/public/Hair_Serum.webp',
+                'Face Serum': './frontend/public/Etlala_hair_Shampoo.webp',
+                'Body Cream Care': './frontend/public/Etlala_Mascara_brighter.webp',
+                'Moisturizer': './frontend/public/Etlala_Strengthens_and_lengthens_Nails_brighter.webp',
+                'Body Perfume': './frontend/public/ItlalaCremesolaireinvisible.webp',
+                'Night Cream': './frontend/public/ItlalaGelNettoyantmatched.webp'
+              };
+              // Update grid product cards
+              document.querySelectorAll('img.new-product-image').forEach(function(img){
+                if (img.src && img.src.indexOf('images.unsplash.com') !== -1) {
+                  var alt = img.getAttribute('alt') || '';
+                  var mapped = localMap[alt] || './frontend/public/CMP1.webp';
+                  img.src = mapped;
+                }
+              });
+              // Update any luxury product tiles as fallback too
+              var luxFallbacks = [
+                './frontend/public/CMP1.webp', './frontend/public/CMP2.webp', './frontend/public/CMP3.webp', './frontend/public/CMP4.webp',
+                './frontend/public/Etlala_Whithening_night_cream.webp', './frontend/public/Etlala_Anti_Strech_marks_Serum.webp',
+                './frontend/public/Hair_Serum.webp', './frontend/public/Etlala_hair_Shampoo.webp',
+                './frontend/public/ItlalaCremesolaireinvisible.webp', './frontend/public/ItlalaGelNettoyantmatched.webp',
+                './frontend/public/Etlala_Strengthens_and_lengthens_Nails_brighter.webp', './frontend/public/Etlala_Mascara_brighter.webp'
+              ];
+              var idx = 0;
+              document.querySelectorAll('img.lux-card-img').forEach(function(img){
+                if (img.src && img.src.indexOf('images.unsplash.com') !== -1) {
+                  img.src = luxFallbacks[idx % luxFallbacks.length];
+                  idx++;
+                }
+              });
+            } catch (e) {}
+          });
+        </script>
+        <script>
+            // Initialize site-wide scroll reveal excluding the hero
+            document.addEventListener('DOMContentLoaded', function(){
+                if (typeof initScrollReveal === 'function') {
+                    // Global text (fast, non-scrub), excluding loader and hero by default
+                    initScrollReveal({
+                        includeSelector: [
+                            '.brand-story-main-title', '.brand-story-text',
+                            '.lux-hero-overline', '.lux-hero-title', '.lux-hero-description',
+                            '.porsche-hero-subtitle', '.porsche-hero-title', '.porsche-hero-description',
+                            '.new-products-title', '.new-products-description',
+                            '.lux-products-title', '.lux-products-description',
+                            '.p-style-777c3bab', /* About VitalVisage heading */
+                            '.porsche-card-hero-subtitle', '.porsche-card-hero-title',
+                            '.chanel-hero-overline', '.chanel-hero-title',
+                            '.porsche-card-hero-text p'
+                        ].join(', '),
+                        extraSelectors: '',
+                        excludeSelector: [
+                            '.loader', '.loader *',
+                            '.clip-center', '.clip-center *',
+                            '.marquee', '.marquee *',
+                            '.div-style-e8e4eaf2', '.div-style-e8e4eaf2 *', /* sweep bar section */
+                            /* do not animate product card texts */
+                            '.new-product-card', '.new-product-card *',
+                            '.new-products-row', '.new-products-row *',
+                            '.new-products-row-2', '.new-products-row-2 *',
+                            /* do not animate lux products section */
+                            '.lux-products-container', '.lux-products-container *',
+                            '.lux-card', '.lux-card *',
+                            '.lux-card-name', '.lux-card-price',
+                            '.sidebar-menu', '.sidebar-menu *',
+                            '.minimal-navbar', '.minimal-navbar *',
+                            /* Exclude all buttons and button-like elements */
+                            'button', '.lux-hero-cta', '.Button-style-51bb650e', 'a[role="button"]', 'a.button', '.btn'
+                        ].join(', '),
+                        rotationFrom: 3,
+                        opacityFrom: 0.2,
+                        blurFrom: 2,
+                        start: 'top 98%',
+                        staggerEach: 0.015,
+                        scrub: true,
+                        scrubAmount: 0.25,
+                        scrollDistance: 80
+                    });
+
+                                    }
+            });
+        </script>
+        <style>
+          @media (max-width: 768px) {
+            /* Mobile typography refinements for key text blocks */
+            .brand-story-text,
+            .lux-hero-description,
+            .porsche-hero-description,
+            .new-products-description,
+            .lux-products-description,
+            .porsche-card-hero-text p {
+              font-size: 14.5px;
+              line-height: 1.8;
+              letter-spacing: 0.2px;
+              color: #3b3b3b;
+              margin-bottom: 28px; /* add space below text on small devices */
+              text-wrap: pretty;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+            }
+            /* Tighter heading composition and spacing */
+            .brand-story-main-title,
+            .lux-hero-title,
+            .porsche-hero-title,
+            .new-products-title,
+            .lux-products-title,
+            .porsche-card-hero-title,
+            .chanel-hero-title {
+              line-height: 1.15;
+              text-wrap: balance;
+              margin-bottom: 12px;
+            }
+            /* Extra breathing room for About block when followed by media */
+            .porsche-card-hero-text { margin-bottom: 32px; }
+          }
+
+          @media (max-width: 480px) {
+            .brand-story-text,
+            .lux-hero-description,
+            .porsche-hero-description,
+            .new-products-description,
+            .lux-products-description,
+            .porsche-card-hero-text p {
+              font-size: 14px;
+              margin-bottom: 32px;
+            }
+            .porsche-card-hero-text { margin-bottom: 36px; }
+          }
+        </style>
+    </head>
+    <body>
+        <div class="loader">
+            <div class="loader-clip clip-top">
+                <div class="marquee">
+                    <div class="marquee-container">
+                        <span>Etlala</span>
+                        <span>Etlala</span>
+                        Etlala
+                        <span>Etlala</span>
+                        <span>Etlala</span>
+                    </div>    
+                </div>
+            </div>
+            <div class="loader-clip clip-bottom">
+                <div class="marquee">
+                    <div class="marquee-container">
+                        <span>Etlala</span>
+                        <span>Etlala</span>
+                        Etlala
+                        <span>Etlala</span>
+                        <span>Etlala</span>
+                    </div>    
+                </div>
+            </div>
+        </div>
+        <div class="clip-center">
+            <div class="marquee">
+                <div class="marquee-container">
+                    <span>Etlala</span>
+                    <span>Etlala</span>
+                    Etlala
+                    <span>Etlala</span>
+                    <span>Etlala</span>
+                </div>    
+            </div>
+        </div>
+        <!-- VitalVisage Content -->
+        <div id="main-content" style="opacity: 0; width: 100%; min-height: 100vh;">
+            <div style="width: 100%; margin: 0 auto;">
+                <div class="div-style-dd895c17">
+                    <div class="div-style-cb53ac36">
+                        <div class="div-style-6a573304">
+                            <div class="div-style-e6f8426c">
+                                <!-- Sidebar Menu -->
+                                <div class="sidebar-overlay"></div>
+                                <aside class="sidebar-menu">
+                                    <div class="sidebar-header">
+                                        <button class="sidebar-back" aria-label="Back">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span class="sidebar-back-text">Back</span>
+                                        </button>
+                                        <nav class="sidebar-header-nav">
+                                            <a href="/" class="sidebar-header-link active">Accueil</a>
+                                            <a href="/gift-card" class="sidebar-header-link">Carte Cadeau</a>
+                                            <a href="/store-locator" class="sidebar-header-link">Nos Boutiques</a>
+                                            <a href="/contact" class="sidebar-header-link">Contactez-nous</a>
+                                        </nav>
+                                        <button class="sidebar-close" aria-label="Close Menu">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Mobile Multi-Level Menu -->
+                                    <div class="sidebar-mobile-menu">
+                                        <div class="sidebar-menu-item">
+                                            <button class="sidebar-menu-link" data-panel="product-categories">
+                                                <span>PRODUCT CATEGORIES</span>
+                                                <span class="sidebar-menu-arrow">
+                                                    <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="sidebar-menu-item">
+                                            <button class="sidebar-menu-link" data-panel="collections">
+                                                <span>COLLECTIONS</span>
+                                                <span class="sidebar-menu-arrow">
+                                                    <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="sidebar-menu-item">
+                                            <a href="/collectors-items" class="sidebar-menu-link">
+                                                <span>COLLECTOR'S ITEMS</span>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sidebar-menu-item">
+                                            <a href="/art-of-living" class="sidebar-menu-link">
+                                                <span>ART OF LIVING</span>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sidebar-menu-item">
+                                            <a href="/the-watch" class="sidebar-menu-link">
+                                                <span>THE WATCH</span>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sidebar-menu-item">
+                                            <a href="/apparel" class="sidebar-menu-link">
+                                                <span>APPAREL <span style="color: #6E8B72; font-size: 10px; margin-left: 8px;">COMING SOON</span></span>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sidebar-menu-item">
+                                            <a href="/lookbooks" class="sidebar-menu-link">
+                                                <span>LOOKBOOKS</span>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sidebar-menu-item">
+                                            <a href="/design-objects" class="sidebar-menu-link">
+                                                <span>DESIGN OBJECTS</span>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sidebar-menu-item">
+                                            <button class="sidebar-menu-link" data-panel="house-of-minas">
+                                                <span>ABOUT ETLALA</span>
+                                                <span class="sidebar-menu-arrow">
+                                                    <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Sub-panels -->
+                                    <div class="sidebar-panel" id="panel-product-categories">
+                                        <h2 class="sidebar-subpanel-title">PRODUCT CATEGORIES</h2>
+                                        <div class="sidebar-subpanel-list">
+                                            <div class="sidebar-subpanel-item"><a href="/serums" class="sidebar-subpanel-link">Serums</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/moisturizers" class="sidebar-subpanel-link">Moisturizers</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/cleansers" class="sidebar-subpanel-link">Cleansers</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/face-masks" class="sidebar-subpanel-link">Face Masks</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/eye-care" class="sidebar-subpanel-link">Eye Care</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/sunscreen" class="sidebar-subpanel-link">Sunscreen</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/toners" class="sidebar-subpanel-link">Toners</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/exfoliators" class="sidebar-subpanel-link">Exfoliators</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/accessories" class="sidebar-subpanel-link">Accessories</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/zodiac" class="sidebar-subpanel-link">Zodiac</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/mens-accessories" class="sidebar-subpanel-link">Men's Accessories</a></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="sidebar-panel" id="panel-collections">
+                                        <h2 class="sidebar-subpanel-title">COLLECTIONS</h2>
+                                        <div class="sidebar-subpanel-list">
+                                            <div class="sidebar-subpanel-item"><a href="/unchained" class="sidebar-subpanel-link">Unchained</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/porcelain-collection" class="sidebar-subpanel-link">Porcelain Collection</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/bebe-collection" class="sidebar-subpanel-link">BÉBÉ Collection</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/symbols" class="sidebar-subpanel-link">Symbols</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/jolly-roger" class="sidebar-subpanel-link">Jolly Roger</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/black-mamba" class="sidebar-subpanel-link">Black Mamba</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/astra" class="sidebar-subpanel-link">Astra</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/neoprene-form" class="sidebar-subpanel-link">Neoprene Form</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/hearts" class="sidebar-subpanel-link">Hearts</a></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="sidebar-panel" id="panel-house-of-minas">
+                                        <h2 class="sidebar-subpanel-title">ABOUT ETLALA</h2>
+                                        <div class="sidebar-subpanel-list">
+                                            <div class="sidebar-subpanel-item"><a href="/brand-legacy" class="sidebar-subpanel-link">Brand Legacy</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/craftsmanship" class="sidebar-subpanel-link">Craftsmanship</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/collaborations" class="sidebar-subpanel-link">Collaborations</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/news-updates" class="sidebar-subpanel-link">News & Updates</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/press-office" class="sidebar-subpanel-link">Press Office</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/sustainability" class="sidebar-subpanel-link">Sustainability</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/join-our-team" class="sidebar-subpanel-link">Join our team</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/studio-services" class="sidebar-subpanel-link">Studio Services</a></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Contact Footer for Mobile Menu -->
+                                    <div class="sidebar-contact-footer">
+                                        <div class="sidebar-contact-content">
+                                            <a href="tel:+302106233577" class="sidebar-contact-phone">
+                                                <span class="sidebar-contact-label">T.</span>
+                                                <span class="sidebar-contact-value">+30 210 623 3577</span>
+                                            </a>
+                                            <a href="mailto:info@etlala.com" class="sidebar-contact-email" aria-label="Email us">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                                                    <path d="M3 7L12 13L21 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="sidebar-content">
+                                        <!-- Column 1: Product Categories & Collections -->
+                                        <div class="sidebar-section">
+                                            <h3 class="sidebar-section-title">PRODUCT CATEGORIES</h3>
+                                            <div class="sidebar-section-content">
+                                                <div class="sidebar-column">
+                                                    <a href="/serums" class="sidebar-link">Serums</a>
+                                                    <a href="/moisturizers" class="sidebar-link">Moisturizers</a>
+                                                    <a href="/cleansers" class="sidebar-link">Cleansers</a>
+                                                    <a href="/face-masks" class="sidebar-link">Face Masks</a>
+                                                    <a href="/eye-care" class="sidebar-link">Eye Care</a>
+                                                    <a href="/sunscreen" class="sidebar-link">Sunscreen</a>
+                                                </div>
+                                                
+                                                <div class="sidebar-column">
+                                                    <a href="/toners" class="sidebar-link">Toners</a>
+                                                    <a href="/exfoliators" class="sidebar-link">Exfoliators</a>
+                                                    <a href="/accessories" class="sidebar-link">Accessories</a>
+                                                    <a href="/zodiac" class="sidebar-link">Zodiac</a>
+                                                    <a href="/mens-accessories" class="sidebar-link">Men's Accessories</a>
+                                                </div>
+                                            </div>
+                                            
+                                            <h3 class="sidebar-section-title">COLLECTIONS</h3>
+                                            <div class="sidebar-section-content">
+                                                <div class="sidebar-column">
+                                                    <a href="/unchained" class="sidebar-link">Unchained</a>
+                                                    <a href="/porcelain-collection" class="sidebar-link">Porcelain Collection</a>
+                                                    <a href="/bebe-collection" class="sidebar-link">BÉBÉ Collection</a>
+                                                    <a href="/symbols" class="sidebar-link">Symbols</a>
+                                                    <a href="/jolly-roger" class="sidebar-link">Jolly Roger</a>
+                                                </div>
+                                                
+                                                <div class="sidebar-column">
+                                                    <a href="/black-mamba" class="sidebar-link">Black Mamba</a>
+                                                    <a href="/astra" class="sidebar-link">Astra</a>
+                                                    <a href="/neoprene-form" class="sidebar-link">Neoprene Form</a>
+                                                    <a href="/hearts" class="sidebar-link">Hearts</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Column 2: Featured Rows with Images (2-column grid) -->
+                                        <div class="sidebar-section">
+                                            <div class="sidebar-featured-grid">
+                                                <div class="sidebar-featured-col">
+                                                    <a href="/collectors-items" class="sidebar-featured-row">
+                                                        <h3 class="sidebar-featured-row-title">COLLECTOR'S ITEMS</h3>
+                                                        <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=128&h=128&fit=crop" alt="Collector's Items" class="sidebar-featured-row-image" />
+                                                    </a>
+                                                    <a href="/the-watch" class="sidebar-featured-row">
+                                                        <h3 class="sidebar-featured-row-title">THE WATCH</h3>
+                                                        <img src="https://images.unsplash.com/photo-1509941943102-10c232535736?w=128&h=128&fit=crop" alt="The Watch" class="sidebar-featured-row-image" />
+                                                    </a>
+                                                    <a href="/lookbooks" class="sidebar-featured-row">
+                                                        <h3 class="sidebar-featured-row-title">LOOKBOOKS</h3>
+                                                        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=128&h=128&fit=crop" alt="Lookbooks" class="sidebar-featured-row-image" />
+                                                    </a>
+                                                </div>
+                                                <div class="sidebar-featured-col">
+                                                    <a href="/art-of-living" class="sidebar-featured-row">
+                                                        <h3 class="sidebar-featured-row-title">ART OF LIVING</h3>
+                                                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop" alt="Art of Living" class="sidebar-featured-row-image" />
+                                                    </a>
+                                                    <a href="/apparel" class="sidebar-featured-row">
+                                                        <div>
+                                                            <span class="sidebar-featured-row-title">APPAREL</span>
+                                                            <span class="sidebar-featured-row-subtitle">COMING SOON</span>
+                                                        </div>
+                                                        <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=128&h=128&fit=crop" alt="Apparel" class="sidebar-featured-row-image" />
+                                                    </a>
+                                                    <a href="/design-objects" class="sidebar-featured-row">
+                                                        <h3 class="sidebar-featured-row-title">DESIGN OBJECTS</h3>
+                                                        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=128&h=128&fit=crop" alt="Design Objects" class="sidebar-featured-row-image" />
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="sidebar-divider"></div>
+                                            <h3 class="sidebar-section-title">ABOUT ETLALA</h3>
+                                            <div class="sidebar-section-content">
+                                                <div class="sidebar-column">
+                                                    <a href="/brand-legacy" class="sidebar-link">Brand Legacy</a>
+                                                    <a href="/craftsmanship" class="sidebar-link">Craftsmanship</a>
+                                                    <a href="/collaborations" class="sidebar-link">Collaborations</a>
+                                                    <a href="/news-updates" class="sidebar-link">News & Updates</a>
+                                                </div>
+                                                <div class="sidebar-column">
+                                                    <a href="/press-office" class="sidebar-link">Press Office</a>
+                                                    <a href="/sustainability" class="sidebar-link">Sustainability</a>
+                                                    <a href="/join-our-team" class="sidebar-link">Join our team</a>
+                                                    <a href="/studio-services" class="sidebar-link">Studio Services</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Column 3: Promo Card -->
+                                        <div class="sidebar-section">
+                                            <div class="sidebar-promo-card">
+                                                <img class="sidebar-promo-media" src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=640&h=480&fit=crop" alt="Premium Skincare Collection" />
+                                                <div class="sidebar-promo-body">
+                                                    <h4 class="sidebar-promo-title">PREMIUM SKINCARE COLLECTION</h4>
+                                                    <p class="sidebar-promo-desc">Our signature collection crafted with natural ingredients. Designed for radiant skin with timeless beauty rituals.</p>
+                                                    <button class="sidebar-promo-cta">DISCOVER THE LEGACY</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </aside>
+
+                                <!-- New Minimalist Navigation Bar -->
+                                <nav class="minimal-navbar">
+                                    <div class="navbar-left">
+                                        <button class="hamburger-menu" id="hamburger-btn" aria-label="Menu">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </button>
+                                        <button class="search-btn" aria-label="Search">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                                                <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                            <span class="search-text">SEARCH</span>
+                                        </button>
+                                    </div>
+                                    <div class="navbar-center">
+                                        <a href="/" class="brand-logo">
+                                            <img src="./frontend/public/logo.png" alt="ETLALA" style="width: 100%; height: auto;" />
+                                        </a>
+                                    </div>
+                                    <div class="navbar-right">
+                                        <a href="/login" class="nav-link">LOGIN / SIGN UP</a>
+                                        <a href="/account" class="account-icon" aria-label="Account">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                                                <path d="M5 20C5 16.134 8.134 13 12 13C15.866 13 19 16.134 19 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </a>
+                                        <a href="/cart" class="cart-link">
+                                            <span class="cart-text">CART</span>
+                                            <span class="cart-badge">0</span>
+                                        </a>
+                                    </div>
+                                </nav>
+                                
+                                <!-- Large Brand Name in Center of Main Hero -->
+                                <div style="position: absolute; top: 50%; left: 52%; transform: translate(-50%, -50%); z-index: 5; text-align: center; pointer-events: none;">
+                                    <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(80px, 15vw, 220px); font-weight: 700; color: #ffffff; letter-spacing: 0.05em; margin: 0; text-transform: uppercase; text-shadow: 0 4px 30px rgba(0,0,0,0.4);">ETLALA</h1>
+                                </div>
+                                
+                                <div class="div-style-bf7de1f0">
+                                    <div class="div-style-2a9291c9">
+                                        <p class="p-style-196a0414">Embrace Timeless<br />Beauty</p>
+                                        <p class="p-style-1e469a35">
+                                            Indulge in the delicate balance of science and nature, <br />elevating your daily ritual to an enriching experience<br />
+                                            of nourishment and renewal.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="div-style-e8e4eaf2">
+                        <div class="div-style-2b05c4ca">
+                            <p class="p-style-802d8898">HYDRATATION & MOUVEMENT</p>
+                            <div class="div-style-7a413c44">
+                                <svg viewBox="0 0 24 24" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="star" xmlns="http://www.w3.org/2000/svg">
+                                        <path id="Vector" d="M12,1.25c0.267,0 0.513,0.14 0.648,0.37l3.341,5.73l6.194,1.56c0.257,0.07 0.461,0.26 0.536,0.52c0.075,0.25 0.011,0.52 -0.169,0.72l-4.232,4.57l1.594,7.12c0.062,0.27 -0.035,0.55 -0.25,0.73c-0.215,0.18 -0.512,0.23 -0.771,0.12l-6.891,-2.88l-6.891,2.88c-0.259,0.11 -0.556,0.06 -0.771,-0.12c-0.215,-0.18 -0.311,-0.46 -0.25,-0.73l1.594,-7.12l-4.232,-4.57c-0.18,-0.2 -0.244,-0.47 -0.169,-0.72c0.075,-0.26 0.279,-0.45 0.536,-0.52l6.194,-1.56l3.341,-5.73c0.135,-0.23 0.381,-0.37 0.648,-0.37z" fill="currentColor" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <p class="p-style-802d8898">INGRÉDIENTS NATURELS</p>
+                            <div class="div-style-7a413c44">
+                                <svg viewBox="0 0 24 24" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="star_2" xmlns="http://www.w3.org/2000/svg">
+                                        <path id="Vector_2" d="M12,1.25c0.267,0 0.513,0.14 0.648,0.37l3.341,5.73l6.194,1.56c0.257,0.07 0.461,0.26 0.536,0.52c0.075,0.25 0.011,0.52 -0.169,0.72l-4.232,4.57l1.594,7.12c0.062,0.27 -0.035,0.55 -0.25,0.73c-0.215,0.18 -0.512,0.23 -0.771,0.12l-6.891,-2.88l-6.891,2.88c-0.259,0.11 -0.556,0.06 -0.771,-0.12c-0.215,-0.18 -0.311,-0.46 -0.25,-0.73l1.594,-7.12l-4.232,-4.57c-0.18,-0.2 -0.244,-0.47 -0.169,-0.72c0.075,-0.26 0.279,-0.45 0.536,-0.52l6.194,-1.56l3.341,-5.73c0.135,-0.23 0.381,-0.37 0.648,-0.37z" fill="currentColor" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <p class="p-style-802d8898">CONTRÔLE DU SÉBUM</p>
+                            <div class="div-style-7a413c44">
+                                <svg viewBox="0 0 24 24" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="star_3" xmlns="http://www.w3.org/2000/svg">
+                                        <path id="Vector_3" d="M12,1.25c0.27,0 0.51,0.14 0.65,0.37l3.34,5.73l6.19,1.56c0.26,0.07 0.46,0.26 0.54,0.52c0.07,0.25 0.01,0.52 -0.17,0.72l-4.23,4.57l1.59,7.12c0.06,0.27 -0.03,0.55 -0.25,0.73c-0.21,0.18 -0.51,0.23 -0.77,0.12l-6.89,-2.88l-6.89,2.88c-0.26,0.11 -0.56,0.06 -0.77,-0.12c-0.22,-0.18 -0.31,-0.46 -0.25,-0.73l1.59,-7.12l-4.23,-4.57c-0.18,-0.2 -0.24,-0.47 -0.17,-0.72c0.08,-0.26 0.28,-0.45 0.54,-0.52l6.19,-1.56l3.34,-5.73c0.14,-0.23 0.38,-0.37 0.65,-0.37z" fill="currentColor" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <p class="p-style-802d8898">PROTECTION UV</p>
+                            <div class="div-style-7a413c44">
+                                <svg viewBox="0 0 24 24" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="star_4" xmlns="http://www.w3.org/2000/svg">
+                                        <path id="Vector_4" d="M12,1.25c0.267,0 0.513,0.14 0.648,0.37l3.341,5.73l6.194,1.56c0.257,0.07 0.461,0.26 0.536,0.52c0.075,0.25 0.011,0.52 -0.169,0.72l-4.232,4.57l1.594,7.12c0.062,0.27 -0.035,0.55 -0.25,0.73c-0.215,0.18 -0.512,0.23 -0.771,0.12l-6.891,-2.88l-6.891,2.88c-0.259,0.11 -0.556,0.06 -0.771,-0.12c-0.215,-0.18 -0.311,-0.46 -0.25,-0.73l1.594,-7.12l-4.232,-4.57c-0.18,-0.2 -0.244,-0.47 -0.169,-0.72c0.075,-0.26 0.279,-0.45 0.536,-0.52l6.194,-1.56l3.341,-5.73c0.135,-0.23 0.381,-0.37 0.648,-0.37z" fill="currentColor" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <!-- Duplicate for seamless loop -->
+                            <p class="p-style-802d8898">HYDRATION & MOTION</p>
+                            <div class="div-style-7a413c44">
+                                <svg viewBox="0 0 24 24" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12,1.25c0.267,0 0.513,0.14 0.648,0.37l3.341,5.73l6.194,1.56c0.257,0.07 0.461,0.26 0.536,0.52c0.075,0.25 0.011,0.52 -0.169,0.72l-4.232,4.57l1.594,7.12c0.062,0.27 -0.035,0.55 -0.25,0.73c-0.215,0.18 -0.512,0.23 -0.771,0.12l-6.891,-2.88l-6.891,2.88c-0.259,0.11 -0.556,0.06 -0.771,-0.12c-0.215,-0.18 -0.311,-0.46 -0.25,-0.73l1.594,-7.12l-4.232,-4.57c-0.18,-0.2 -0.244,-0.47 -0.169,-0.72c0.075,-0.26 0.279,-0.45 0.536,-0.52l6.194,-1.56l3.341,-5.73c0.135,-0.23 0.381,-0.37 0.648,-0.37z" fill="currentColor" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <p class="p-style-802d8898">NATURAL INGREDIENTS</p>
+                            <div class="div-style-7a413c44">
+                                <svg viewBox="0 0 24 24" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12,1.25c0.267,0 0.513,0.14 0.648,0.37l3.341,5.73l6.194,1.56c0.257,0.07 0.461,0.26 0.536,0.52c0.075,0.25 0.011,0.52 -0.169,0.72l-4.232,4.57l1.594,7.12c0.062,0.27 -0.035,0.55 -0.25,0.73c-0.215,0.18 -0.512,0.23 -0.771,0.12l-6.891,-2.88l-6.891,2.88c-0.259,0.11 -0.556,0.06 -0.771,-0.12c-0.215,-0.18 -0.311,-0.46 -0.25,-0.73l1.594,-7.12l-4.232,-4.57c-0.18,-0.2 -0.244,-0.47 -0.169,-0.72c0.075,-0.26 0.279,-0.45 0.536,-0.52l6.194,-1.56l3.341,-5.73c0.135,-0.23 0.381,-0.37 0.648,-0.37z" fill="currentColor" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <p class="p-style-802d8898">OIL CONTROL</p>
+                            <div class="div-style-7a413c44">
+                                <svg viewBox="0 0 24 24" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12,1.25c0.27,0 0.51,0.14 0.65,0.37l3.34,5.73l6.19,1.56c0.26,0.07 0.46,0.26 0.54,0.52c0.07,0.25 0.01,0.52 -0.17,0.72l-4.23,4.57l1.59,7.12c0.06,0.27 -0.03,0.55 -0.25,0.73c-0.21,0.18 -0.51,0.23 -0.77,0.12l-6.89,-2.88l-6.89,2.88c-0.26,0.11 -0.56,0.06 -0.77,-0.12c-0.22,-0.18 -0.31,-0.46 -0.25,-0.73l1.59,-7.12l-4.23,-4.57c-0.18,-0.2 -0.24,-0.47 -0.17,-0.72c0.08,-0.26 0.28,-0.45 0.54,-0.52l6.19,-1.56l3.34,-5.73c0.14,-0.23 0.38,-0.37 0.65,-0.37z" fill="currentColor" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <p class="p-style-802d8898">UV PROTECTION</p>
+                            <div class="div-style-7a413c44">
+                                <svg viewBox="0 0 24 24" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12,1.25c0.267,0 0.513,0.14 0.648,0.37l3.341,5.73l6.194,1.56c0.257,0.07 0.461,0.26 0.536,0.52c0.075,0.25 0.011,0.52 -0.169,0.72l-4.232,4.57l1.594,7.12c0.062,0.27 -0.035,0.55 -0.25,0.73c-0.215,0.18 -0.512,0.23 -0.771,0.12l-6.891,-2.88l-6.891,2.88c-0.259,0.11 -0.556,0.06 -0.771,-0.12c-0.215,-0.18 -0.311,-0.46 -0.25,-0.73l1.594,-7.12l-4.232,-4.57c-0.18,-0.2 -0.244,-0.47 -0.169,-0.72c0.075,-0.26 0.279,-0.45 0.536,-0.52l6.194,-1.56l3.341,-5.73c0.135,-0.23 0.381,-0.37 0.648,-0.37z" fill="currentColor" />
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Brand Story Section -->
+                    <div class="brand-story-section">
+                        <div class="brand-story-container">
+                            <div class="brand-story-title-wrapper">
+                                <h2 class="brand-story-main-title scroll-reveal scroll-reveal-text">VITALVISAGE WAS ESTABLISHED IN MOROCCO IN 2024</h2>
+                            </div>
+                            <div class="brand-story-text-wrapper">
+                                <p class="brand-story-text scroll-reveal scroll-reveal-text">
+                                    The studio follows the strict skincare manufacturing process and maintains a high level of quality control to ensure our vision and philosophy is passed on to the customer. VitalVisage had personally designed and created every single product, crafting it from premium natural ingredients. A family affair that continues to this day through dedication and passion.
+                                </p>
+                                <p class="brand-story-text scroll-reveal scroll-reveal-text">
+                                    Every step of the process is kept in house, allowing the brand to maintain complete autonomy and freedom. The distinctive VitalVisage style has persisted and evolved over the years, never sacrificing our quality with respect to the craftsmanship and processes, a quality that defines the living heritage of VITALVISAGE.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Porsche x Chanel Luxe Hero Section -->
+                    <section class="lux-hero">
+                        <style>
+                            .lux-hero { position: relative; width: 100%; margin: 0; }
+                            .lux-hero-container { position: relative; width: 100%; height: 100vh; min-height: 650px; display: flex; align-items: flex-end; justify-content: flex-start; overflow: hidden; }
+                            .lux-hero-bg { position: absolute; inset: 0; }
+                            .lux-hero-image { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.05) brightness(0.8); }
+                            .lux-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.1) 100%); }
+                            .lux-hero-content { position: relative; z-index: 2; width: 100%; max-width: 1440px; padding: 0 112px 80px; display: flex; align-items: flex-start; margin-top: auto; }
+                            .lux-hero-accent { width: 1px; height: 240px; background: rgba(255,255,255,0.6); margin-right: 32px; }
+                            .lux-hero-text { color: #fff; display: flex; flex-direction: column; gap: 24px; max-width: 700px; }
+                            .lux-hero-overline { font: 600 12px/1 Lato, sans-serif; letter-spacing: 6px; opacity: 0.8; margin: 0; text-transform: uppercase; }
+                            .lux-hero-title { font: 300 68px/1.05 Lato, sans-serif; letter-spacing: 2px; text-transform: uppercase; margin: 0; }
+                            .lux-hero-description { font: 400 16px/1.8 Lato, sans-serif; opacity: 0.92; margin: 0; }
+                            .lux-hero-cta-group { display: flex; gap: 16px; margin-top: 8px; }
+                            .lux-hero-cta { padding: 14px 34px; letter-spacing: 2px; font: 600 12px Lato, sans-serif; text-transform: uppercase; border: 1px solid #fff; background: transparent; color: #fff; cursor: pointer; transition: all .35s ease; }
+                            .lux-hero-cta.primary { background: #000; border-color: #000; color: #fff; }
+                            .lux-hero-cta.primary:hover { background: transparent; color: #fff; border-color: #fff; }
+                            .lux-hero-cta.ghost { background: transparent; }
+                            .lux-hero-cta.ghost:hover { background: #fff; color: #000; }
+                            @media (max-width: 1200px) { .lux-hero-content{padding:0 60px;} .lux-hero-title{font-size:54px;} }
+                            @media (max-width: 768px) { .lux-hero-container{height:70vh;align-items:flex-end;} .lux-hero-content{padding:0 32px 40px;} .lux-hero-accent{display:none;} .lux-hero-title{font-size:40px;letter-spacing:1px;} .lux-hero-overline{letter-spacing:4px;} .lux-hero-description{opacity:0.9;} .lux-hero-cta{padding:12px 24px;} }
+                            @media (max-width: 480px) { .lux-hero-container{min-height:520px;} .lux-hero-content{padding:0 24px 32px;} .lux-hero-title{font-size:32px;} .lux-hero-cta-group{gap:12px;flex-wrap:wrap;} }
+                        </style>
+                        <div class="lux-hero-container">
+                            <div class="lux-hero-bg">
+                                <img class="lux-hero-image" src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=1920&h=1080&fit=crop" alt="Monochrome Luxury" />
+                                <div class="lux-hero-overlay"></div>
+                            </div>
+                            
+                            <!-- Large Brand Name in Center -->
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 5; text-align: center;">
+                                <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(80px, 15vw, 200px); font-weight: 700; color: #ffffff; letter-spacing: 0.05em; margin: 0; text-transform: uppercase; text-shadow: 0 4px 20px rgba(0,0,0,0.3);">ETLALA</h1>
+                            </div>
+                            
+                            <div class="lux-hero-content">
+                                <div class="lux-hero-accent"></div>
+                                <div class="lux-hero-text">
+                                    <p class="lux-hero-overline">EXCLUSIVE EDITION</p>
+                                    <h2 class="lux-hero-title">ICONIC. MINIMAL. TIMELESS.</h2>
+                                    <p class="lux-hero-description">Purity in form, precision in detail. A modern curation of essentials engineered for everyday elegance.</p>
+                                    <div class="lux-hero-cta-group">
+                                        <button class="lux-hero-cta primary">SHOP THE COLLECTION</button>
+                                        <button class="lux-hero-cta ghost">LEARN MORE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <div class="div-style-e4bf7da9">
+                        <div class="div-style-570497a2">
+                            <div class="div-style-24aea4a">
+                                <div class="div-style-eebb0721">
+                                    <p class="p-style-1e1fa26e">Shop By Collection</p>
+                                    <p class="p-style-7516f5f7">Explore our curated selection of skincare essentials</p>
+                                </div>
+                                <div class="div-style-a0273da9">
+                                    <div class="div-style-b686f8d8">
+                                        <button class="Button-style-51bb650e">MOISTURIZER</button>
+                                    </div>
+                                    <div class="div-style-69503951">
+                                        <button class="Button-style-51bb650e">CLEANSER</button>
+                                    </div>
+                                    <div class="div-style-a005d590">
+                                        <div class="div-style-9ee1e528">
+                                            <div class="div-style-9ac56f">
+                                                <p class="p-style-61334955">SUNSCREEN</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="div-style-e55ba7d4">
+                                <style>
+                                    .new-products-section {
+                                        box-sizing: border-box;
+                                        display: flex;
+                                        flex-direction: column;
+                                        align-items: stretch;
+                                        justify-content: flex-start;
+                                        padding: 40px 24px 20px 24px;
+                                        width: 100vw;
+                                        margin-left: calc(50% - 50vw);
+                                        margin-right: calc(50% - 50vw);
+                                    }
+                                    .new-products-header {
+                                        display: flex;
+                                        flex: 0 0 auto;
+                                        flex-direction: row;
+                                        gap: 8px;
+                                        align-items: flex-start;
+                                        justify-content: space-between;
+                                        padding-right: 28px;
+                                    }
+                                    .new-products-title {
+                                        flex: 0 0 auto;
+                                        padding: 0;
+                                        margin: 0;
+                                        font: 300 64px/64px Poppins, sans-serif;
+                                        color: #000000;
+                                        text-align: left;
+                                        letter-spacing: -3.2px;
+                                    }
+                                    .new-products-description {
+                                        box-sizing: border-box;
+                                        flex: 0 0 auto;
+                                        align-self: flex-end;
+                                        max-width: 518px;
+                                        padding: 0;
+                                        padding-bottom: 4px;
+                                        margin: 0;
+                                        font: 300 16px Poppins, sans-serif;
+                                        color: #000000;
+                                        text-align: justify;
+                                        letter-spacing: -0.8px;
+                                    }
+                                    .new-products-grid-container {
+                                        display: flex;
+                                        flex: 0 0 auto;
+                                        flex-direction: column;
+                                        align-items: stretch;
+                                        align-self: stretch;
+                                        justify-content: center;
+                                        margin-top: 70px;
+                                        width: 100%;
+                                        max-width: 100%;
+                                    }
+                                    .new-products-row {
+                                        display: grid;
+                                        grid-template-columns: repeat(4, minmax(0, 1fr));
+                                        gap: 2px;
+                                        align-items: start;
+                                        justify-items: stretch;
+                                    }
+                                    .new-products-row-2 {
+                                        display: grid;
+                                        grid-template-columns: repeat(4, minmax(0, 1fr));
+                                        gap: 2px;
+                                        align-items: start;
+                                        justify-items: stretch;
+                                        margin-top: 2px;
+                                    }
+                                    .new-product-card {
+                                        box-sizing: border-box;
+                                        display: flex;
+                                        flex-direction: column;
+                                        align-items: stretch;
+                                        justify-content: flex-start;
+                                        background: #ffffff;
+                                        border: 1px solid #eeeeee;
+                                        border-radius: 16px;
+                                        padding: 20px;
+                                        overflow: hidden;
+                                        position: relative;
+                                        box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 10px 28px rgba(0,0,0,0.05);
+                                        transition: transform 150ms ease, box-shadow 150ms ease;
+                                    }
+                                    .new-product-image {
+                                        display: block;
+                                        flex: 0 0 auto;
+                                        width: 100%;
+                                        height: 540px;
+                                        object-fit: contain;
+                                        background: #ffffff;
+                                        border-radius: 12px;
+                                    }
+                                    .new-product-info {
+                                        box-sizing: border-box;
+                                        display: flex;
+                                        flex: 0 0 auto;
+                                        flex-direction: row;
+                                        gap: 12px;
+                                        align-items: flex-start;
+                                        justify-content: space-between;
+                                        padding: 16px 0;
+                                    }
+                                    .new-product-details {
+                                        flex: 1;
+                                        display: flex;
+                                        flex-direction: column;
+                                        gap: 4px;
+                                    }
+                                    .new-product-name {
+                                        padding: 0;
+                                        margin: 0;
+                                        font: 500 16px Poppins, sans-serif;
+                                        color: #000000;
+                                        text-transform: uppercase;
+                                        letter-spacing: 0.8px;
+                                    }
+                                    .new-product-category {
+                                        display: none;
+                                    }
+                                    .new-product-price {
+                                        flex: 0 0 auto;
+                                        padding: 0;
+                                        margin: 0;
+                                        font: 500 16px Poppins, sans-serif;
+                                        color: #000000;
+                                    }
+                                    .new-product-bookmark {
+                                        flex: 0 0 auto;
+                                        width: 20px;
+                                        height: 20px;
+                                        cursor: pointer;
+                                    }
+                                    .new-product-bookmark svg {
+                                        width: 100%;
+                                        height: 100%;
+                                    }
+                                    .new-product-arrow {
+                                        position: absolute;
+                                        top: 30px;
+                                        right: 30px;
+                                        width: 60px;
+                                        height: 60px;
+                                        background: white;
+                                        border-radius: 50%;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        cursor: pointer;
+                                    }
+                                    .new-product-arrow svg {
+                                        width: 30px;
+                                        height: 30px;
+                                        transform: rotate(-45deg);
+                                    }
+                                    .new-product-card:hover {
+                                        transform: translateY(-2px);
+                                        box-shadow: 0 3px 10px rgba(0,0,0,0.06), 0 14px 36px rgba(0,0,0,0.08);
+                                    }
+
+                                    /* Mobile-only redesign to match pendant-style cards */
+                                    @media (max-width: 768px) {
+                                        /* 2 columns, larger gaps like the reference */
+                                        .new-products-row,
+                                        .new-products-row-2 {
+                                            grid-template-columns: repeat(2, minmax(0, 1fr));
+                                            gap: 16px;
+                                        }
+
+                                        /* Card: thin gray border, subtle radius, no shadow, no outer padding */
+                                        .new-product-card {
+                                            border: 1px solid #e0e0e0;
+                                            border-radius: 6px;
+                                            box-shadow: none;
+                                            padding: 0;
+                                            background: #ffffff;
+                                            overflow: hidden;
+                                            display: flex;
+                                            flex-direction: column;
+                                            height: 100%;
+                                        }
+
+                                        /* Image area: flexible height to fill space, contain fit, padded inside the card */
+                                        .new-product-image {
+                                            flex: 1;
+                                            min-height: 260px;
+                                            object-fit: contain;
+                                            padding: 30px 30px 0 30px; /* top/side padding, no bottom */
+                                            background: #ffffff;
+                                            border-radius: 0;
+                                            display: block;
+                                            width: 100%;
+                                        }
+
+                                        /* Info area: clean separation and spacing */
+                                        .new-product-info {
+                                            padding: 24px 30px 30px 30px;
+                                            gap: 6px;
+                                            align-items: flex-start;
+                                            border-top: 1px solid #efefef; /* subtle divider */
+                                            background: #ffffff;
+                                        }
+
+                                        /* Category: show, small, uppercase, underlined */
+                                        .new-product-category {
+                                        display: block;
+                                        margin: 0 0 8px 0;
+                                        font: 400 11px 'Lato', sans-serif;
+                                        letter-spacing: 2px;
+                                        text-transform: uppercase;
+                                        color: #000000;
+                                        text-decoration: none;
+                                        }
+                                        
+                                        /* Name: uppercase, compact */
+                                        .new-product-name {
+                                        font: 400 16px 'Lato', sans-serif;
+                                        letter-spacing: 0;
+                                        text-transform: uppercase;
+                                        color: #000000;
+                                        margin: 0 0 12px 0;
+                                        }
+                                        
+                                        /* Price: same size as name as in reference */
+                                        .new-product-price {
+                                        font: 400 16px 'Lato', sans-serif;
+                                        color: #000000;
+                                        margin: 0;
+                                        }
+
+                                        /* Hide bookmark icon on small devices */
+                                        .new-product-bookmark { display: none; }
+                                    }
+                                </style>
+                                <style>
+                                    /* Universal product card styling matching pendant-style cards */
+                                    .new-products-row,
+                                    .new-products-row-2 {
+                                        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+                                        gap: 2px !important;
+                                    }
+                                    .new-product-card {
+                                        border: 1px solid #eeeeee !important;
+                                        border-radius: 16px !important;
+                                        box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 10px 28px rgba(0,0,0,0.05) !important;
+                                        padding: 20px !important;
+                                        background: #ffffff !important;
+                                        overflow: hidden !important;
+                                        position: relative !important;
+                                        transition: transform 150ms ease, box-shadow 150ms ease !important;
+                                    }
+                                    .new-product-card:hover {
+                                        transform: translateY(-2px) !important;
+                                        box-shadow: 0 3px 10px rgba(0,0,0,0.06), 0 14px 36px rgba(0,0,0,0.08) !important;
+                                    }
+                                    .new-product-image {
+                                        display: block !important;
+                                        width: 100% !important;
+                                        height: 540px !important;
+                                        object-fit: contain !important;
+                                        background: #ffffff !important;
+                                        border-radius: 12px !important;
+                                        padding: 0 !important;
+                                    }
+                                    .new-product-info {
+                                        box-sizing: border-box !important;
+                                        display: flex !important;
+                                        flex-direction: row !important;
+                                        gap: 12px !important;
+                                        align-items: flex-start !important;
+                                        justify-content: space-between !important;
+                                        padding: 16px 0 !important;
+                                        border-top: none !important;
+                                        background: #ffffff !important;
+                                    }
+                                    .new-product-details { flex: 1 !important; display: flex !important; flex-direction: column !important; gap: 4px !important; }
+                                    .new-product-category { display: block !important; margin: 0 0 8px 0 !important; font: 400 11px 'Lato', sans-serif !important; letter-spacing: 2px !important; text-transform: uppercase !important; color: #000000 !important; text-decoration: underline !important; text-underline-offset: 2px !important; }
+                                    .new-product-name { padding: 0 !important; margin: 0 0 12px 0 !important; font: 400 16px 'Lato', sans-serif !important; color: #000000 !important; text-transform: uppercase !important; letter-spacing: 0 !important; }
+                                    .new-product-price { padding: 0 !important; margin: 0 !important; font: 400 16px 'Lato', sans-serif !important; color: #000000 !important; }
+                                    .new-product-bookmark { display: flex !important; width: 20px !important; height: 20px !important; }
+                                    .new-product-bookmark svg { width: 100% !important; height: 100% !important; }
+                                    @media (max-width: 900px) {
+                                        .new-products-row,
+                                        .new-products-row-2 { grid-template-columns: repeat(3, minmax(0,1fr)) !important; gap: 2px !important; }
+                                    }
+                                    @media (max-width: 768px) {
+                                        .new-products-section { padding: 48px 16px !important; }
+                                        .new-products-row,
+                                        .new-products-row-2 { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 2px !important; }
+                                        .new-product-image { height: 400px !important; }
+                                    }
+                                    @media (max-width: 480px) {
+                                        .new-products-section { padding: 40px 12px !important; }
+                                        .new-product-image { height: 320px !important; }
+                                    }
+                                </style>
+                                <style>
+                                    /* Mobile-friendly text for the New Products header */
+                                    @media (max-width: 768px) {
+                                        .new-products-header { flex-direction: column; gap: 12px; padding-right: 0; }
+                                        .new-products-title { font: 400 34px/1.15 Poppins, sans-serif; letter-spacing: -0.5px; text-align: left; margin: 0; }
+                                        .new-products-description { max-width: 100%; font: 400 14px/1.65 Poppins, sans-serif; color: #4a4a4a; text-align: left; padding: 0; margin: 4px 0 0 0; }
+                                    }
+                                    @media (max-width: 480px) {
+                                        .new-products-title { font: 500 28px/1.2 Poppins, sans-serif; letter-spacing: 0; }
+                                        .new-products-description { font: 400 13px/1.6 Poppins, sans-serif; color: #555; }
+                                    }
+                                </style>
+                                <div class="new-products-section">
+                                    <div class="new-products-header">
+                                        <p class="new-products-title">Discover Your Perfect<br />Skincare Routine</p>
+                                        <p class="new-products-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                    </div>
+                                    <div class="new-products-grid-container">
+                                        <div class="new-products-row">
+                                            <div class="new-product-card">
+                                                <img src="./frontend/public/Etlala_Whithening_night_cream.webp" class="new-product-image" alt="Whitening Night Cream" />
+                                                <div class="new-product-info">
+                                                    <div class="new-product-details">
+                                                        <p class="new-product-name">Whitening Night Cream</p>
+                                                        <p class="new-product-category">Night Care</p>
+                                                    </div>
+                                                    <p class="new-product-price">$28</p>
+                                                    <div class="new-product-bookmark">
+                                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="new-product-card">
+                                                <img src="./frontend/public/Etlala_Anti_Strech_marks_Serum.webp" class="new-product-image" alt="Anti Stretch Marks Serum" />
+                                                <div class="new-product-info">
+                                                    <div class="new-product-details">
+                                                        <p class="new-product-name">Anti Stretch Marks Serum</p>
+                                                        <p class="new-product-category">Body Care Serum</p>
+                                                    </div>
+                                                    <p class="new-product-price">$32</p>
+                                                    <div class="new-product-bookmark">
+                                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="new-product-card">
+                                                <img src="./frontend/public/Hair_Serum.webp" class="new-product-image" alt="Hair Serum" />
+                                                <div class="new-product-info">
+                                                    <div class="new-product-details">
+                                                        <p class="new-product-name">Hair Serum</p>
+                                                        <p class="new-product-category">Hair Care</p>
+                                                    </div>
+                                                    <p class="new-product-price">$24</p>
+                                                    <div class="new-product-bookmark">
+                                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="new-product-card">
+                                                <img src="./frontend/public/Etlala_hair_Shampoo.webp" class="new-product-image" alt="Hair Shampoo" />
+                                                <div class="new-product-info">
+                                                    <div class="new-product-details">
+                                                        <p class="new-product-name">Hair Shampoo</p>
+                                                        <p class="new-product-category">Hair Care</p>
+                                                    </div>
+                                                    <p class="new-product-price">$22</p>
+                                                    <div class="new-product-bookmark">
+                                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                                                    </div>
+                                        <div class="new-products-row-2">
+                                            <div class="new-product-card">
+                                                <img src="https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?w=400&h=400&fit=crop" class="new-product-image" alt="Body Cream Care" />
+                                                <div class="new-product-info">
+                                                    <div class="new-product-details">
+                                                        <p class="new-product-name">Body Cream Care</p>
+                                                        <p class="new-product-category">Body Care &amp; Lotion</p>
+                                                    </div>
+                                                    <p class="new-product-price">$22</p>
+                                                    <div class="new-product-bookmark">
+                                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="new-product-card">
+                                                <img src="https://images.unsplash.com/photo-1556228852-80c3b5796f0e?w=400&h=400&fit=crop" class="new-product-image" alt="Moisturizer" />
+                                                <div class="new-product-info">
+                                                    <div class="new-product-details">
+                                                        <p class="new-product-name">Moisturizer</p>
+                                                        <p class="new-product-category">Moisturizer &amp; Lotion</p>
+                                                    </div>
+                                                    <p class="new-product-price">$28</p>
+                                                    <div class="new-product-bookmark">
+                                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="new-product-card">
+                                                <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop" class="new-product-image" alt="Body Perfume" />
+                                                <div class="new-product-info">
+                                                    <div class="new-product-details">
+                                                        <p class="new-product-name">Body Perfume</p>
+                                                        <p class="new-product-category">Body Care &amp; Skincare</p>
+                                                    </div>
+                                                    <p class="new-product-price">$45</p>
+                                                    <div class="new-product-bookmark">
+                                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="new-product-card">
+                                                <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=400&h=400&fit=crop" class="new-product-image" alt="Night Cream" />
+                                                <div class="new-product-info">
+                                                    <div class="new-product-details">
+                                                        <p class="new-product-name">Night Cream</p>
+                                                        <p class="new-product-category">Night Care</p>
+                                                    </div>
+                                                    <p class="new-product-price">$32</p>
+                                                    <div class="new-product-bookmark">
+                                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Porsche-Style Hero Section -->
+                        <div class="porsche-hero-section">
+                            <div class="porsche-hero-container">
+                                <div class="porsche-hero-image-wrapper">
+                                    <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1920&h=1080&fit=crop" class="porsche-hero-image" alt="Luxury Skincare" />
+                                    <div class="porsche-hero-overlay"></div>
+                                </div>
+                                <div class="porsche-hero-content">
+                                    <div class="porsche-hero-text">
+                                        <p class="porsche-hero-subtitle">THE ONES THAT DEFINE US</p>
+                                        <h2 class="porsche-hero-title">EXCELLENCE<br />IN EVERY<br />DETAIL</h2>
+                                        <p class="porsche-hero-description">
+                                            Crafted with precision and passion, our signature collection<br />
+                                            embodies the perfect harmony of science and luxury.<br />
+                                            Experience skincare that transcends expectations.
+                                        </p>
+                                        <button class="porsche-hero-cta">EXPLORE COLLECTION</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Duplicate Product Cards Section -->
+                        <style>
+                            /* Desktop-only fixes to make Featured Collection match pendant-style exactly */
+                            @media (min-width: 769px) {
+                                .featured-collection .new-products-row,
+                                .featured-collection .new-products-row-2 {
+                                    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+                                    gap: 2px !important;
+                                }
+                                .featured-collection .new-products-row-2 { margin-top: 2px !important; }
+                                .featured-collection .new-product-card {
+                                    border: 1px solid #e0e0e0 !important;
+                                    border-radius: 16px !important;
+                                    box-shadow: none !important;
+                                    padding: 0 !important;
+                                    background: #ffffff !important;
+                                    overflow: hidden !important;
+                                }
+                                .featured-collection .new-product-image {
+                                    height: 540px !important;
+                                    width: 100% !important;
+                                    max-width: 100% !important;
+                                    object-fit: contain !important;
+                                    object-position: center center !important;
+                                    padding: 20px 24px 0 24px !important;
+                                    background: #ffffff !important;
+                                    border-radius: 16px !important;
+                                    display: block !important;
+                                }
+                                .featured-collection .new-product-info {
+                                    padding: 24px 30px 30px 30px !important;
+                                    border-top: 1px solid #efefef !important;
+                                    background: #ffffff !important;
+                                    align-items: flex-start !important;
+                                    gap: 12px !important;
+                                }
+                                .featured-collection .new-product-category {
+                                    display: block !important;
+                                    margin: 0 0 2px 0 !important;
+                                    font: 600 11px Poppins, sans-serif !important;
+                                    letter-spacing: 0.8px !important;
+                                    text-transform: uppercase !important;
+                                    color: #000 !important;
+                                    text-decoration: underline !important;
+                                    text-underline-offset: 2px !important;
+                                }
+                                .featured-collection .new-product-name {
+                                    font: 600 14px Poppins, sans-serif !important;
+                                    letter-spacing: 0.5px !important;
+                                    text-transform: uppercase !important;
+                                    color: #000 !important;
+                                    margin: 0 !important;
+                                }
+                                .featured-collection .new-product-price {
+                                    font: 600 14px Poppins, sans-serif !important;
+                                    color: #000 !important;
+                                    margin: 0 !important;
+                                }
+                            }
+                        </style>
+                        <div class="div-style-e55ba7d4">
+                            <div class="new-products-section featured-collection">
+                                <div class="new-products-header">
+                                    <p class="new-products-title">Featured<br />Collection</p>
+                                    <p class="new-products-description">Discover our most loved products, carefully selected to bring out your natural radiance and elevate your skincare routine
+                                </div>
+                                <div class="new-products-grid-container">
+                                    <div class="new-products-row">
+                                        <div class="new-product-card">
+                                            <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=400&fit=crop" class="new-product-image" alt="Body Butter Care" />
+                                            <div class="new-product-info">
+                                                <div class="new-product-details">
+                                                    <p class="new-product-name">Body Butter Care</p>
+                                                    <p class="new-product-category">Body Lotion Skincare</p>
+                                                </div>
+                                                <p class="new-product-price">$20</p>
+                                                <div class="new-product-bookmark">
+                                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="new-product-card">
+                                            <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop" class="new-product-image" alt="Jar Cream Care" />
+                                            <div class="new-product-info">
+                                                <div class="new-product-details">
+                                                    <p class="new-product-name">Jar Cream Care</p>
+                                                    <p class="new-product-category">Moisturizer &amp; Lotion</p>
+                                                </div>
+                                                <p class="new-product-price">$25</p>
+                                                <div class="new-product-bookmark">
+                                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="new-product-card">
+                                            <img src="https://images.unsplash.com/photo-1571875257727-256c39da42af?w=400&h=400&fit=crop" class="new-product-image" alt="Skincare Tube" />
+                                            <div class="new-product-info">
+                                                <div class="new-product-details">
+                                                    <p class="new-product-name">Skincare Tube</p>
+                                                    <p class="new-product-category">Facial &amp; Lotion</p>
+                                                </div>
+                                                <p class="new-product-price">$18</p>
+                                                <div class="new-product-bookmark">
+                                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="new-product-card">
+                                            <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400&h=400&fit=crop" class="new-product-image" alt="Face Serum" />
+                                            <div class="new-product-info">
+                                                <div class="new-product-details">
+                                                    <p class="new-product-name">Face Serum</p>
+                                                    <p class="new-product-category">Anti-Aging Serum</p>
+                                                </div>
+                                                <p class="new-product-price">$35</p>
+                                                <div class="new-product-bookmark">
+                                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="new-products-row-2">
+                                        <div class="new-product-card">
+                                            <img src="https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?w=400&h=400&fit=crop" class="new-product-image" alt="Body Cream Care" />
+                                            <div class="new-product-info">
+                                                <div class="new-product-details">
+                                                    <p class="new-product-name">Body Cream Care</p>
+                                                    <p class="new-product-category">Body Care &amp; Lotion</p>
+                                                </div>
+                                                <p class="new-product-price">$22</p>
+                                                <div class="new-product-bookmark">
+                                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="new-product-card">
+                                            <img src="https://images.unsplash.com/photo-1556228852-80c3b5796f0e?w=400&h=400&fit=crop" class="new-product-image" alt="Moisturizer" />
+                                            <div class="new-product-info">
+                                                <div class="new-product-details">
+                                                    <p class="new-product-name">Moisturizer</p>
+                                                    <p class="new-product-category">Moisturizer &amp; Lotion</p>
+                                                </div>
+                                                <p class="new-product-price">$28</p>
+                                                <div class="new-product-bookmark">
+                                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="new-product-card">
+                                            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop" class="new-product-image" alt="Body Perfume" />
+                                            <div class="new-product-info">
+                                                <div class="new-product-details">
+                                                    <p class="new-product-name">Body Perfume</p>
+                                                    <p class="new-product-category">Body Care &amp; Skincare</p>
+                                                </div>
+                                                <p class="new-product-price">$45</p>
+                                                <div class="new-product-bookmark">
+                                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="new-product-card">
+                                            <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=400&h=400&fit=crop" class="new-product-image" alt="Night Cream" />
+                                            <div class="new-product-info">
+                                                <div class="new-product-details">
+                                                    <p class="new-product-name">Night Cream</p>
+                                                    <p class="new-product-category">Night Care</p>
+                                                </div>
+                                                <p class="new-product-price">$32</p>
+                                                <div class="new-product-bookmark">
+                                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="div-style-e83673c7">
+                            <div class="div-style-5886da17">
+                                <div class="div-style-dbf73d53">
+                                    <p class="p-style-777c3bab">About VitalVisage</p>
+                                    <div class="div-style-36d44a56">
+                                        <img src="root/assets/image_c460095a.png" class="img-style-1dfd66a5" />
+                                        <div class="div-style-973ce4ea">
+                                            <p class="p-style-db134d9e">
+                                                <span>We believe in the transformative power of cosmetics</span><span class="span-style-503a1eb1"><br /></span><span>and skincare, empowering individuals to express their</span><span class="span-style-503a1eb1"><br /></span><span>unique beauty confidently. With a passion for quality</span><span class="span-style-503a1eb1"><br /></span><span>and creativity, we strive to create products that not</span><span class="span-style-503a1eb1"><br /></span><span>only enhance outer beauty but also foster a sense of</span><span class="span-style-503a1eb1"><br /></span><span>self-expression and inner confidence.</span><span></span><span class="span-style-503a1eb1"><br /></span><span>Our journey began with a simple vision to redefine</span><span class="span-style-503a1eb1"><br /></span><span>beauty industry through a combination of cutting-edge</span><span class="span-style-503a1eb1"><br /></span><span>research, premium ingredients and a commitment to</span><span class="span-style-503a1eb1"><br /></span><span>sustainability, Every product in our collection is</span><span class="span-style-503a1eb1"><br /></span><span>carefully crafted to deliver exceptional results.</span>
+                                            </p>
+                                            <div class="div-style-ea723caf">
+                                                <img src="root/assets/image_ea62dd08.png" class="img-style-1dfd66a5" />
+                                            </div>
+                                        </div>
+                                        <img src="root/assets/image_f01a23d0.png" class="img-style-1dfd66a5" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Porsche-Style Hero Section with Card Borders -->
+                            <div class="porsche-card-hero-section">
+                                <div class="porsche-card-hero-container">
+                                    <div class="porsche-card-hero-image-wrapper">
+                                        <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1920&h=1080&fit=crop" class="porsche-card-hero-image" alt="Luxury Skincare Collection" />
+                                        <div class="porsche-card-hero-overlay"></div>
+                                    </div>
+                                    <div class="porsche-card-hero-content">
+                                        <div class="porsche-card-hero-text">
+                                            <p class="porsche-card-hero-subtitle">CRAFTED FOR PERFECTION</p>
+                                            <h2 class="porsche-card-hero-title">TIMELESS<br />ELEGANCE<br />REDEFINED</h2>
+                                            <p class="porsche-card-hero-description">
+                                                Where innovation meets tradition. Our exclusive collection<br />
+                                                represents the pinnacle of skincare excellence, designed<br />
+                                                for those who demand nothing but the best.
+                                            </p>
+                                            <button class="porsche-card-hero-cta">DISCOVER MORE</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Single-row Featured Products (Porsche x Chanel style) -->
+                            <section class="lux-products">
+                                <style>
+                                    /* Full-bleed collections gallery */
+                                    .lux-products { 
+                                        width: 100vw;
+                                        position: relative;
+                                        left: 50%;
+                                        margin-left: -50vw;
+                                        margin-right: -50vw;
+                                        right: 50%;
+                                        box-sizing: border-box;
+                                        padding: 80px 0;
+                                        background: var(--brand-green, #6E8B72);
+                                    }
+                                    .lux-products-container { 
+                                        width: 100%;
+                                        max-width: 1440px;
+                                        margin: 0 auto;
+                                        display: flex; 
+                                        flex-direction: column; 
+                                        gap: 40px;
+                                        color: #fff;
+                                        padding: 0 60px;
+                                    }
+                                    .lux-products-header { 
+                                        text-align: center;
+                                        margin-bottom: 20px;
+                                    }
+                                    .lux-products-title { 
+                                        margin: 0 0 8px;
+                                        font: 600 11px/1 var(--font-heading);
+                                        letter-spacing: 4px;
+                                        text-transform: uppercase;
+                                        color: var(--black, #000000);
+                                    }
+                                    .lux-products-heading {
+                                        margin: 0;
+                                        font: 500 32px/1.1 var(--font-heading);
+                                        letter-spacing: 1px;
+                                        text-transform: uppercase;
+                                        color: #fff;
+                                    }
+                                    .lux-products-row { 
+                                        display: grid;
+                                        grid-auto-flow: column;
+                                        grid-auto-columns: 300px;
+                                        gap: 30px;
+                                        width: 100%;
+                                        overflow-x: auto;
+                                        overflow-y: hidden;
+                                        padding: 4px 4px 24px;
+                                        scroll-snap-type: x mandatory;
+                                        overscroll-behavior-x: contain;
+                                        -webkit-overflow-scrolling: touch;
+                                        scroll-behavior: smooth;
+                                        scrollbar-width: none;
+                                        -ms-overflow-style: none;
+                                    }
+                                    .lux-products-row::-webkit-scrollbar {
+                                        display: none;
+                                    }
+                                    .lux-products-row::-webkit-scrollbar { display: none; /* Chrome/Safari/Opera */ }
+                                    .lux-card { 
+                                        display: flex;
+                                        flex-direction: column;
+                                        width: 100%;
+                                        background: transparent;
+                                        border: 1px solid rgba(255,255,255,0.1);
+                                        text-decoration: none;
+                                        color: inherit;
+                                        scroll-snap-align: start;
+                                        transition: all 0.3s ease;
+                                        position: relative;
+                                        overflow: hidden;
+                                    }
+                                    .lux-card:hover { 
+                                        border-color: rgba(255,255,255,0.2);
+                                        background: rgba(255,255,255,0.05);
+                                        transform: translateY(-2px);
+                                    }
+                                    .lux-card-img { 
+                                        width: 100%;
+                                        aspect-ratio: 1/1;
+                                        object-fit: cover;
+                                        background: #000;
+                                        filter: brightness(0.95) contrast(1.02);
+                                    }
+                                    .lux-card-info { 
+                                        display: flex;
+                                        flex-direction: column;
+                                        gap: 4px;
+                                        padding: 20px;
+                                        background: transparent;
+                                    }
+                                    .lux-card-name { 
+                                        margin: 0;
+                                        font: 500 13px/1.2 var(--font-heading);
+                                        letter-spacing: 2px;
+                                        text-transform: uppercase;
+                                        color: var(--black, #000000);
+                                    }
+                                    .lux-card-price { 
+                                        margin: 0;
+                                        font: 400 12px/1 var(--font-body);
+                                        color: var(--black, #000000);
+                                        letter-spacing: 1px;
+                                    }
+                                    @media (max-width: 1200px) {
+                                        .lux-products-container { padding: 0 40px; }
+                                        .lux-products-row { 
+                                            grid-auto-columns: minmax(280px, 340px);
+                                            gap: 20px;
+                                        }
+                                    }
+                                    @media (max-width: 768px) {
+                                        .lux-products-container { padding: 0 24px; }
+                                        .lux-products-row {
+                                            grid-auto-columns: 280px;
+                                            gap: 16px;
+                                        }
+                                        .lux-card {
+                                            min-height: 320px;
+                                        }
+                                    }
+                                    @media (max-width: 480px) {
+                                        .lux-products-container { padding: 0 20px; }
+                                        .lux-products-row {
+                                            grid-auto-columns: 260px;
+                                            gap: 14px;
+                                            padding: 16px;
+                                        }
+                                        .lux-card {
+                                            min-height: 300px;
+                                        }
+                                    }
+                                    /* drag-to-scroll only */
+                                    .lux-products-row { cursor: grab; user-select: none; }
+                                    .lux-products-row.dragging { cursor: grabbing; scroll-behavior: auto !important; }
+                                    .lux-products-row.dragging .lux-card { pointer-events: none; user-select: none; }
+                                    .lux-card { transition: transform .25s cubic-bezier(0.4, 0, 0.2, 1), border-color .25s ease, background-color .25s ease; }
+                                </style>
+                                <div class="lux-products-container">
+                                    <div class="lux-products-header">
+                                        <p class="lux-products-title">Featured Selections</p>
+                                    </div>
+                                    <div class="lux-products-row">
+                                        <a class="lux-card" href="#">
+                                            <img class="lux-card-img" src="./frontend/public/CMP1.webp" alt="Body Butter Care" />
+                                            <div class="lux-card-info">
+                                                <p class="lux-card-name">Body Butter Care</p>
+                                                <p class="lux-card-price">$20</p>
+                                            </div>
+                                        </a>
+                                        <a class="lux-card" href="#">
+                                            <img class="lux-card-img" src="./frontend/public/CMP2.webp" alt="Jar Cream Care" />
+                                            <div class="lux-card-info">
+                                                <p class="lux-card-name">Jar Cream Care</p>
+                                                <p class="lux-card-price">$25</p>
+                                            </div>
+                                        </a>
+                                        <a class="lux-card" href="#">
+                                            <img class="lux-card-img" src="./frontend/public/CMP3.webp" alt="Skincare Tube" />
+                                            <div class="lux-card-info">
+                                                <p class="lux-card-name">Skincare Tube</p>
+                                                <p class="lux-card-price">$18</p>
+                                            </div>
+                                        </a>
+                                        <a class="lux-card" href="#">
+                                            <img class="lux-card-img" src="./frontend/public/CMP4.webp" alt="Face Serum" />
+                                            <div class="lux-card-info">
+                                                <p class="lux-card-name">Face Serum</p>
+                                                <p class="lux-card-price">$35</p>
+                                            </div>
+                                        </a>
+                                        <a class="lux-card" href="#">
+                                            <img class="lux-card-img" src="./frontend/public/Etlala_Whithening_night_cream.webp" alt="Hydrating Mist" />
+                                            <div class="lux-card-info">
+                                                <p class="lux-card-name">Hydrating Mist</p>
+                                                <p class="lux-card-price">$30</p>
+                                            </div>
+                                        </a>
+                                        <a class="lux-card" href="#">
+                                            <img class="lux-card-img" src="./frontend/public/Etlala_Anti_Strech_marks_Serum.webp" alt="Silk Cleanser" />
+                                            <div class="lux-card-info">
+                                                <p class="lux-card-name">Silk Cleanser</p>
+                                                <p class="lux-card-price">$24</p>
+                                            </div>
+                                        </a>
+                                        <a class="lux-card" href="#">
+                                            <img class="lux-card-img" src="./frontend/public/Hair_Serum.webp" alt="Porcelain Toner" />
+                                            <div class="lux-card-info">
+                                                <p class="lux-card-name">Porcelain Toner</p>
+                                                <p class="lux-card-price">$22</p>
+                                            </div>
+                                        </a>
+                                        <a class="lux-card" href="#">
+                                            <img class="lux-card-img" src="./frontend/public/Etlala_hair_Shampoo.webp" alt="Revive Elixir" />
+                                            <div class="lux-card-info">
+                                                <p class="lux-card-name">Revive Elixir</p>
+                                                <p class="lux-card-price">$48</p>
+                                            </div>
+                                        </a>
+                                        <a class="lux-card" href="#">
+                                            <img class="lux-card-img" src="./frontend/public/ItlalaCremesolaireinvisible.webp" alt="Matte Sunscreen" />
+                                            <div class="lux-card-info">
+                                                <p class="lux-card-name">Matte Sunscreen</p>
+                                                <p class="lux-card-price">$29</p>
+                                            </div>
+                                        </a>
+                                        <a class="lux-card" href="#">
+                                            <img class="lux-card-img" src="./frontend/public/ItlalaGelNettoyantmatched.webp" alt="Glow Essence" />
+                                            <div class="lux-card-info">
+                                                <p class="lux-card-name">Glow Essence</p>
+                                                <p class="lux-card-price">$39</p>
+                                            </div>
+                                        </a>
+                                        <a class="lux-card" href="#">
+                                            <img class="lux-card-img" src="./frontend/public/Etlala_Strengthens_and_lengthens_Nails_brighter.webp" alt="Rose Night Oil" />
+                                            <div class="lux-card-info">
+                                                <p class="lux-card-name">Rose Night Oil</p>
+                                                <p class="lux-card-price">$44</p>
+                                            </div>
+                                        </a>
+                                        <a class="lux-card" href="#">
+                                            <img class="lux-card-img" src="./frontend/public/Etlala_Mascara_brighter.webp" alt="Velvet Balm" />
+                                            <div class="lux-card-info">
+                                                <p class="lux-card-name">Velvet Balm</p>
+                                                <p class="lux-card-price">$26</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </section>
+                            
+                            <div>
+                                <div class="div-style-e9df4128">
+                                    <div class="div-style-ffcd7f71">
+                                        <div class="div-style-78ac29dc">
+                                            <div class="div-style-c6630b">
+                                                <div class="div-style-f6b6c208">
+                                                    <!-- EXCLUSIVE RELEASE hero removed -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Instagram/gallery section removed -->
+
+                            <!-- Bordered Chanel-style Hero Section -->
+                            <section class="chanel-hero">
+                                <style>
+                                    .chanel-hero { width: 100%; padding: 80px 112px; display: flex; justify-content: center; align-items: center; }
+                                    /* Use site-wide brand green so the hero matches the page background */
+                                    .chanel-hero-container { position: relative; width: 100%; max-width: 1440px; height: 100vh; min-height: 540px; border: none; border-radius: 0; background: #000000; overflow: hidden; display: grid; grid-template-columns: 3fr 1fr; margin: 0 auto; box-shadow: none; }
+                                    .chanel-hero-media { position: relative; background: #f5f5f5; }
+                                    .chanel-hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.05) brightness(0.96); }
+                                    .chanel-hero-content { display: flex; flex-direction: column; justify-content: center; gap: 24px; padding: 56px; }
+                                    .chanel-hero-overline { margin: 0; font: 600 12px/1 Lato, sans-serif; letter-spacing: 6px; text-transform: uppercase; color: rgba(0,0,0,0.7); }
+                                    .chanel-hero-title { margin: 0; font: 700 64px/1.08 "Playfair Display", serif; color: #000; letter-spacing: 1px; text-transform: uppercase; }
+                                    .chanel-hero-description { margin: 0; font: 400 16px/1.8 Lato, sans-serif; color: #000000; max-width: 560px; }
+                                    .chanel-hero-cta-group { display: flex; gap: 14px; margin-top: 8px; }
+                                    .chanel-hero-cta { padding: 12px 28px; font: 600 12px Lato, sans-serif; text-transform: uppercase; letter-spacing: 2px; background: #fff; color: #000; border: 1px solid #000; cursor: pointer; transition: all .3s ease; }
+                                    .chanel-hero-cta.primary { background: #000; color: #fff; }
+                                    .chanel-hero-cta.primary:hover { background: #fff; color: #000; }
+                                    .chanel-hero-cta.ghost:hover { background: #000; color: #fff; }
+                                    @media (max-width: 1200px) { .chanel-hero { padding: 60px 60px; } .chanel-hero-title{ font-size: 48px; } }
+                                    @media (max-width: 900px) { .chanel-hero-container { grid-template-columns: 1fr; height: auto; min-height: 520px; } .chanel-hero-media { order: -1; height: 320px; } .chanel-hero-content { padding: 40px 32px; } .chanel-hero-title{ font-size: 40px; } }
+                                    @media (max-width: 480px) { .chanel-hero { padding: 40px 16px; } .chanel-hero-title{ font-size: 32px; letter-spacing: 0; } }
+                                </style>
+                                <style>
+                                    .chanel-hero-container {
+                                        display: grid;
+                                        grid-template-columns: 1.3fr 1fr;
+                                        align-items: stretch;
+                                        min-height: 520px;
+                                        background: #f5f5f5;
+                                    }
+                                    .chanel-hero-content {
+                                        background: #000000;
+                                        padding: 120px 120px;
+                                        display: flex;
+                                        flex-direction: column;
+                                        justify-content: center;
+                                        align-items: flex-start;
+                                        color: white;
+                                        max-width: 1400px;
+                                        margin: 0 auto;
+                                    }
+                                    .chanel-hero-overline {
+                                        font-family: 'Montserrat', sans-serif;
+                                        font-size: 12px;
+                                        letter-spacing: 2px;
+                                        color: rgba(255, 255, 255, 0.7);
+                                        margin-bottom: 24px;
+                                    }
+                                    .chanel-hero-title {
+                                        font-family: 'Montserrat', sans-serif;
+                                        font-size: 72px;
+                                        font-weight: 600;
+                                        line-height: 1.1;
+                                        margin: 0 0 40px 0;
+                                        color: white;
+                                        letter-spacing: -0.02em;
+                                    }
+                                    .chanel-hero-description {
+                                        font-family: 'Lato', sans-serif;
+                                        font-size: 18px;
+                                        line-height: 1.6;
+                                        color: rgba(255, 255, 255, 0.9);
+                                        margin-bottom: 60px;
+                                        max-width: 640px;
+                                    }
+                                    .chanel-hero-cta {
+                                        font-family: 'Montserrat', sans-serif;
+                                        font-size: 14px;
+                                        font-weight: 600;
+                                        letter-spacing: 1px;
+                                        padding: 12px 32px;
+                                        border: 1px solid #B8860B;
+                                        background: transparent;
+                                        color: #B8860B;
+                                        cursor: pointer;
+                                        transition: all 0.3s ease;
+                                    }
+                                    .chanel-hero-cta:hover {
+                                        background: #B8860B;
+                                        color: white;
+                                    }
+                                    .chanel-hero-media {
+                                        background: #000000;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        overflow: hidden;
+                                    }
+                                    .chanel-hero-image {
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: cover;
+                                    }
+                                    @media (max-width: 900px) {
+                                        .chanel-hero-container {
+                                            grid-template-columns: 1fr;
+                                        }
+                                        .chanel-hero-content {
+                                            padding: 40px 24px;
+                                        }
+                                    }
+                                </style>
+                                <div class="chanel-hero-container">
+                                    <div class="chanel-hero-content">
+                                        <p class="chanel-hero-overline">CRAFTED FOR PERFECTION</p>
+                                        <h2 class="chanel-hero-title">TIMELESS<br/>ELEGANCE<br/>REDEFINED</h2>
+                                        <p class="chanel-hero-description">Where innovation meets tradition. Our exclusive collection represents the pinnacle of skincare excellence, designed for those who demand nothing but the best.</p>
+                                        <div class="chanel-hero-cta-group">
+                                            <button class="chanel-hero-cta primary">DISCOVER MORE</button>
+                                        </div>
+                                    </div>
+                                    <div class="chanel-hero-media">
+                                        <img class="chanel-hero-image" src="./frontend/public/image_a31f1231.png" alt="Luxury Skincare Product" />
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <!-- Features Section with Big Cards -->
+                        <section class="features-section">
+                        <style>
+                        .features-section {
+                        width: 100%;
+                        background: #ffffff;
+                        padding: 80px 0;
+                        margin: 0;
+                        }
+                        .features-container {
+                        max-width: 1440px;
+                        margin: 0 auto;
+                        padding: 0 60px;
+                        display: grid;
+                        grid-template-columns: repeat(4, 1fr);
+                        gap: 24px;
+                        }
+                        .feature-card {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
+                        background: #ffffff;
+                        border: 1px solid #e5e5e5;
+                        border-radius: 12px;
+                        padding: 48px 32px;
+                        gap: 24px;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+                        }
+                        .feature-card:hover {
+                        transform: translateY(-4px);
+                        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+                        border-color: #000;
+                        }
+                        .feature-icon {
+                        width: 64px;
+                        height: 64px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: #f8f8f8;
+                        border-radius: 50%;
+                        margin-bottom: 8px;
+                        }
+                        .feature-icon svg {
+                        width: 32px;
+                        height: 32px;
+                        stroke: #000;
+                        stroke-width: 1.5;
+                        }
+                        .feature-title {
+                        margin: 0;
+                        font: 600 15px/1.2 'Lato', sans-serif;
+                        letter-spacing: 1.8px;
+                        text-transform: uppercase;
+                        color: #000;
+                        }
+                        .feature-description {
+                        margin: 0;
+                        font: 400 15px/1.7 'Lato', sans-serif;
+                        color: #666;
+                        flex: 1;
+                        }
+                        .feature-link {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 8px;
+                        margin-top: 12px;
+                        font: 500 13px/1 'Lato', sans-serif;
+                        color: #000;
+                        text-decoration: none;
+                        transition: gap 0.3s ease;
+                        padding: 10px 20px;
+                        border: 1px solid #e5e5e5;
+                        border-radius: 6px;
+                        }
+                        .feature-link:hover {
+                        gap: 12px;
+                        background: #000;
+                        color: #fff;
+                        border-color: #000;
+                        }
+                        .feature-link svg {
+                        width: 16px;
+                        height: 16px;
+                        stroke: currentColor;
+                        stroke-width: 2;
+                        }
+                        @media (max-width: 1200px) {
+                        .features-container {
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 20px;
+                        padding: 0 40px;
+                        }
+                        .feature-card {
+                        padding: 40px 28px;
+                        }
+                        }
+                        @media (max-width: 768px) {
+                        .features-section {
+                        padding: 60px 0;
+                        }
+                        .features-container {
+                        grid-template-columns: 1fr;
+                        gap: 16px;
+                        padding: 0 24px;
+                        }
+                        .feature-card {
+                        padding: 36px 24px;
+                        }
+                        .feature-icon {
+                        width: 56px;
+                        height: 56px;
+                        }
+                        .feature-icon svg {
+                        width: 28px;
+                        height: 28px;
+                        }
+                        .feature-description {
+                        font-size: 14px;
+                        }
+                        }
+                        </style>
+                                <div class="features-container">
+                                <!-- Secure Payment -->
+                                <div class="feature-card">
+                                <div class="feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="3" y="8" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                                                <path d="M7 8V6C7 3.79086 8.79086 2 11 2H13C15.2091 2 17 3.79086 17 6V8" stroke="currentColor" stroke-width="1.5"/>
+                                                <circle cx="12" cy="14" r="1.5" fill="currentColor"/>
+                                            </svg>
+                                        </div>
+                                        <h3 class="feature-title">SECURE PAYMENT</h3>
+                                        <p class="feature-description">Our safety is our top priority, thus your payment information is processed securely.</p>
+                                        <a href="#" class="feature-link">
+                                            <span>Learn more</span>
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+
+                                    <!-- Free Shipping -->
+                                    <div class="feature-card">
+                                    <div class="feature-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 6H16V15H3V6Z" stroke="currentColor" stroke-width="1.5"/>
+                                    <path d="M16 9H19L21 12V15H16V9Z" stroke="currentColor" stroke-width="1.5"/>
+                                    <circle cx="7" cy="18" r="2" stroke="currentColor" stroke-width="1.5"/>
+                                    <circle cx="17" cy="18" r="2" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                    </div>
+                                    <h3 class="feature-title">FREE SHIPPING</h3>
+                                    <p class="feature-description">Free domestic shipping and returns for purchases over €500.</p>
+                                    <a href="#" class="feature-link">
+                                    <span>Learn more</span>
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </a>
+                                    </div>
+                                    
+                                    <!-- Stores & Retailers -->
+                                    <div class="feature-card">
+                                    <div class="feature-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="1.5"/>
+                                    <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                    </div>
+                                    <h3 class="feature-title">STORES & RETAILERS</h3>
+                                    <p class="feature-description">Discover our stores and find a location near you.</p>
+                                    <a href="#" class="feature-link">
+                                    <span>Learn more</span>
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </a>
+                                    </div>
+                                    
+                                    <!-- Support -->
+                                    <div class="feature-card">
+                                    <div class="feature-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                    </div>
+                                    <h3 class="feature-title">SUPPORT</h3>
+                                    <p class="feature-description">We are more than happy to reply to any questions and tell you more about our products.</p>
+                                    <a href="#" class="feature-link">
+                                    <span>Learn more</span>
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </a>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        gsap.from(".clip-top, .clip-bottom", 2, {
+            delay: 1,
+            height: "50vh",
+            ease: "power4.inOut",
+        });
+        
+        gsap.to(".marquee", 3.5, {
+            delay: 0.75,
+            top: "50%",
+            ease: "power4.inOut",
+        });
+
+        gsap.from(".clip-top .marquee, .clip-bottom .marquee", 5, {
+            delay: 1,
+            left: "100%",
+            ease: "power3.inOut",
+        });
+
+        gsap.from(".clip-center .marquee", 5, {
+            delay: 1,
+            left: "-50%",
+            ease: "power3.inOut",
+        });
+
+        gsap.to(".clip-top", 2, {
+            delay: 6,
+            clipPath: "inset(0 0 100% 0)",
+            ease: "power4.inOut",
+        });
+
+        gsap.to(".clip-bottom", 2, {
+            delay: 6,
+            clipPath: "inset(100% 0 0 0)",
+            ease: "power4.inOut",
+        });
+
+        gsap.to(".clip-top .marquee, .clip-bottom .marquee, .clip-center .marquee", 1, {
+            delay: 6,
+            opacity: 0,
+            ease: "power2.inOut",
+        });
+
+        // Fade in main content after loader animation completes
+        gsap.to("#main-content", 1.5, {
+            delay: 7,
+            opacity: 1,
+            ease: "power2.inOut",
+        });
+
+        // Ultra-smooth drag-to-scroll with momentum for the lux-products rail
+        (function(){
+            var rail = document.querySelector('.lux-products-row');
+            if(!rail) return;
+            
+            var isDown = false;
+            var startX = 0;
+            var scrollLeft = 0;
+            var velocity = 0;
+            var momentumID;
+            var lastX = 0;
+            var lastTime = 0;
+            var velocityTracker = [];
+
+            function momentumLoop(){
+                if(Math.abs(velocity) > 0.3){
+                    rail.scrollLeft += velocity;
+                    velocity *= 0.95; // Smoother friction
+                    momentumID = requestAnimationFrame(momentumLoop);
+                } else {
+                    velocity = 0;
+                    cancelAnimationFrame(momentumID);
+                }
+            }
+
+            rail.addEventListener('mousedown', function(e){
+                isDown = true;
+                rail.classList.add('dragging');
+                startX = e.pageX - rail.offsetLeft;
+                scrollLeft = rail.scrollLeft;
+                velocity = 0;
+                velocityTracker = [];
+                lastX = e.pageX;
+                lastTime = Date.now();
+                cancelAnimationFrame(momentumID);
+            });
+
+            rail.addEventListener('mouseleave', function(){
+                if(isDown){
+                    isDown = false;
+                    rail.classList.remove('dragging');
+                    momentumLoop();
+                }
+            });
+
+            rail.addEventListener('mouseup', function(){
+                isDown = false;
+                rail.classList.remove('dragging');
+                
+                // Average last few velocity samples for smoother momentum
+                if(velocityTracker.length > 0){
+                    var sum = velocityTracker.reduce(function(a, b){ return a + b; }, 0);
+                    velocity = (sum / velocityTracker.length) * 0.8;
+                }
+                momentumLoop();
+            });
+
+            rail.addEventListener('mousemove', function(e){
+                if(!isDown) return;
+                e.preventDefault();
+                
+                var x = e.pageX - rail.offsetLeft;
+                var walk = (x - startX) * 1.2; // Lower sensitivity for smoother feel
+                rail.scrollLeft = scrollLeft - walk;
+                
+                // Track velocity with smoothing
+                var now = Date.now();
+                var dt = now - lastTime;
+                if(dt > 0){
+                    var currentVelocity = -((e.pageX - lastX) / dt) * 15;
+                    velocityTracker.push(currentVelocity);
+                    if(velocityTracker.length > 5){
+                        velocityTracker.shift();
+                    }
+                }
+                lastX = e.pageX;
+                lastTime = now;
+            });
+
+            // Touch events with momentum
+            var touchStartX = 0;
+            var touchScrollLeft = 0;
+            var touchVelocityTracker = [];
+            var touchLastX = 0;
+            var touchLastTime = 0;
+
+            rail.addEventListener('touchstart', function(e){
+                if(!e.touches || !e.touches[0]) return;
+                rail.classList.add('dragging');
+                touchStartX = e.touches[0].pageX;
+                touchScrollLeft = rail.scrollLeft;
+                velocity = 0;
+                touchVelocityTracker = [];
+                touchLastX = e.touches[0].pageX;
+                touchLastTime = Date.now();
+                cancelAnimationFrame(momentumID);
+            }, {passive: true});
+
+            rail.addEventListener('touchend', function(){
+                rail.classList.remove('dragging');
+                
+                // Average velocity for smooth momentum
+                if(touchVelocityTracker.length > 0){
+                    var sum = touchVelocityTracker.reduce(function(a, b){ return a + b; }, 0);
+                    velocity = (sum / touchVelocityTracker.length) * 0.8;
+                }
+                momentumLoop();
+            }, {passive: true});
+
+            rail.addEventListener('touchmove', function(e){
+                if(!e.touches || !e.touches[0]) return;
+                var x = e.touches[0].pageX;
+                var walk = (touchStartX - x);
+                rail.scrollLeft = touchScrollLeft + walk;
+                
+                // Track velocity with smoothing
+                var now = Date.now();
+                var dt = now - touchLastTime;
+                if(dt > 0){
+                    var currentVelocity = ((touchLastX - x) / dt) * 15;
+                    touchVelocityTracker.push(currentVelocity);
+                    if(touchVelocityTracker.length > 5){
+                        touchVelocityTracker.shift();
+                    }
+                }
+                touchLastX = x;
+                touchLastTime = now;
+            }, {passive: true});
+        })();
+        </script>
+    </body>
+</html>

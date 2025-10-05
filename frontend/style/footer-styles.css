@@ -1,0 +1,438 @@
+/* =========================
+   Footer Styles - Minas-Inspired Luxury Design
+   Clean, minimal, elegant - matching Minas Designs
+   =========================== */
+
+:root {
+    /* Minas-inspired luxury palette */
+    --gold: #C9A961;
+    --gold-dark: #9B7E3C;
+    --gold-light: #E5D5B3;
+    --black: #000000;
+    --white: #FFFFFF;
+    --gray-50: #FAFAFA;
+    --gray-100: #F7F7F7;
+    --gray-200: #E5E5E5;
+    --gray-500: #737373;
+    --gray-700: #404040;
+    --text-primary: #000000;
+    --text-secondary: #737373;
+    --border-light: #E5E5E5;
+}
+
+.site-footer {
+    background-color: #000000;
+    padding: 80px 0 0 0;
+    width: 100%;
+    font-family: 'Lato', 'Helvetica Neue', sans-serif;
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 60px 60px 60px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px;
+    border-bottom: 1px solid rgba(201, 169, 97, 0.15);
+}
+
+/* Footer Columns */
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer-column-title {
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--white);
+    margin: 0 0 12px 0;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.footer-links li {
+    margin: 0;
+}
+
+.footer-link {
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-link:hover {
+    color: var(--gold);
+    text-decoration: none;
+}
+
+/* Contact Info */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.contact-label {
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.contact-value {
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-value:hover {
+    color: var(--gold);
+}
+
+/* Newsletter Section */
+.newsletter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.newsletter-title {
+    font-family: 'Lato', sans-serif;
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--white);
+    margin: 0 0 20px 0;
+    padding-bottom: 20px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(201, 169, 97, 0.3);
+}
+
+.newsletter-form {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    max-width: 100%;
+}
+
+.newsletter-input {
+    flex: 1;
+    padding: 14px 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    color: var(--white);
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: none;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.newsletter-input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+    font-style: normal;
+}
+
+.newsletter-input:focus {
+    border-color: var(--gold);
+}
+
+.newsletter-button {
+    padding: 14px 28px;
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--white);
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.newsletter-button:hover {
+    background-color: var(--gold);
+    border-color: var(--gold);
+    color: var(--white);
+}
+
+.newsletter-button:active {
+    transform: scale(0.98);
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.social-link {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+.social-link:hover {
+    color: var(--gold);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    padding: 30px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-bottom-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.commercial-register {
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.35);
+    margin: 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.copyright-text {
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.35);
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.footer-bottom-link {
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.35);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.footer-bottom-link:hover {
+    color: var(--gold);
+}
+
+.footer-bottom-right {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.payment-icon {
+    height: 24px;
+    width: auto;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.payment-icon:hover {
+    opacity: 1;
+}
+
+/* Scroll to Top Button */
+.scroll-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 48px;
+    height: 48px;
+    background-color: var(--gold);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+}
+
+.scroll-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-top:hover {
+    background-color: var(--gold-dark);
+    transform: translateY(-4px);
+}
+
+.scroll-top svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--white);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .footer-container {
+        padding: 0 40px 50px 40px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 50px;
+    }
+
+    .newsletter-section {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 60px 0 0 0;
+    }
+
+    .footer-container {
+        padding: 0 30px 40px 30px;
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .newsletter-section {
+        grid-column: 1;
+    }
+
+    .newsletter-title {
+        font-size: 28px;
+    }
+
+    .footer-bottom {
+        padding: 25px 30px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-bottom-links {
+        flex-wrap: wrap;
+    }
+
+    .scroll-top {
+        bottom: 30px;
+        right: 30px;
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-footer {
+        padding: 50px 0 0 0;
+    }
+
+    .footer-container {
+        padding: 0 20px 30px 20px;
+        gap: 35px;
+    }
+
+    .footer-column-title {
+        font-size: 10px;
+        margin-bottom: 10px;
+    }
+
+    .footer-link {
+        font-size: 12px;
+    }
+
+    .newsletter-title {
+        font-size: 24px;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .newsletter-input {
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .newsletter-button {
+        width: 100%;
+        padding: 14px 24px;
+    }
+
+    .social-links {
+        gap: 20px;
+    }
+
+    .footer-bottom {
+        padding: 20px;
+    }
+
+    .footer-bottom-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .commercial-register,
+    .copyright-text,
+    .footer-bottom-link {
+        font-size: 10px;
+    }
+
+    .scroll-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+    }
+}

@@ -1,0 +1,17 @@
+/* Scroll reveal base styles */
+.scroll-reveal-text { 
+  backface-visibility: hidden; 
+  transform: translateZ(0); 
+  will-change: transform;
+  perspective: 1000px;
+}
+.word { 
+  display: inline-block; 
+  will-change: opacity, filter, transform;
+  transform-style: preserve-3d;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}

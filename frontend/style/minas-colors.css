@@ -1,0 +1,229 @@
+/* ============================================
+   MINAS-INSPIRED LUXURY COLOR SYSTEM
+   Clean, minimal, elegant - no glows
+   ============================================ */
+
+:root {
+    /* Primary Palette */
+    --gold: #C9A961;
+    --gold-dark: #9B7E3C;
+    --gold-light: #E5D5B3;
+    
+    /* Neutrals */
+    --black: #000000;
+    --white: #FFFFFF;
+    --gray-50: #FAFAFA;
+    --gray-100: #F7F7F7;
+    --gray-200: #E5E5E5;
+    --gray-300: #D4D4D4;
+    --gray-500: #737373;
+    --gray-700: #404040;
+    --gray-900: #000000;
+    
+    /* Semantic Colors */
+    --text-primary: #000000;
+    --text-secondary: #737373;
+    --text-tertiary: #A3A3A3;
+    --border-light: #E5E5E5;
+    --border-medium: #D4D4D4;
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F7F7F7;
+    --bg-tertiary: #FAFAFA;
+}
+
+/* ============================================
+   TYPOGRAPHY SYSTEM
+   ============================================ */
+
+.text-gold { color: var(--gold); }
+.text-gold-dark { color: var(--gold-dark); }
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+
+/* ============================================
+   BUTTON SYSTEM - Minas Style
+   ============================================ */
+
+/* Primary Gold Button */
+.btn-gold {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+    background: var(--gold-dark);
+    border-color: var(--gold-dark);
+}
+
+/* Outline Gold Button */
+.btn-gold-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: transparent;
+    border: 1px solid var(--gold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-gold-outline:hover {
+    color: var(--white);
+    background: var(--gold);
+}
+
+/* Black Button */
+.btn-black {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--black);
+    border: 1px solid var(--black);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-black:hover {
+    background: var(--gray-900);
+    border-color: var(--gray-900);
+}
+
+/* Outline Black Button */
+.btn-black-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--black);
+    background: transparent;
+    border: 1px solid var(--black);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-black-outline:hover {
+    color: var(--white);
+    background: var(--black);
+}
+
+/* ============================================
+   BORDERS & DIVIDERS
+   ============================================ */
+
+.border-gold {
+    border-color: var(--gold);
+}
+
+.border-light {
+    border-color: var(--border-light);
+}
+
+.divider-gold {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 16px 0;
+}
+
+.divider-gold-center {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 16px auto;
+}
+
+/* ============================================
+   BACKGROUNDS
+   ============================================ */
+
+.bg-white { background: var(--white); }
+.bg-gray-light { background: var(--gray-100); }
+.bg-gray-medium { background: var(--gray-200); }
+
+/* ============================================
+   ACCENT LINES - Minas Style
+   ============================================ */
+
+.accent-line-gold {
+    position: relative;
+}
+
+.accent-line-gold::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin-top: 12px;
+}
+
+.accent-line-gold-center {
+    position: relative;
+}
+
+.accent-line-gold-center::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 12px auto 0;
+}
+
+/* ============================================
+   HOVER STATES
+   ============================================ */
+
+.hover-gold {
+    transition: color 0.3s ease;
+}
+
+.hover-gold:hover {
+    color: var(--gold);
+}
+
+.hover-underline-gold {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.hover-underline-gold::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+}
+
+.hover-underline-gold:hover::after {
+    width: 100%;
+}
