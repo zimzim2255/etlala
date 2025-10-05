@@ -112,7 +112,7 @@ h1,h2,h3,h4,h5,h6, .p-style-802d8898 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: Moresby;
+    font-family: 'Playfair Display', serif;
     gap: 0.4em;
 }
 
