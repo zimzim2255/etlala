@@ -5,9 +5,30 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Lato:wght@400;500;600;700&display=swap" />
     <!-- Added Montserrat for condensed, geometric headings like the 'ICONIC. MIN..' sample -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" />
+        <style>
+          /* Hide loader until webfonts are ready to avoid fallback on first frames */
+          html:not(.fonts-loaded) .loader { visibility: hidden !important; }
+        </style>
+        <script>
+          (function() {
+            var root = document.documentElement;
+            function markReady(){ root.classList.add('fonts-loaded'); }
+            try {
+              if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(markReady);
+              } else {
+                window.addEventListener('load', markReady);
+              }
+            } catch (e) {
+              window.addEventListener('load', markReady);
+            }
+          })();
+        </script>
         <link rel="stylesheet" href="./frontend/style/style.css"/>
         <link rel="stylesheet" href="./frontend/style/navbar-styles.css"/>
         <link rel="stylesheet" href="./frontend/style/footer-styles.css"/>

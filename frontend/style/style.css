@@ -116,6 +116,14 @@ h1,h2,h3,h4,h5,h6, .p-style-802d8898 {
     gap: 0.4em;
 }
 
+/* Force the loader marquee to always use Playfair Display on all environments */
+.loader .marquee,
+.loader .marquee-container,
+.loader .marquee span {
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 700;
+}
+
 
 
 .container {
