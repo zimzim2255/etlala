@@ -99,7 +99,7 @@ h1,h2,h3,h4,h5,h6, .p-style-802d8898 {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 200vw;
-    color: #D4AF37;
+    color: #FFFFFF;
     mix-blend-mode: difference;
     font-size: 16vw;
     font-family: 'Playfair Display', serif;
@@ -113,6 +113,7 @@ h1,h2,h3,h4,h5,h6, .p-style-802d8898 {
     justify-content: space-between;
     align-items: center;
     font-family: Moresby;
+    gap: 0.4em;
 }
 
 
@@ -405,7 +406,7 @@ h1,h2,h3,h4,h5,h6, .p-style-802d8898 {
     width: max-content;
     height: auto;
     overflow: visible;
-    animation: slideMarquee 20s linear infinite;
+    animation: slideMarquee 36s linear infinite;
 }
 @keyframes slideMarquee {
     0% {
