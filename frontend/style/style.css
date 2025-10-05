@@ -230,8 +230,14 @@ h1,h2,h3,h4,h5,h6, .p-style-802d8898 {
 }
 
 @media (max-width: 900px) {
-    /* center the image on smaller screens to avoid awkward cropping */
-    .div-style-cb53ac36 { background-position: center center; }
+    /* Use mobile hero image for the MAIN hero and center it */
+    .div-style-cb53ac36::before {
+        background-image: url("../public/hero_main-small_devicess.png");
+        background-position: center center;
+        background-size: cover;
+        /* Show green split on the right, like desktop */
+        clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+    }
 }
 .div-style-6a573304 {
     box-sizing: border-box;

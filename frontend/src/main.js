@@ -1,4 +1,4 @@
-// Sidebar Menu Functionality - Multi-Level Navigation (Minas-Style)
+ // Sidebar Menu Functionality - Multi-Level Navigation (Minas-Style)
 function initSidebarMenu() {
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const sidebarMenu = document.querySelector('.sidebar-menu');
@@ -9,6 +9,34 @@ function initSidebarMenu() {
     
     let currentPanel = null;
     let panelHistory = [];
+
+    // Create inline current title after Back button
+    const sidebarHeader = document.querySelector('.sidebar-header');
+    const currentTitleEl = document.createElement('span');
+    currentTitleEl.className = 'sidebar-current-title';
+    if (sidebarHeader && sidebarBack) {
+        sidebarHeader.insertBefore(currentTitleEl, sidebarBack.nextSibling);
+    }
+
+    // Inject CSS for inline title and drill-down header style
+    (function injectSidebarStyles(){
+        if (document.getElementById('sidebar-drilldown-style')) return;
+        const style = document.createElement('style');
+        style.id = 'sidebar-drilldown-style';
+        style.textContent = `
+.sidebar-current-title { display: none; margin-left: 12px; }
+.sidebar-menu:has(.sidebar-panel.active) .sidebar-back-text { display: none !important; }
+.sidebar-menu:has(.sidebar-panel.active) .sidebar-current-title { display: inline-block !important; font: 600 14px/1.2 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--text); }
+.sidebar-menu:has(.sidebar-panel.active) .sidebar-header { border-bottom: 1px solid #d9d9d9 !important; padding: 24px 28px 16px 28px !important; background: transparent !important; }
+.sidebar-menu:has(.sidebar-panel.active) .sidebar-subpanel-title { display: none !important; }
+/* Fallback for browsers without :has() */
+.sidebar-menu.has-active-panel .sidebar-back-text { display: none !important; }
+.sidebar-menu.has-active-panel .sidebar-current-title { display: inline-block !important; font: 600 14px/1.2 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--text); }
+.sidebar-menu.has-active-panel .sidebar-header { border-bottom: 1px solid #d9d9d9 !important; padding: 24px 28px 16px 28px !important; background: transparent !important; }
+.sidebar-menu.has-active-panel .sidebar-subpanel-title { display: none !important; }
+        `;
+        document.head.appendChild(style);
+    })();
 
     // Open sidebar
     function openSidebar() {
@@ -36,6 +64,12 @@ function initSidebarMenu() {
         if (sidebarBack) {
             sidebarBack.classList.remove('visible');
         }
+        if (currentTitleEl) {
+            currentTitleEl.textContent = '';
+        }
+        if (sidebarMenu) {
+            sidebarMenu.classList.remove('has-active-panel');
+        }
     }
     
     // Open a sub-panel
@@ -53,6 +87,15 @@ function initSidebarMenu() {
         // Activate new panel
         panel.classList.add('active');
         currentPanel = panel;
+
+        // Update header inline title and drilldown state
+        const titleNode = panel.querySelector('.sidebar-subpanel-title');
+        if (titleNode && currentTitleEl) {
+            currentTitleEl.textContent = titleNode.textContent || '';
+        }
+        if (sidebarMenu) {
+            sidebarMenu.classList.add('has-active-panel');
+        }
         
         // Show back button
         if (sidebarBack) {
@@ -71,10 +114,25 @@ function initSidebarMenu() {
             previousPanel.classList.remove('previous');
             previousPanel.classList.add('active');
             currentPanel = previousPanel;
+
+            // Update header inline title
+            const titleNode = currentPanel.querySelector('.sidebar-subpanel-title');
+            if (titleNode && currentTitleEl) {
+                currentTitleEl.textContent = titleNode.textContent || '';
+            }
+            if (sidebarMenu) {
+                sidebarMenu.classList.add('has-active-panel');
+            }
         } else {
             currentPanel = null;
             if (sidebarBack) {
                 sidebarBack.classList.remove('visible');
+            }
+            if (currentTitleEl) {
+                currentTitleEl.textContent = '';
+            }
+            if (sidebarMenu) {
+                sidebarMenu.classList.remove('has-active-panel');
             }
         }
     }
