@@ -182,10 +182,68 @@ function initSidebarMenu() {
     });
 }
 
+// Insert autoplaying videos into Shop By Collection tiles (Moisturizer, Cleanser, Sunscreen)
+function insertShopByCollectionVideos() {
+    try {
+        var container = document.querySelector('.div-style-a0273da9');
+        if (!container) return;
+        var configs = [
+            { selector: '.div-style-b686f8d8', src: './frontend/public/category-1.mp4' }, // MOISTURIZER
+            { selector: '.div-style-69503951', src: './frontend/public/category-2.mp4' }, // CLEANSER
+            { selector: '.div-style-a005d590', src: './frontend/public/category-3.mp4' }  // SUNSCREEN
+        ];
+        configs.forEach(function(cfg) {
+            var col = container.querySelector(cfg.selector);
+            if (!col) return;
+            if (col.querySelector('video.shop-by-collection-video')) return; // avoid duplicates
+
+            // Ensure stacking context
+            if (!col.style.position) col.style.position = 'relative';
+
+            // Create video
+            var video = document.createElement('video');
+            video.className = 'shop-by-collection-video';
+            video.src = cfg.src;
+            video.autoplay = true;
+            video.loop = true;
+            video.muted = true;
+            video.playsInline = true;
+            video.setAttribute('playsinline', '');
+            video.setAttribute('preload', 'auto');
+            // Fill parent
+            video.style.position = 'absolute';
+            video.style.top = '0';
+            video.style.left = '0';
+            video.style.right = '0';
+            video.style.bottom = '0';
+            video.style.width = '100%';
+            video.style.height = '100%';
+            video.style.objectFit = 'cover';
+            video.style.zIndex = '0';
+            video.style.pointerEvents = 'none';
+            video.style.borderRadius = '0';
+
+            // Make existing overlays sit above video
+            Array.prototype.forEach.call(col.children, function(child){
+                if (child !== video && child.style) {
+                    if (!child.style.position) child.style.position = 'relative';
+                    child.style.zIndex = '1';
+                }
+            });
+
+            // Insert as first child
+            col.insertBefore(video, col.firstChild);
+        });
+    } catch (e) { /* no-op */ }
+}
+
 // Load footer after page animations complete
 window.addEventListener('DOMContentLoaded', function() {
     // Initialize sidebar menu
     initSidebarMenu();
+
+    // Add videos into Shop By Collection tiles
+    insertShopByCollectionVideos();
 
     // Wait for GSAP animations to complete (8 seconds total)
     setTimeout(function() {
