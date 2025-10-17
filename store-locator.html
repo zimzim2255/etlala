@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trouver une boutique - ETLALA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Lato:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" />
+    
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="./frontend/style/navbar-styles.css"/>
+    <link rel="stylesheet" href="./frontend/style/navbar-dropdown.css"/>
+    <link rel="stylesheet" href="./frontend/style/footer-styles.css"/>
+    <link rel="stylesheet" href="./frontend/style/minas-colors.css"/>
+    
+    <!-- Store Locator Styles -->
+    <link rel="stylesheet" href="./frontend/style/store-locator.css"/>
+</head>
+<body>
+    <!-- Sidebar Menu -->
+    <div class="sidebar-overlay"></div>
+    <aside class="sidebar-menu">
+        <div class="sidebar-header">
+            <button class="sidebar-back" aria-label="Retour">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="sidebar-back-text">Retour</span>
+            </button>
+            <nav class="sidebar-header-nav">
+                <a href="/" class="sidebar-header-link">Accueil</a>
+                <a href="/gift-card" class="sidebar-header-link">Carte cadeau</a>
+                <a href="/store-locator.html" class="sidebar-header-link active">Trouver une boutique</a>
+                <a href="/contact.html" class="sidebar-header-link">Nous contacter</a>
+            </nav>
+            <button class="sidebar-close" aria-label="Fermer le menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Multi-Level Menu -->
+        <div class="sidebar-mobile-menu">
+            <div class="sidebar-menu-item">
+                <button class="sidebar-menu-link" data-panel="product-categories">
+                    <span>CATÉGORIES SOINS DE LA PEAU</span>
+                    <span class="sidebar-menu-arrow">
+                        <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <button class="sidebar-menu-link" data-panel="collections">
+                    <span>PAR BESOIN</span>
+                    <span class="sidebar-menu-arrow">
+                        <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <a href="/best-sellers" class="sidebar-menu-link">
+                    <span>MEILLEURES VENTES</span>
+                </a>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <a href="/body-care" class="sidebar-menu-link">
+                    <span>SOINS DU CORPS</span>
+                </a>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <a href="/hair-care" class="sidebar-menu-link">
+                    <span>SOINS DES CHEVEUX</span>
+                </a>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <a href="/starter-kits" class="sidebar-menu-link">
+                    <span>KITS DÉCOUVERTE <span style="color: #6E8B72; font-size: 10px; margin-left: 8px;">BIENTÔT DISPONIBLE</span></span>
+                </a>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <a href="/new-arrivals" class="sidebar-menu-link">
+                    <span>NOUVEAUTÉS</span>
+                </a>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <a href="/tools-accessories" class="sidebar-menu-link">
+                    <span>OUTILS &amp; ACCESSOIRES</span>
+                </a>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <button class="sidebar-menu-link" data-panel="house-of-minas">
+                    <span>À PROPOS D'ETLALA</span>
+                    <span class="sidebar-menu-arrow">
+                        <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Sub-panels -->
+        <div class="sidebar-panel" id="panel-product-categories">
+            <h2 class="sidebar-subpanel-title">CATÉGORIES SOINS DE LA PEAU</h2>
+            <div class="sidebar-subpanel-list">
+                <div class="sidebar-subpanel-item"><a href="/cleansers" class="sidebar-subpanel-link">Nettoyants</a></div>
+                <div class="sidebar-subpanel-item"><a href="/toners" class="sidebar-subpanel-link">Lotions toniques</a></div>
+                <div class="sidebar-subpanel-item"><a href="/serums" class="sidebar-subpanel-link">Sérums</a></div>
+                <div class="sidebar-subpanel-item"><a href="/moisturizers" class="sidebar-subpanel-link">Hydratants</a></div>
+                <div class="sidebar-subpanel-item"><a href="/eye-care" class="sidebar-subpanel-link">Soin des yeux</a></div>
+                <div class="sidebar-subpanel-item"><a href="/sunscreen" class="sidebar-subpanel-link">Écran solaire</a></div>
+            </div>
+        </div>
+        
+        <div class="sidebar-panel" id="panel-collections">
+            <h2 class="sidebar-subpanel-title">PAR BESOIN</h2>
+            <div class="sidebar-subpanel-list">
+                <div class="sidebar-subpanel-item"><a href="/concern/hydration" class="sidebar-subpanel-link">Hydratation</a></div>
+                <div class="sidebar-subpanel-item"><a href="/concern/anti-aging" class="sidebar-subpanel-link">Anti‑âge</a></div>
+                <div class="sidebar-subpanel-item"><a href="/concern/brightening" class="sidebar-subpanel-link">Éclat</a></div>
+            </div>
+        </div>
+        
+        <div class="sidebar-panel" id="panel-house-of-minas">
+            <h2 class="sidebar-subpanel-title">À PROPOS D'ETLALA</h2>
+            <div class="sidebar-subpanel-list">
+                <div class="sidebar-subpanel-item"><a href="/brand-legacy" class="sidebar-subpanel-link">Héritage de la marque</a></div>
+                <div class="sidebar-subpanel-item"><a href="/craftsmanship" class="sidebar-subpanel-link">Savoir‑faire</a></div>
+                <div class="sidebar-subpanel-item"><a href="/sustainability" class="sidebar-subpanel-link">Durabilité</a></div>
+            </div>
+        </div>
+        
+        <!-- Contact Footer for Mobile Menu -->
+        <div class="sidebar-contact-footer">
+            <div class="sidebar-contact-content">
+                <a href="tel:+212762641558" class="sidebar-contact-phone">
+                    <span class="sidebar-contact-label">Tél.</span>
+                    <span class="sidebar-contact-value">+212762641558</span>
+                </a>
+                <a href="mailto:info@etlala.com" class="sidebar-contact-email" aria-label="Envoyez-nous un e-mail">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M3 7L12 13L21 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Navbar -->
+    <nav class="minimal-navbar">
+        <div class="navbar-left">
+            <button class="hamburger-menu" id="hamburger-btn" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <button class="search-btn" aria-label="Rechercher">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                    <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span class="search-text">RECHERCHER</span>
+            </button>
+        </div>
+        <div class="navbar-center">
+            <a href="/" class="brand-logo">
+                <img src="./frontend/public/logo.png" alt="ETLALA" style="width: 100%; height: auto;" />
+            </a>
+        </div>
+        <div class="navbar-right">
+            <a href="/login" class="nav-link">CONNEXION / INSCRIPTION</a>
+            <a href="#" class="account-icon" aria-label="Compte">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                    <path d="M5 20C5 16.134 8.134 13 12 13C15.866 13 19 16.134 19 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </a>
+            <a href="#" class="cart-link">
+                <span class="cart-text">PANIER</span>
+                <span class="cart-badge">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="store-locator-page">
+        <!-- Hero Section -->
+        <section class="store-hero">
+            <div class="store-hero-content">
+                <p class="store-hero-overline">TROUVEZ‑NOUS</p>
+                <h1 class="store-hero-title">Visitez nos<br/>boutiques</h1>
+                <p class="store-hero-description">
+                    Découvrez ETLALA en personne dans nos adresses exclusives.<br/>
+                    Profitez de consultations personnalisées et de l’ensemble de notre gamme.
+                </p>
+            </div>
+        </section>
+
+        <!-- Search & Filter Section -->
+        <section class="store-search-section">
+            <div class="store-search-container">
+                <div class="search-bar-wrapper">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                        <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <input type="text" id="storeSearch" class="search-input" placeholder="Recherchez par ville ou adresse...">
+                </div>
+                
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Tous les emplacements</button>
+                    <button class="filter-btn" data-filter="flagship">Magasins phares</button>
+                    <button class="filter-btn" data-filter="retail">Magasins de détail</button>
+                    <button class="filter-btn" data-filter="boutique">Boutiques</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Store Listings -->
+        <section class="store-listings-section">
+            <div class="store-listings-container">
+                <div class="stores-grid" id="storesGrid">
+                    <!-- Stores will be dynamically inserted here -->
+                </div>
+                
+                <div class="no-results" id="noResults" style="display: none;">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <h3>Aucun magasin trouvé</h3>
+                    <p>Essayez d'ajuster votre recherche ou vos filtres</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Online Shopping CTA -->
+        <section class="online-cta-section">
+            <div class="online-cta-container">
+                <div class="online-cta-content">
+                    <h2 class="online-cta-title">Vous ne pouvez pas vous rendre en boutique ?</h2>
+                    <p class="online-cta-description">
+                        Découvrez notre collection complète en ligne avec la livraison gratuite dès 500 DH d'achat.<br/>
+                        Profitez de la même expérience de luxe depuis chez vous.
+                    </p>
+                    <a href="/products.html" class="online-cta-btn">Acheter en ligne</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Store Services -->
+        <section class="store-services-section">
+            <div class="store-services-container">
+                <h2 class="store-services-title">Services en boutique</h2>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M5 20C5 16.134 8.134 13 12 13C15.866 13 19 16.134 19 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Consultation personnalisée</h3>
+                        <p class="service-description">Analyse de peau individuelle avec nos experts</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 2L7.17 4H3C1.9 4 1 4.9 1 6V18C1 19.1 1.9 20 3 20H21C22.1 20 23 19.1 23 18V6C23 4.9 22.1 4 21 4H16.83L15 2H9Z" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Essais produits</h3>
+                        <p class="service-description">Essayez avant d'acheter grâce à notre gamme de testeurs</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M9 3V6M15 3V6M3 9H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Prendre rendez-vous</h3>
+                        <p class="service-description">Planifiez une consultation privée selon vos disponibilités</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 7H4C2.9 7 2 7.9 2 9V19C2 20.1 2.9 21 4 21H20C21.1 21 22 20.1 22 19V9C22 7.9 21.1 7 20 7Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M16 7V5C16 3.9 15.1 3 14 3H10C8.9 3 8 3.9 8 5V7" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Emballage cadeau</h3>
+                        <p class="service-description">Emballage cadeau de luxe offert pour tous les achats</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="./frontend/src/main.js"></script>
+    <script src="./frontend/src/navbar-dropdown.js"></script>
+    <script src="./frontend/src/store-locator.js"></script>
+    
+    <script>
+        // Load footer
+        fetch('./frontend/footer-component.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('footer-container').innerHTML = html;
+            })
+            .catch(error => console.log('Footer load error:', error));
+    </script>
+</body>
+</html>

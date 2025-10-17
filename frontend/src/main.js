@@ -10,6 +10,20 @@ function initSidebarMenu() {
     let currentPanel = null;
     let panelHistory = [];
 
+    // Set active state for header nav links based on current page
+    (function setActiveHeaderLink(){
+        const currentPath = window.location.pathname;
+        const headerLinks = document.querySelectorAll('.sidebar-header-link');
+        headerLinks.forEach(link => {
+            const linkPath = new URL(link.href, window.location.origin).pathname;
+            if (currentPath === linkPath || (currentPath === '/index.html' && linkPath === '/')) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    })();
+
     // Create inline current title after Back button
     const sidebarHeader = document.querySelector('.sidebar-header');
     const currentTitleEl = document.createElement('span');
@@ -24,15 +38,19 @@ function initSidebarMenu() {
         const style = document.createElement('style');
         style.id = 'sidebar-drilldown-style';
         style.textContent = `
-.sidebar-current-title { display: none; margin-left: 12px; }
-.sidebar-menu:has(.sidebar-panel.active) .sidebar-back-text { display: none !important; }
-.sidebar-menu:has(.sidebar-panel.active) .sidebar-current-title { display: inline-block !important; font: 600 14px/1.2 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--text); }
-.sidebar-menu:has(.sidebar-panel.active) .sidebar-header { border-bottom: 1px solid #d9d9d9 !important; padding: 24px 28px 16px 28px !important; background: transparent !important; }
+.sidebar-current-title { 
+  display: none; 
+  font: 600 15px/1.2 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+  letter-spacing: .06em; 
+  text-transform: uppercase; 
+  color: var(--text);
+  text-align: center;
+  flex: 1;
+}
+.sidebar-menu:has(.sidebar-panel.active) .sidebar-current-title { display: block !important; }
 .sidebar-menu:has(.sidebar-panel.active) .sidebar-subpanel-title { display: none !important; }
 /* Fallback for browsers without :has() */
-.sidebar-menu.has-active-panel .sidebar-back-text { display: none !important; }
-.sidebar-menu.has-active-panel .sidebar-current-title { display: inline-block !important; font: 600 14px/1.2 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--text); }
-.sidebar-menu.has-active-panel .sidebar-header { border-bottom: 1px solid #d9d9d9 !important; padding: 24px 28px 16px 28px !important; background: transparent !important; }
+.sidebar-menu.has-active-panel .sidebar-current-title { display: block !important; }
 .sidebar-menu.has-active-panel .sidebar-subpanel-title { display: none !important; }
         `;
         document.head.appendChild(style);
@@ -237,27 +255,111 @@ function insertShopByCollectionVideos() {
     } catch (e) { /* no-op */ }
 }
 
+// Utility: detect if a link likely leads to a missing page (no file extension or known html present)
+function isLikelyMissingPath(href){
+    try{
+        var url = new URL(href, location.origin);
+        // Only intercept same-origin internal links
+        if (url.origin !== location.origin) return false;
+        var path = url.pathname;
+        // Allow known existing pages
+        var known = [
+            '/', '/index.html', '/products.html', '/product-details.html', '/contact.html', '/store-locator.html',
+            '/footer.html', '/navbar-component.html', '/footer-component.html',
+            '/cart.html', '/checkout.html', '/order-confirmation.html', '/coming-soon.html'
+        ];
+        if (known.indexOf(path) !== -1) return false;
+        // Simple heuristic: treat as missing if it doesn't end with .html and isn't a root slash ending
+        if (!/\.html$/i.test(path)) return true;
+        // If it ends with .html but not in known list, still treat as missing (static host can't 404 check without HEAD)
+        return true;
+    }catch(e){ return false; }
+}
+
+function bootstrapComingSoonRedirects(){
+    document.addEventListener('click', function(e){
+        var a = e.target.closest('a[href]');
+        if (!a) return;
+        var href = a.getAttribute('href');
+        if (!href || href.startsWith('#')) return;
+        // Ignore mailto, tel, javascript, http(s) external
+        if (/^(mailto:|tel:|javascript:|#)/i.test(href)) return;
+        if (/^https?:\/\//i.test(href) && !href.startsWith(location.origin)) return;
+        if (isLikelyMissingPath(href)){
+            e.preventDefault();
+            var u = new URL(href, location.origin);
+            var path = u.pathname + (u.search || '') + (u.hash || '');
+            location.href = '/coming-soon.html?path=' + encodeURIComponent(path);
+        }
+    }, true);
+}
+
+// Remove old sidebar immediately (before DOMContentLoaded)
+(function removeOldSidebar(){
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function(){
+            document.querySelectorAll('.sidebar-menu, .sidebar-overlay').forEach(function(el){ el.remove(); });
+        });
+    } else {
+        document.querySelectorAll('.sidebar-menu, .sidebar-overlay').forEach(function(el){ el.remove(); });
+    }
+})();
+
 // Load footer after page animations complete
 window.addEventListener('DOMContentLoaded', function() {
-    // Initialize sidebar menu
-    initSidebarMenu();
+    // Enable Coming Soon redirects for non-existing links
+    bootstrapComingSoonRedirects();
+
+    // Inject unified Sidebar on every page, replacing any existing markup
+    (function injectSidebar(){
+        function mount(html){
+            // Remove any existing sidebar/overlay to avoid duplicates (double-check)
+            document.querySelectorAll('.sidebar-menu, .sidebar-overlay').forEach(function(el){ el.remove(); });
+            // Insert at top of body for consistent z-index stacking
+            var holder = document.createElement('div');
+            holder.innerHTML = html;
+            var frag = document.createDocumentFragment();
+            while (holder.firstChild) frag.appendChild(holder.firstChild);
+            document.body.insertBefore(frag, document.body.firstChild);
+            // Initialize sidebar interactions
+            initSidebarMenu();
+        }
+        fetch('./frontend/sidebar-component.html')
+            .then(function(r){ return r.text(); })
+            .then(function(html){ mount(html); })
+            .catch(function(err){ console.log('Sidebar load error:', err); initSidebarMenu(); });
+    })();
+
+    // Ensure global search panel is available on all pages
+    (function ensureSearchPanel(){
+        if (!document.querySelector('script[src$="frontend/src/search-panel.js"], script[src$="/search-panel.js"], script[src*="search-panel.js"]')) {
+            var sc = document.createElement('script');
+            sc.src = './frontend/src/search-panel.js';
+            sc.async = false;
+            document.head.appendChild(sc);
+        }
+    })();
 
     // Add videos into Shop By Collection tiles
     insertShopByCollectionVideos();
 
-    // Wait for GSAP animations to complete (8 seconds total)
-    setTimeout(function() {
+    // Auto-inject footer component on every page (no per-page code needed)
+    (function injectFooter(){
+        // Prefer an explicit container if present
+        var explicit = document.getElementById('footer-container');
+        function mount(html){
+            if (explicit) {
+                explicit.innerHTML = html;
+            } else {
+                // Fallback: append before closing body
+                var holder = document.createElement('div');
+                holder.innerHTML = html;
+                document.body.appendChild(holder);
+            }
+        }
         fetch('./frontend/footer-component.html')
-            .then(response => response.text())
-            .then(html => {
-                // Find the last section in main-content and append footer after it
-                const mainContent = document.getElementById('main-content');
-                if (mainContent) {
-                    const footerContainer = document.createElement('div');
-                    footerContainer.innerHTML = html;
-                    mainContent.appendChild(footerContainer);
-                }
-            })
-            .catch(error => console.log('Footer load error:', error));
-    }, 8000);
+            .then(function(r){ return r.text(); })
+            .then(function(html){ mount(html); })
+            .catch(function(err){ console.log('Footer load error:', err); });
+    })();
 });

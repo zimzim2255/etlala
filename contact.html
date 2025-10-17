@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nous contacter - ETLALA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Lato:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" />
+    
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="./frontend/style/navbar-styles.css"/>
+    <link rel="stylesheet" href="./frontend/style/navbar-dropdown.css"/>
+    <link rel="stylesheet" href="./frontend/style/footer-styles.css"/>
+    <link rel="stylesheet" href="./frontend/style/minas-colors.css"/>
+    
+    <!-- Contact Page Styles -->
+    <link rel="stylesheet" href="./frontend/style/contact.css"/>
+</head>
+<body>
+    <!-- Sidebar Menu -->
+    <div class="sidebar-overlay"></div>
+    <aside class="sidebar-menu">
+        <div class="sidebar-header">
+            <button class="sidebar-back" aria-label="Retour">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="sidebar-back-text">Retour</span>
+            </button>
+            <nav class="sidebar-header-nav">
+                <a href="/" class="sidebar-header-link">Accueil</a>
+                <a href="/gift-card" class="sidebar-header-link">Carte cadeau</a>
+                <a href="/store-locator" class="sidebar-header-link">Trouver une boutique</a>
+                <a href="/contact.html" class="sidebar-header-link active">Nous contacter</a>
+            </nav>
+            <button class="sidebar-close" aria-label="Fermer le menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Multi-Level Menu -->
+        <div class="sidebar-mobile-menu">
+            <div class="sidebar-menu-item">
+                <button class="sidebar-menu-link" data-panel="product-categories">
+                    <span>CATÉGORIES SOINS DE LA PEAU</span>
+                    <span class="sidebar-menu-arrow">
+                        <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <button class="sidebar-menu-link" data-panel="collections">
+                    <span>PAR BESOIN</span>
+                    <span class="sidebar-menu-arrow">
+                        <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <a href="/best-sellers" class="sidebar-menu-link">
+                    <span>MEILLEURES VENTES</span>
+                </a>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <a href="/body-care" class="sidebar-menu-link">
+                    <span>SOINS DU CORPS</span>
+                </a>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <a href="/hair-care" class="sidebar-menu-link">
+                    <span>SOINS DES CHEVEUX</span>
+                </a>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <a href="/starter-kits" class="sidebar-menu-link">
+                    <span>COFFRETS DE DÉMARRAGE <span style="color: #6E8B72; font-size: 10px; margin-left: 8px;">Bientôt disponible</span></span>
+                </a>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <a href="/new-arrivals" class="sidebar-menu-link">
+                    <span>NOUVEAUTÉS</span>
+                </a>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <a href="/tools-accessories" class="sidebar-menu-link">
+                    <span>OUTILS &amp; ACCESSOIRES</span>
+                </a>
+            </div>
+            
+            <div class="sidebar-menu-item">
+                <button class="sidebar-menu-link" data-panel="house-of-minas">
+                    <span>À PROPOS D'ETLALA</span>
+                    <span class="sidebar-menu-arrow">
+                        <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Sub-panels -->
+        <div class="sidebar-panel" id="panel-product-categories">
+            <h2 class="sidebar-subpanel-title">CATÉGORIES SOINS DE LA PEAU</h2>
+            <div class="sidebar-subpanel-list">
+                <div class="sidebar-subpanel-item"><a href="/cleansers" class="sidebar-subpanel-link">Nettoyants</a></div>
+                <div class="sidebar-subpanel-item"><a href="/toners" class="sidebar-subpanel-link">Lotions toniques</a></div>
+                <div class="sidebar-subpanel-item"><a href="/serums" class="sidebar-subpanel-link">Sérums</a></div>
+                <div class="sidebar-subpanel-item"><a href="/moisturizers" class="sidebar-subpanel-link">Hydratants</a></div>
+                <div class="sidebar-subpanel-item"><a href="/eye-care" class="sidebar-subpanel-link">Soin des yeux</a></div>
+                <div class="sidebar-subpanel-item"><a href="/sunscreen" class="sidebar-subpanel-link">Écran solaire</a></div>
+            </div>
+        </div>
+        
+        <div class="sidebar-panel" id="panel-collections">
+            <h2 class="sidebar-subpanel-title">PAR BESOIN</h2>
+            <div class="sidebar-subpanel-list">
+                <div class="sidebar-subpanel-item"><a href="/concern/hydration" class="sidebar-subpanel-link">Hydratation</a></div>
+                <div class="sidebar-subpanel-item"><a href="/concern/anti-aging" class="sidebar-subpanel-link">Anti-âge</a></div>
+                <div class="sidebar-subpanel-item"><a href="/concern/brightening" class="sidebar-subpanel-link">Éclat</a></div>
+            </div>
+        </div>
+        
+        <div class="sidebar-panel" id="panel-house-of-minas">
+            <h2 class="sidebar-subpanel-title">À PROPOS D'ETLALA</h2>
+            <div class="sidebar-subpanel-list">
+                <div class="sidebar-subpanel-item"><a href="/brand-legacy" class="sidebar-subpanel-link">Héritage de la marque</a></div>
+                <div class="sidebar-subpanel-item"><a href="/craftsmanship" class="sidebar-subpanel-link">Savoir-faire</a></div>
+                <div class="sidebar-subpanel-item"><a href="/sustainability" class="sidebar-subpanel-link">Durabilité</a></div>
+            </div>
+        </div>
+        
+        <!-- Contact Footer for Mobile Menu -->
+        <div class="sidebar-contact-footer">
+            <div class="sidebar-contact-content">
+                <a href="tel:+212762641558" class="sidebar-contact-phone">
+                    <span class="sidebar-contact-label">Tél.</span>
+                    <span class="sidebar-contact-value">+212762641558</span>
+                </a>
+                <a href="mailto:info@etlala.com" class="sidebar-contact-email" aria-label="Envoyez-nous un e-mail">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M3 7L12 13L21 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Navbar -->
+    <nav class="minimal-navbar">
+        <div class="navbar-left">
+            <button class="hamburger-menu" id="hamburger-btn" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <button class="search-btn" aria-label="Rechercher">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                    <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span class="search-text">RECHERCHER</span>
+            </button>
+        </div>
+        <div class="navbar-center">
+            <a href="/" class="brand-logo">
+                <img src="./frontend/public/logo.png" alt="ETLALA" style="width: 100%; height: auto;" />
+            </a>
+        </div>
+        <div class="navbar-right">
+            <a href="/login" class="nav-link">CONNEXION / INSCRIPTION</a>
+            <a href="#" class="account-icon" aria-label="Compte">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                    <path d="M5 20C5 16.134 8.134 13 12 13C15.866 13 19 16.134 19 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </a>
+            <a href="#" class="cart-link">
+                <span class="cart-text">PANIER</span>
+                <span class="cart-badge">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="contact-page">
+        <!-- Hero Section -->
+        <section class="contact-hero">
+            <div class="contact-hero-content">
+                <p class="contact-hero-overline">CONTACTEZ-NOUS</p>
+                <h1 class="contact-hero-title">Nous serions ravis de<br/>vous entendre</h1>
+                <p class="contact-hero-description">
+                    Que vous ayez une question sur nos produits, besoin de conseils en soins de la peau,<br/>
+                    ou simplement envie de partager votre expérience, notre équipe est là pour vous aider.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Info Cards -->
+        <section class="contact-info-section">
+            <div class="contact-info-container">
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 8L10.89 13.26C11.54 13.67 12.46 13.67 13.11 13.26L21 8M5 19H19C20.1 19 21 18.1 21 17V7C21 5.9 20.1 5 19 5H5C3.9 5 3 5.9 3 7V17C3 18.1 3.9 19 5 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="contact-info-title">Écrivez-nous</h3>
+                    <p class="contact-info-text">info@etlala.com</p>
+                    <p class="contact-info-text">support@etlala.com</p>
+                </div>
+
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 5C3 3.89543 3.89543 3 5 3H8.27924C8.70967 3 9.09181 3.27543 9.22792 3.68377L10.7257 8.17721C10.8831 8.64932 10.6694 9.16531 10.2243 9.38787L7.96701 10.5165C9.06925 12.9612 11.0388 14.9308 13.4835 16.033L14.6121 13.7757C14.8347 13.3306 15.3507 13.1169 15.8228 13.2743L20.3162 14.7721C20.7246 14.9082 21 15.2903 21 15.7208V19C21 20.1046 20.1046 21 19 21H18C9.71573 21 3 14.2843 3 6V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="contact-info-title">Appelez-nous</h3>
+                    <p class="contact-info-text">+212 762 641 558</p>
+                    <p class="contact-info-subtext">Lun-Ven 9h-18h GMT</p>
+                </div>
+
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="contact-info-title">Rendez-nous visite</h3>
+                    <p class="contact-info-text">Casablanca, Morocco</p>
+                    <p class="contact-info-subtext">Sur rendez-vous uniquement</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="contact-form-section">
+            <div class="contact-form-container">
+                <div class="contact-form-header">
+                    <h2 class="contact-form-title">Envoyez-nous un message</h2>
+                    <p class="contact-form-description">Remplissez le formulaire ci-dessous et nous vous répondrons sous 24 heures.</p>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">Prénom *</label>
+                            <input type="text" id="firstName" name="firstName" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Nom *</label>
+                            <input type="text" id="lastName" name="lastName" class="form-input" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Adresse e-mail *</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Numéro de téléphone</label>
+                            <input type="tel" id="phone" name="phone" class="form-input">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject" class="form-label">Sujet *</label>
+                        <select id="subject" name="subject" class="form-select" required>
+                            <option value="">Sélectionnez un sujet</option>
+                            <option value="product-inquiry">Question sur un produit</option>
+                            <option value="order-status">Statut de commande</option>
+                            <option value="skincare-advice">Conseils soins de la peau</option>
+                            <option value="partnership">Opportunité de partenariat</option>
+                            <option value="feedback">Avis</option>
+                            <option value="other">Autre</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message *</label>
+                        <textarea id="message" name="message" class="form-textarea" rows="6" required></textarea>
+                    </div>
+
+                    <div class="form-group form-checkbox-group">
+                        <label class="form-checkbox-label">
+                            <input type="checkbox" name="newsletter" class="form-checkbox">
+                            <span class="form-checkbox-text">S'abonner à notre newsletter pour des offres exclusives et des conseils de soin</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="form-submit-btn">
+                        <span class="btn-text">Envoyer le message</span>
+                        <span class="btn-loader" style="display: none;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="60" stroke-dashoffset="40"/>
+                            </svg>
+                        </span>
+                    </button>
+
+                    <div class="form-message" id="formMessage"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="contact-faq-section">
+            <div class="contact-faq-container">
+                <h2 class="contact-faq-title">Foire aux questions</h2>
+                
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Quels sont vos délais de livraison ?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Nous traitons généralement les commandes sous 1 à 2 jours ouvrés. Les délais de livraison varient selon la destination : 3 à 5 jours au Maroc, 7 à 14 jours pour les commandes internationales.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Proposez-vous la livraison internationale ?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Oui ! Nous livrons dans la plupart des pays. Les frais et délais de livraison varient selon la destination. Consultez notre page livraison pour plus de détails.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Quelle est votre politique de retour ?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Nous offrons une politique de retour de 30 jours pour les produits non ouverts. Si vous n'êtes pas satisfait de votre achat, contactez-nous sous 30 jours pour un remboursement complet ou un échange.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Vos produits sont-ils sans cruauté animale ?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Absolument ! Tous les produits ETLALA sont 100% sans cruauté animale et fabriqués avec des ingrédients naturels, issus de sources éthiques. Nous ne testons jamais sur les animaux.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Comment choisir les produits adaptés à mon type de peau ?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Nous vous recommandons de répondre à notre quiz peau ou de contacter nos experts. Vous pouvez également réserver une consultation gratuite pour obtenir des recommandations personnalisées.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="./frontend/src/main.js"></script>
+    <script src="./frontend/src/navbar-dropdown.js"></script>
+    <script src="./frontend/src/contact.js"></script>
+    
+    <script>
+        // Load footer
+        fetch('./frontend/footer-component.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('footer-container').innerHTML = html;
+            })
+            .catch(error => console.log('Footer load error:', error));
+    </script>
+</body>
+</html>

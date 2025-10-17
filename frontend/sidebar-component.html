@@ -1,0 +1,267 @@
+<!-- Unified Sidebar Component (Overlay + Sidebar Menu) -->
+<div class="sidebar-overlay"></div>
+<aside class="sidebar-menu">
+  <div class="sidebar-header">
+    <button class="sidebar-back" aria-label="Back">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="sidebar-back-text">Retour</span>
+    </button>
+    <nav class="sidebar-header-nav">
+    <a href="/index.html" class="sidebar-header-link">Accueil</a>
+    <a href="/coming-soon.html?path=/gift-card" class="sidebar-header-link">Carte Cadeau</a>
+    <a href="/store-locator.html" class="sidebar-header-link">Nos Magasins</a>
+    <a href="/contact.html" class="sidebar-header-link">Contactez-nous</a>
+    </nav>
+    <button class="sidebar-close" aria-label="Fermer le menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Multi-Level Menu -->
+  <div class="sidebar-mobile-menu">
+    <div class="sidebar-menu-item">
+      <button class="sidebar-menu-link" data-panel="product-categories">
+        <span>CATÉGORIES SOINS</span>
+        <span class="sidebar-menu-arrow">
+          <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+    </div>
+
+    <div class="sidebar-menu-item">
+      <button class="sidebar-menu-link" data-panel="collections">
+        <span>PAR PRÉOCCUPATION</span>
+        <span class="sidebar-menu-arrow">
+          <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+    </div>
+
+    <div class="sidebar-menu-item">
+      <a href="/products.html" class="sidebar-menu-link">
+        <span>MEILLEURES VENTES</span>
+      </a>
+    </div>
+
+    <div class="sidebar-menu-item">
+      <a href="/products.html" class="sidebar-menu-link">
+        <span>SOINS DU CORPS</span>
+      </a>
+    </div>
+
+    <div class="sidebar-menu-item">
+      <a href="/products.html" class="sidebar-menu-link">
+        <span>SOINS CAPILLAIRES</span>
+      </a>
+    </div>
+
+    <div class="sidebar-menu-item">
+      <a href="/coming-soon.html?path=/starter-kits" class="sidebar-menu-link">
+        <span>KITS DÉCOUVERTE <span style="color: #6E8B72; font-size: 10px; margin-left: 8px;">BIENTÔT</span></span>
+      </a>
+    </div>
+
+    <div class="sidebar-menu-item">
+      <a href="/products.html" class="sidebar-menu-link">
+        <span>NOUVEAUTÉS</span>
+      </a>
+    </div>
+
+    <div class="sidebar-menu-item">
+      <a href="/products.html" class="sidebar-menu-link">
+        <span>OUTILS &amp; ACCESSOIRES</span>
+      </a>
+    </div>
+
+    <div class="sidebar-menu-item">
+      <button class="sidebar-menu-link" data-panel="house-of-minas">
+        <span>À PROPOS D'ETLALA</span>
+        <span class="sidebar-menu-arrow">
+          <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Sub-panels -->
+  <div class="sidebar-panel" id="panel-product-categories">
+    <h2 class="sidebar-subpanel-title">CATÉGORIES SOINS</h2>
+    <div class="sidebar-subpanel-list">
+      <div class="sidebar-subpanel-item"><a href="/products.html?category=cleanser" class="sidebar-subpanel-link">Nettoyants</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Toniques</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Sérums</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html?category=moisturizer" class="sidebar-subpanel-link">Hydratants</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Soins des Yeux</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html?category=sunscreen" class="sidebar-subpanel-link">Protection Solaire</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Exfoliants</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Huiles de Traitement</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Masques</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Soins de Nuit</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Outils &amp; Accessoires</a></div>
+    </div>
+  </div>
+
+  <div class="sidebar-panel" id="panel-collections">
+    <h2 class="sidebar-subpanel-title">PAR PRÉOCCUPATION</h2>
+    <div class="sidebar-subpanel-list">
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Hydratation</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Anti-Âge</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Éclaircissant</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Acné &amp; Imperfections</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Soins des Pores</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Peau Sensible</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Protection Solaire</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Teint Terne</a></div>
+      <div class="sidebar-subpanel-item"><a href="/products.html" class="sidebar-subpanel-link">Cernes</a></div>
+    </div>
+  </div>
+
+  <div class="sidebar-panel" id="panel-house-of-minas">
+    <h2 class="sidebar-subpanel-title">À PROPOS D'ETLALA</h2>
+    <div class="sidebar-subpanel-list">
+      <div class="sidebar-subpanel-item"><a href="/coming-soon.html?path=/brand-legacy" class="sidebar-subpanel-link">Héritage de la Marque</a></div>
+      <div class="sidebar-subpanel-item"><a href="/coming-soon.html?path=/craftsmanship" class="sidebar-subpanel-link">Savoir-Faire</a></div>
+      <div class="sidebar-subpanel-item"><a href="/coming-soon.html?path=/collaborations" class="sidebar-subpanel-link">Collaborations</a></div>
+      <div class="sidebar-subpanel-item"><a href="/coming-soon.html?path=/news-updates" class="sidebar-subpanel-link">Actualités</a></div>
+      <div class="sidebar-subpanel-item"><a href="/coming-soon.html?path=/press-office" class="sidebar-subpanel-link">Presse</a></div>
+      <div class="sidebar-subpanel-item"><a href="/coming-soon.html?path=/sustainability" class="sidebar-subpanel-link">Durabilité</a></div>
+      <div class="sidebar-subpanel-item"><a href="/coming-soon.html?path=/join-our-team" class="sidebar-subpanel-link">Rejoignez-nous</a></div>
+      <div class="sidebar-subpanel-item"><a href="/coming-soon.html?path=/studio-services" class="sidebar-subpanel-link">Services Studio</a></div>
+    </div>
+  </div>
+
+  <!-- Contact Footer for Mobile Menu -->
+  <div class="sidebar-contact-footer">
+    <div class="sidebar-contact-content">
+      <a href="tel:+212762641558" class="sidebar-contact-phone">
+        <span class="sidebar-contact-label">Tél.</span>
+        <span class="sidebar-contact-value">+212762641558</span>
+      </a>
+      <a href="mailto:info@etlala.com" class="sidebar-contact-email" aria-label="Envoyez-nous un e-mail">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M3 7L12 13L21 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Desktop Sidebar Content (Featured, Categories, About) -->
+  <div class="sidebar-content">
+    <!-- Column 1: Product Categories & Collections -->
+    <div class="sidebar-section">
+      <h3 class="sidebar-section-title">CATÉGORIES DE PRODUITS</h3>
+      <div class="sidebar-section-content">
+        <div class="sidebar-column">
+          <a href="/products.html" class="sidebar-link">Sérums</a>
+          <a href="/products.html?category=moisturizer" class="sidebar-link">Hydratants</a>
+          <a href="/products.html?category=cleanser" class="sidebar-link">Nettoyants</a>
+          <a href="/products.html" class="sidebar-link">Masques</a>
+          <a href="/products.html" class="sidebar-link">Soins des Yeux</a>
+          <a href="/products.html?category=sunscreen" class="sidebar-link">Protection Solaire</a>
+        </div>
+        
+        <div class="sidebar-column">
+          <a href="/products.html" class="sidebar-link">Toniques</a>
+          <a href="/products.html" class="sidebar-link">Exfoliants</a>
+          <a href="/products.html" class="sidebar-link">Huiles de Traitement</a>
+          <a href="/products.html" class="sidebar-link">Soins de Nuit</a>
+          <a href="/products.html" class="sidebar-link">Outils &amp; Accessoires</a>
+        </div>
+      </div>
+      
+      <h3 class="sidebar-section-title">COLLECTIONS</h3>
+      <div class="sidebar-section-content">
+        <div class="sidebar-column">
+          <a href="/products.html" class="sidebar-link">Collection Hydratation</a>
+          <a href="/products.html" class="sidebar-link">Collection Anti‑Âge</a>
+          <a href="/products.html" class="sidebar-link">Collection Éclaircissante</a>
+          <a href="/products.html" class="sidebar-link">Collection Peaux Sensibles</a>
+          <a href="/products.html" class="sidebar-link">Collection Anti‑Acné</a>
+        </div>
+        
+        <div class="sidebar-column">
+          <a href="/products.html" class="sidebar-link">Collection Éclat Naturel</a>
+          <a href="/products.html" class="sidebar-link">Essentiels du Quotidien</a>
+          <a href="/products.html" class="sidebar-link">Rituel de Luxe</a>
+          <a href="/products.html" class="sidebar-link">Kits de Voyage</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Column 2: Featured Rows with Images (2-column grid) -->
+    <div class="sidebar-section">
+      <div class="sidebar-featured-grid">
+        <div class="sidebar-featured-col">
+          <a href="/products.html" class="sidebar-featured-row">
+            <h3 class="sidebar-featured-row-title">MEILLEURES VENTES</h3>
+            <img src="./frontend/public/products/pack-1.JPG" alt="Meilleures ventes" class="sidebar-featured-row-image" />
+          </a>
+          <a href="/products.html" class="sidebar-featured-row">
+            <h3 class="sidebar-featured-row-title">NOUVEAUTÉS</h3>
+            <img src="./frontend/public/products/tebrima.JPG" alt="Nouveautés" class="sidebar-featured-row-image" />
+          </a>
+          <a href="/products.html" class="sidebar-featured-row">
+            <h3 class="sidebar-featured-row-title">ROUTINE DE SOIN</h3>
+            <img src="./frontend/public/products/pack-de-visage.JPG" alt="Routine de soin" class="sidebar-featured-row-image" />
+          </a>
+        </div>
+        <div class="sidebar-featured-col">
+          <a href="/products.html" class="sidebar-featured-row">
+            <h3 class="sidebar-featured-row-title">COFFRETS CADEAUX</h3>
+            <img src="./frontend/public/products/pack-de-cheveux.JPG" alt="Coffrets cadeaux" class="sidebar-featured-row-image" />
+          </a>
+          <a href="/coming-soon.html?path=/starter-kits" class="sidebar-featured-row">
+            <div>
+              <span class="sidebar-featured-row-title">KITS DÉCOUVERTE</span>
+              <span class="sidebar-featured-row-subtitle">BIENTÔT DISPONIBLE</span>
+            </div>
+            <img src="./frontend/public/products/pack-1.JPG" alt="Kits découverte" class="sidebar-featured-row-image" />
+          </a>
+          <a href="/products.html" class="sidebar-featured-row">
+            <h3 class="sidebar-featured-row-title">ÉDITION LIMITÉE</h3>
+            <img src="./frontend/public/products/creme eclaircissante.JPG" alt="Édition limitée" class="sidebar-featured-row-image" />
+          </a>
+        </div>
+      </div>
+      <div class="sidebar-divider"></div>
+      <h3 class="sidebar-section-title">À PROPOS D'ETLALA</h3>
+      <div class="sidebar-section-content">
+        <div class="sidebar-column">
+          <a href="/coming-soon.html?path=/brand-legacy" class="sidebar-link">Héritage de la Marque</a>
+          <a href="/coming-soon.html?path=/craftsmanship" class="sidebar-link">Savoir-Faire</a>
+          <a href="/coming-soon.html?path=/collaborations" class="sidebar-link">Collaborations</a>
+          <a href="/coming-soon.html?path=/news-updates" class="sidebar-link">Actualités</a>
+        </div>
+        <div class="sidebar-column">
+          <a href="/coming-soon.html?path=/press-office" class="sidebar-link">Presse</a>
+          <a href="/coming-soon.html?path=/sustainability" class="sidebar-link">Durabilité</a>
+          <a href="/coming-soon.html?path=/join-our-team" class="sidebar-link">Rejoignez‑nous</a>
+          <a href="/coming-soon.html?path=/studio-services" class="sidebar-link">Services Studio</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Column 3: Promo Card -->
+    <div class="sidebar-section">
+      <div class="sidebar-promo-card">
+        <img class="sidebar-promo-media" src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=640&h=480&fit=crop" alt="Collection de soins premium" />
+        <div class="sidebar-promo-body">
+          <h4 class="sidebar-promo-title">COLLECTION SOINS PREMIUM</h4>
+          <p class="sidebar-promo-desc">Notre collection emblématique élaborée avec des ingrédients naturels. Conçue pour une peau éclatante et des rituels de beauté intemporels.</p>
+          <a href="/coming-soon.html?path=/heritage" class="sidebar-promo-cta" style="text-decoration: none; display: inline-block; text-align: center;">DÉCOUVRIR L'HÉRITAGE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>

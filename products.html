@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos produits - Etlala</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Lato:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="./frontend/style/navbar-styles.css"/>
+    <link rel="stylesheet" href="./frontend/style/navbar-dropdown.css"/>
+    <link rel="stylesheet" href="./frontend/style/footer-styles.css"/>
+    <link rel="stylesheet" href="./frontend/style/products.css"/>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="minimal-navbar">
+        <div class="navbar-left">
+            <button class="hamburger-menu" id="hamburger-btn" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 12H21M3 6H21M3 18H21" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <button class="search-btn" aria-label="Rechercher">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="8" stroke="#FFFFFF" stroke-width="2"/>
+                    <path d="M21 21L16.65 16.65" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span class="search-text">RECHERCHER</span>
+            </button>
+        </div>
+        <div class="navbar-center">
+            <a href="/" class="brand-logo">
+                <img src="./frontend/public/logo.png" alt="ETLALA" />
+            </a>
+        </div>
+        <div class="navbar-right">
+            <a href="/login" class="nav-link">CONNEXION / INSCRIPTION</a>
+            <a href="/account" class="account-icon" aria-label="Compte">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8" r="4" stroke="#FFFFFF" stroke-width="2"/>
+                    <path d="M5 20C5 16.134 8.134 13 12 13C15.866 13 19 16.134 19 20" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </a>
+            <a href="#" class="cart-link">
+                <span class="cart-text">PANIER</span>
+                <span class="cart-badge">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Navbar Dropdown Overlay and Cart Dropdown -->
+    <div class="navbar-dropdown-overlay"></div>
+    <div class="navbar-dropdown cart-dropdown" id="cart-dropdown">
+        <div class="dropdown-header">
+            <h3 class="dropdown-title">Panier</h3>
+            <button class="dropdown-close" data-dropdown="cart">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+        <div class="dropdown-body">
+            <div class="cart-items" id="cart-items"></div>
+            <div class="cart-empty" id="cart-empty">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 2L7.17 4H3C1.9 4 1 4.9 1 6V18C1 19.1 1.9 20 3 20H21C22.1 20 23 19.1 23 18V6C23 4.9 22.1 4 21 4H16.83L15 2H9Z" stroke="#6E8B72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p>Votre panier est vide</p>
+                <a href="/products.html" class="shop-now-btn">Acheter maintenant</a>
+            </div>
+        </div>
+        <div class="dropdown-footer" id="cart-footer">
+            <div class="cart-total">
+                <span class="total-label">Sous-total :</span>
+                <span class="total-amount" id="cart-total">0 DH</span>
+            </div>
+            <div class="cart-actions">
+                <a href="/cart.html" class="btn-view-cart">Voir le panier</a>
+                <a href="/checkout.html" class="btn-checkout">Passer au paiement</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar overlay and drawer for mobile navigation -->
+    <div class="sidebar-overlay"></div>
+    <aside class="sidebar-menu">
+        <div class="sidebar-header">
+            <button class="sidebar-back" aria-label="Retour">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="sidebar-back-text">Retour</span>
+            </button>
+            <nav class="sidebar-header-nav">
+                <a href="/" class="sidebar-header-link active">Accueil</a>
+                <a href="/gift-card" class="sidebar-header-link">Carte cadeau</a>
+                <a href="/store-locator" class="sidebar-header-link">Trouver une boutique</a>
+                <a href="/contact" class="sidebar-header-link">Nous contacter</a>
+            </nav>
+            <button class="sidebar-close" aria-label="Fermer le menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile root menu -->
+        <div class="sidebar-mobile-menu">
+            <div class="sidebar-menu-item">
+                <button class="sidebar-menu-link" data-panel="product-categories">
+                    <span>CATÉGORIES SOINS DE LA PEAU</span>
+                    <span class="sidebar-menu-arrow">
+                        <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            <div class="sidebar-menu-item">
+                <a href="/new-arrivals" class="sidebar-menu-link">
+                    <span>NOUVEAUTÉS</span>
+                </a>
+            </div>
+            <div class="sidebar-menu-item">
+                <a href="/best-sellers" class="sidebar-menu-link">
+                    <span>MEILLEURES VENTES</span>
+                </a>
+            </div>
+            <div class="sidebar-menu-item">
+                <a href="/contact" class="sidebar-menu-link">
+                    <span>NOUS CONTACTER</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Sub-panel: Product Categories -->
+        <div class="sidebar-panel" id="panel-product-categories">
+            <h2 class="sidebar-subpanel-title">CATÉGORIES SOINS DE LA PEAU</h2>
+            <div class="sidebar-subpanel-list">
+                <div class="sidebar-subpanel-item"><a href="/serums" class="sidebar-subpanel-link">Sérums</a></div>
+                <div class="sidebar-subpanel-item"><a href="/moisturizers" class="sidebar-subpanel-link">Hydratants</a></div>
+                <div class="sidebar-subpanel-item"><a href="/cleansers" class="sidebar-subpanel-link">Nettoyants</a></div>
+                <div class="sidebar-subpanel-item"><a href="/face-masks" class="sidebar-subpanel-link">Masques visage</a></div>
+                <div class="sidebar-subpanel-item"><a href="/eye-care" class="sidebar-subpanel-link">Soin des yeux</a></div>
+                <div class="sidebar-subpanel-item"><a href="/sunscreen" class="sidebar-subpanel-link">Écran solaire</a></div>
+            </div>
+        </div>
+
+        <!-- Contact footer -->
+        <div class="sidebar-contact-footer">
+            <div class="sidebar-contact-content">
+                <a href="tel:+212762641558" class="sidebar-contact-phone">
+                    <span class="sidebar-contact-label">Tél.</span>
+                    <span class="sidebar-contact-value">+212762641558</span>
+                </a>
+                <a href="mailto:info@etlala.com" class="sidebar-contact-email" aria-label="Envoyez-nous un e-mail">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M3 7L12 13L21 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Products Page Content -->
+    <div class="products-page">
+        <!-- Header -->
+        <div class="products-header">
+            <div class="products-header-left">
+                <div class="collection-label">Collection</div>
+                <h1 class="products-title">Nos produits</h1>
+            </div>
+            <div class="filter-tabs">
+                <button class="filter-tab active">Mise en avant</button>
+                <button class="filter-tab">Meilleure vente</button>
+                <button class="filter-tab">Nouveauté</button>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-row">
+            <div class="filter-dropdown">
+                <select class="filter-select">
+                    <option value="">Choisir des catégories</option>
+                    <option value="moisturizer">Hydratant</option>
+                    <option value="cleanser">Nettoyant</option>
+                    <option value="serum">Sérum</option>
+                    <option value="sunscreen">Écran solaire</option>
+                    <option value="toner">Lotion tonique</option>
+                </select>
+            </div>
+            <div class="filter-dropdown">
+                <select class="filter-select">
+                    <option value="">Choisir des catégories</option>
+                    <option value="face">Soin du visage</option>
+                    <option value="body">Soin du corps</option>
+                    <option value="hair">Soin capillaire</option>
+                    <option value="tools">Outils & Accessoires</option>
+                </select>
+            </div>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Rechercher des produits">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                    <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid">
+            <!-- Product Card 1 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <button class="wishlist-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="#6E8B72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <span class="product-badge">Mise en avant</span>
+                    <img src="./frontend/public/products/tebrima.JPG" alt="Tebrima" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Tebrima</h3>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <span class="review-count">(230 avis)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">118 DH</div>
+                        <button class="add-to-cart-btn">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <button class="wishlist-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="#6E8B72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <span class="product-badge">Mise en avant</span>
+                    <img src="./frontend/public/products/creme eclaircissante.JPG" alt="Crème Éclaircissante" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Crème Éclaircissante au Caviar Vert</h3>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <span class="review-count">(198 avis)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">259 DH</div>
+                        <button class="add-to-cart-btn">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <button class="wishlist-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="#6E8B72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <span class="product-badge">Nouveau</span>
+                    <img src="./frontend/public/products/hair-serum.JPG" alt="Sérum Capillaire" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Sérum Capillaire Etlala</h3>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <span class="review-count">(276 avis)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">119 DH</div>
+                        <button class="add-to-cart-btn">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 4 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <button class="wishlist-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="#6E8B72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <span class="product-badge">Nouveau</span>
+                    <img src="./frontend/public/products/creme-solaire.JPG" alt="Écran Solaire" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Écran Solaire au Caviar Vert</h3>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <span class="review-count">(312 avis)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">225 DH</div>
+                        <button class="add-to-cart-btn">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 5 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <button class="wishlist-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="#6E8B72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <span class="product-badge">Mise en avant</span>
+                    <img src="./frontend/public/products/gel-nettoyage.JPG" alt="Gel Nettoyant" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Gel Nettoyant au Caviar Vert</h3>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <span class="review-count">(189 avis)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">159 DH</div>
+                        <button class="add-to-cart-btn">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 6 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <button class="wishlist-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="#6E8B72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <span class="product-badge">Meilleure vente</span>
+                    <img src="./frontend/public/products/hair-conditioner.JPG" alt="Démêlant Etlala" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Démêlant Etlala</h3>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <span class="review-count">(245 avis)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">115 DH</div>
+                        <button class="add-to-cart-btn">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 7 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <button class="wishlist-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="#6E8B72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <span class="product-badge">Meilleure vente</span>
+                    <img src="./frontend/public/products/hair-oil.JPG" alt="Huile Capillaire" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Huile Capillaire Etlala</h3>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <span class="review-count">(267 avis)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">129 DH</div>
+                        <button class="add-to-cart-btn">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 8 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <button class="wishlist-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="#6E8B72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <span class="product-badge">Mise en avant</span>
+                    <img src="./frontend/public/products/hair-shampoo.JPG" alt="Shampooing Etlala" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Shampooing Etlala</h3>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <span class="review-count">(221 avis)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">110 DH</div>
+                        <button class="add-to-cart-btn">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+
+                    </div>
+    </div>
+
+    <script src="./frontend/src/main.js"></script>
+    <script src="./frontend/src/navbar-dropdown.js"></script>
+    <script src="./frontend/src/products.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!-- ETLALA Search Panel Component -->
+<div id="search-panel" class="search-panel" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="search-panel-overlay" data-close="search-panel"></div>
+  <div class="search-panel-container" role="document">
+    <div class="search-panel-header">
+      <h2 class="search-title">Search Products</h2>
+      <button class="search-close-btn" aria-label="Close Search" data-close="search-panel">&times;</button>
+    </div>
+
+    <div class="search-input-row">
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+        <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <input type="text" id="global-search-input" class="search-input" placeholder="Search by product, concern, or ingredient..." autocomplete="off" />
+    </div>
+
+    <div class="search-body">
+      <div class="search-popular" id="search-popular">
+        <h3 class="search-subtitle">Popular Searches</h3>
+        <div class="search-tags">
+          <button class="search-tag" data-q="serum">Serum</button>
+          <button class="search-tag" data-q="moisturizer">Moisturizer</button>
+          <button class="search-tag" data-q="cleanser">Cleanser</button>
+          <button class="search-tag" data-q="sunscreen">Sunscreen</button>
+          <button class="search-tag" data-q="brightening">Brightening</button>
+          <button class="search-tag" data-q="anti-aging">Anti-Aging</button>
+        </div>
+      </div>
+
+      <div class="search-results" id="global-search-results" aria-live="polite">
+        <!-- Results rendered here -->
+      </div>
+
+      <div class="search-empty" id="global-search-empty">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 21L16.65 16.65M18 11.5C18 15.6421 14.6421 19 10.5 19C6.35786 19 3 15.6421 3 11.5C3 7.35786 6.35786 4 10.5 4C14.6421 4 18 7.35786 18 11.5Z" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <p>Start typing to search products</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bientôt disponible - ETLALA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Lato:wght@400;500;600;700&display=swap" />
+
+  <style>
+    :root {
+      --green: #6E8B72;
+      --green-dark: #5a7260;
+      --gold: #D4AF37;
+      --gold-dark: #B8941F;
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.8);
+      --border: rgba(255,255,255,0.2);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: 'Lato', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--green);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+    }
+    .cs-wrap { width: min(900px, 92vw); text-align: center; padding: 32px 0; }
+    .cs-badge { display: inline-flex; align-items: center; gap: 10px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 999px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; opacity: .95; }
+    .cs-title { font-family: 'Playfair Display', serif; font-weight: 800; font-size: clamp(32px, 6vw, 64px); letter-spacing: .02em; margin: 18px 0 10px; }
+    .cs-desc { font-size: 16px; line-height: 1.8; color: var(--muted); margin: 0 auto 24px; max-width: 720px; }
+    .cs-path { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--border); padding-top: 14px; margin-top: 10px; }
+
+    .cs-actions { display: inline-flex; gap: 12px; margin-top: 8px; }
+    .btn { -webkit-appearance: none; appearance: none; border: 1.5px solid var(--gold); background: var(--gold); color: var(--green-dark); padding: 12px 20px; border-radius: 6px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; transition: all .2s ease; font-size: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+    .btn:hover { background: var(--gold-dark); border-color: var(--gold-dark); }
+    .btn.ghost { background: transparent; color: var(--text); border-color: var(--border); }
+    .btn.ghost:hover { border-color: var(--text); }
+
+    .cs-footer { margin-top: 26px; font-size: 12px; color: var(--muted); opacity: .9; }
+    .logo { width: 160px; height: auto; display: block; margin: 0 auto 18px; opacity: .95; filter: drop-shadow(0 2px 10px rgba(0,0,0,.25)); }
+
+    @media (max-width: 480px) {
+      .cs-desc { font-size: 14px; }
+      .btn { padding: 11px 16px; font-size: 11px; }
+      .logo { width: 128px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="cs-wrap" role="main">
+    <img class="logo" src="./frontend/public/logo.png" alt="ETLALA" />
+    <div class="cs-badge" aria-label="Statut">Bientôt disponible</div>
+    <h1 class="cs-title">Cette page n'est pas encore prête</h1>
+    <p class="cs-desc">
+      La destination que vous avez tenté d'ouvrir fait partie de notre prochaine mise à jour. Nous peaufinons l'expérience et la rendrons disponible très bientôt.
+    </p>
+    <div class="cs-actions">
+      <a class="btn" href="/index.html" aria-label="Retour à l'accueil">Retour à l'accueil</a>
+      <a class="btn ghost" href="/products.html" aria-label="Parcourir les produits">Parcourir les produits</a>
+    </div>
+    <div class="cs-path" id="cs-path" aria-live="polite"></div>
+    <div class="cs-footer">Merci de votre patience.</div>
+  </main>
+
+  <script>
+    // Show originally requested path when routed here via rewrite (?path=/...)
+    (function(){
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var p = params.get('path') || '';
+        if (!p && document.referrer) {
+          try { p = new URL(document.referrer).pathname; } catch(e) {}
+        }
+        if (p) {
+          var el = document.getElementById('cs-path');
+          if (el) el.textContent = 'Chemin demandé : ' + decodeURIComponent(p);
+        }
+      } catch(e) { /* no-op */ }
+    })();
+  </script>
+</body>
+</html>

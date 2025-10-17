@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>ETLALA - Accueil</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Lato:wght@400;500;600;700&display=swap" />
@@ -31,50 +31,63 @@
         </script>
         <link rel="stylesheet" href="./frontend/style/style.css"/>
         <link rel="stylesheet" href="./frontend/style/navbar-styles.css"/>
+        <link rel="stylesheet" href="./frontend/style/navbar-dropdown.css"/>
         <link rel="stylesheet" href="./frontend/style/footer-styles.css"/>
         <link rel="stylesheet" href="./frontend/style/scroll-reveal.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
         <script src="./frontend/src/scroll-reveal.js"></script>
-        <script src="./frontend/src/main.js"></script>
+                                <script src="./frontend/src/main.js"></script>
+        <script src="./frontend/src/navbar-dropdown.js"></script>
         <script>
-          // Ensure any product card images using external links are swapped to local Etlala assets
+          // Ensure any product card images using external links are swapped to local Etlala product images
           document.addEventListener('DOMContentLoaded', function(){
             try {
-              const localMap = {
-                'Body Butter Care': './frontend/public/Etlala_Whithening_night_cream.webp',
-                'Jar Cream Care': './frontend/public/Etlala_Anti_Strech_marks_Serum.webp',
-                'Skincare Tube': './frontend/public/Hair_Serum.webp',
-                'Face Serum': './frontend/public/Etlala_hair_Shampoo.webp',
-                'Body Cream Care': './frontend/public/Etlala_Mascara_brighter.webp',
-                'Moisturizer': './frontend/public/Etlala_Strengthens_and_lengthens_Nails_brighter.webp',
-                'Body Perfume': './frontend/public/ItlalaCremesolaireinvisible.webp',
-                'Night Cream': './frontend/public/ItlalaGelNettoyantmatched.webp'
-              };
+              // Product images from the products folder
+              var productImages = [
+                './frontend/public/products/creme eclaircissante.JPG',
+                './frontend/public/products/creme-solaire.JPG',
+                './frontend/public/products/gel-nettoyage.JPG',
+                './frontend/public/products/hair-conditioner.JPG',
+                './frontend/public/products/hair-oil.JPG',
+                './frontend/public/products/hair-serum.JPG',
+                './frontend/public/products/hair-shampoo.JPG',
+                './frontend/public/products/pack-1.JPG',
+                './frontend/public/products/pack-de-cheveux.JPG',
+                './frontend/public/products/pack-de-visage.JPG',
+                './frontend/public/products/tebrima.JPG',
+                './frontend/public/products/IMG_1938.JPG'
+              ];
+              
               // Update grid product cards
+              var idx = 0;
               document.querySelectorAll('img.new-product-image').forEach(function(img){
                 if (img.src && img.src.indexOf('images.unsplash.com') !== -1) {
-                  var alt = img.getAttribute('alt') || '';
-                  var mapped = localMap[alt] || './frontend/public/CMP1.webp';
-                  img.src = mapped;
-                }
-              });
-              // Update any luxury product tiles as fallback too
-              var luxFallbacks = [
-                './frontend/public/CMP1.webp', './frontend/public/CMP2.webp', './frontend/public/CMP3.webp', './frontend/public/CMP4.webp',
-                './frontend/public/Etlala_Whithening_night_cream.webp', './frontend/public/Etlala_Anti_Strech_marks_Serum.webp',
-                './frontend/public/Hair_Serum.webp', './frontend/public/Etlala_hair_Shampoo.webp',
-                './frontend/public/ItlalaCremesolaireinvisible.webp', './frontend/public/ItlalaGelNettoyantmatched.webp',
-                './frontend/public/Etlala_Strengthens_and_lengthens_Nails_brighter.webp', './frontend/public/Etlala_Mascara_brighter.webp'
-              ];
-              var idx = 0;
-              document.querySelectorAll('img.lux-card-img').forEach(function(img){
-                if (img.src && img.src.indexOf('images.unsplash.com') !== -1) {
-                  img.src = luxFallbacks[idx % luxFallbacks.length];
+                  img.src = productImages[idx % productImages.length];
                   idx++;
                 }
               });
-            } catch (e) {}
+              
+              // Update any luxury product tiles
+              var luxIdx = 0;
+              document.querySelectorAll('img.lux-card-img').forEach(function(img){
+                if (img.src && img.src.indexOf('images.unsplash.com') !== -1) {
+                  img.src = productImages[luxIdx % productImages.length];
+                  luxIdx++;
+                }
+              });
+              
+              // Update any other product images on the page
+              document.querySelectorAll('img[src*="unsplash"], img[src*="CMP"], img[src*="Etlala"], img[src*="Itlala"], img[src*="Hair_Serum"]').forEach(function(img){
+                var currentSrc = img.getAttribute('src') || '';
+                if (currentSrc.indexOf('products/IMG_') === -1) {
+                  var randomIdx = Math.floor(Math.random() * productImages.length);
+                  img.src = productImages[randomIdx];
+                }
+              });
+            } catch (e) {
+              console.error('Error updating product images:', e);
+            }
           });
         </script>
         <script>
@@ -204,45 +217,269 @@
             .porsche-card-hero-text { margin-bottom: 36px; }
           }
         </style>
-    </head>
+        <style id="disable-opening-animation">
+          /* Hard-disable opening GSAP loader and any related overlay elements */
+          .loader,
+          .loader *,
+          .loader-clip,
+          .clip-center,
+          .clip-center *,
+          .marquee,
+          .marquee * {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+          }
+          /* Ensure main content is visible */
+          #main-content {
+            opacity: 1 !important;
+          }
+        </style>
+    <script>
+  // Make product cards clickable
+  document.addEventListener('DOMContentLoaded', function() {
+    const productCards = document.querySelectorAll('.new-product-card');
+    
+    productCards.forEach(function(card) {
+      // Make the card clickable (but not the bookmark icon)
+      card.style.cursor = 'pointer';
+      
+      card.addEventListener('click', function(e) {
+        // Don't navigate if clicking on the bookmark icon
+        if (e.target.closest('.new-product-bookmark')) {
+          e.stopPropagation();
+          return;
+        }
+        
+        // Get product name from the card
+        const productName = card.querySelector('.new-product-name');
+        if (productName) {
+          const raw = productName.textContent || '';
+          const slug = raw.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+          const aliasMap = { 'gel-nettoyant':'gel-nettoyage', 'ecran-solaire':'creme-solaire', 'huile-capillaire':'hair-oil', 'shampooing':'hair-shampoo', 'demelant':'hair-conditioner', 'serum-capillaire':'hair-serum', 'creme-eclaircissante':'creme-eclaircissante', 'tebrima':'tebrima' };
+          const productId = aliasMap[slug] || slug;
+          
+          // Navigate to product details page
+          window.location.href = 'product-details.html?id=' + productId;
+        }
+      });
+    });
+
+    // Ensure homepage buttons/links navigate to existing pages
+    function go(url){ try { window.location.href = url; } catch(e) {} }
+
+    // Hero CTAs
+    const heroPrimary = document.querySelector('.lux-hero-cta.primary');
+    if (heroPrimary) heroPrimary.addEventListener('click', () => go('/products.html'));
+
+    const heroGhost = document.querySelector('.lux-hero-cta.ghost');
+    if (heroGhost) heroGhost.addEventListener('click', () => go('/products.html'));
+
+    // Category chips/buttons (Hydratant, Nettoyant, Protection Solaire)
+    document.querySelectorAll('.Button-style-51bb650e').forEach(btn => {
+      const txt = (btn.textContent || '').trim().toUpperCase();
+      let cat = '';
+      if (txt.includes('HYDRAT')) cat = 'moisturizer';
+      else if (txt.includes('NETTOY')) cat = 'cleanser';
+      else if (txt.includes('PROTECTION')) cat = 'sunscreen';
+      btn.addEventListener('click', () => go('/products.html' + (cat ? ('?category=' + encodeURIComponent(cat)) : '')));
+      btn.style.cursor = 'pointer';
+    });
+
+    // Sidebar promo CTA
+    const promoCta = document.querySelector('.sidebar-promo-cta');
+    if (promoCta) { promoCta.addEventListener('click', () => go('/coming-soon.html?path=/heritage')); promoCta.style.cursor = 'pointer'; }
+
+    // Feature links (set hrefs if placeholder)
+    document.querySelectorAll('a.feature-link').forEach(a => {
+      a.setAttribute('href', '/products.html');
+    });
+  });
+</script>
+<script>
+  // Homepage product curation: keep only solo products with correct names, images, and prices
+  document.addEventListener('DOMContentLoaded', function(){
+    try {
+      // 1) Remove any duplicate lower grids only within the main (non-featured) products section
+      const primaryRow = document.querySelector('.new-products-section:not(.featured-collection) .new-products-row');
+      if (primaryRow) {
+        const container = primaryRow.closest('.new-products-grid-container') || primaryRow.parentElement;
+        if (container) {
+          Array.from(container.querySelectorAll('.new-products-row-2')).forEach(function(el){ el.remove(); });
+
+          // 2) Remove any collection/package visuals (pack images) only within the main products section
+          Array.from(container.querySelectorAll('img[src*="pack-"]')).forEach(function(img){
+            const card = img.closest('.new-product-card');
+            if (card && card.remove) card.remove();
+          });
+        }
+      }
+
+      // 3) Source of truth products (solo items only), prices from products-details.md
+      const soloProducts = [
+        { name: 'Crème Éclaircissante', category: 'Soin Visage', price: 259, image: './frontend/public/products/creme eclaircissante.JPG' },
+        { name: 'Écran Solaire', category: 'Protection Solaire', price: 225, image: './frontend/public/products/creme-solaire.JPG' },
+        { name: 'Gel Nettoyant', category: 'Nettoyant', price: 159, image: './frontend/public/products/gel-nettoyage.JPG' },
+        { name: 'Tebrima', category: 'Soin du Corps', price: 118, image: './frontend/public/products/tebrima.JPG' },
+        { name: 'Huile Capillaire', category: 'Soins Capillaires', price: 129, image: './frontend/public/products/hair-oil.JPG' },
+        { name: 'Shampooing', category: 'Soins Capillaires', price: 110, image: './frontend/public/products/hair-shampoo.JPG' },
+        { name: 'Démêlant', category: 'Soins Capillaires', price: 115, image: './frontend/public/products/hair-conditioner.JPG' },
+        { name: 'Sérum Capillaire', category: 'Soins Capillaires', price: 119, image: './frontend/public/products/hair-serum.JPG' }
+      ];
+
+      // 4) Rebuild the primary product row in the main (non-featured) section with solo products only
+      const row = document.querySelector('.new-products-section:not(.featured-collection) .new-products-row');
+      if (row) {
+        row.innerHTML = soloProducts.map(p => `
+          <div class="new-product-card">
+            <img src="${p.image}" class="new-product-image" alt="${p.name}" />
+            <div class="new-product-info">
+              <div class="new-product-details">
+                <p class="new-product-name">${p.name}</p>
+                <p class="new-product-category">${p.category}</p>
+              </div>
+              <p class="new-product-price">${p.price} DH</p>
+              <div class="new-product-bookmark"></div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // 5) Rebind product card click navigation after rebuilding
+      const productCards = document.querySelectorAll('.new-product-card');
+      productCards.forEach(function(card){
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function(e){
+          if (e.target.closest('.new-product-bookmark')) { e.stopPropagation(); return; }
+          const productName = card.querySelector('.new-product-name');
+          if (productName) {
+            const raw = productName.textContent || '';
+            const slug = raw.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+            const aliasMap = { 'gel-nettoyant':'gel-nettoyage', 'ecran-solaire':'creme-solaire', 'huile-capillaire':'hair-oil', 'shampooing':'hair-shampoo', 'demelant':'hair-conditioner', 'serum-capillaire':'hair-serum', 'creme-eclaircissante':'creme-eclaircissante', 'tebrima':'tebrima' };
+            const productId = aliasMap[slug] || slug;
+            try { window.location.href = 'product-details.html?id=' + productId; } catch (err) {}
+          }
+        });
+      });
+
+      // 6) Featured Collection (Collection mise en avant): ensure all 8 solo products are displayed
+      const featuredRoot = document.querySelector('.new-products-section.featured-collection');
+      if (featuredRoot) {
+        const grid = featuredRoot.querySelector('.new-products-grid-container') || featuredRoot;
+        const row1 = featuredRoot.querySelector('.new-products-row') || (function(){ const r = document.createElement('div'); r.className = 'new-products-row'; grid.appendChild(r); return r; })();
+        let row2 = featuredRoot.querySelector('.new-products-row-2');
+        if (!row2) { row2 = document.createElement('div'); row2.className = 'new-products-row-2'; grid.appendChild(row2); }
+
+        const existing = Array.from(row1.querySelectorAll('.new-product-card')).concat(Array.from(row2.querySelectorAll('.new-product-card')));
+
+        // Update existing cards in place
+        existing.forEach(function(card, idx){
+          const p = soloProducts[idx % soloProducts.length];
+          const img = card.querySelector('img.new-product-image, img.lux-card-img');
+          const nameEl = card.querySelector('.new-product-name, .lux-card-name');
+          const catEl = card.querySelector('.new-product-category');
+          const priceEl = card.querySelector('.new-product-price, .lux-card-price');
+          if (img) { img.src = p.image; img.alt = p.name; }
+          if (nameEl) nameEl.textContent = p.name;
+          if (catEl) catEl.textContent = p.category;
+          if (priceEl) priceEl.textContent = p.price + ' DH';
+        });
+
+        // Append missing cards to reach full soloProducts length
+        for (let i = existing.length; i < soloProducts.length; i++) {
+          const p = soloProducts[i];
+          const card = document.createElement('div');
+          card.className = 'new-product-card';
+          card.style.cursor = 'pointer';
+          card.innerHTML = `
+            <img src="${p.image}" class="new-product-image" alt="${p.name}">
+            <div class="new-product-info">
+              <div class="new-product-details">
+                <p class="new-product-name">${p.name}</p>
+                <p class="new-product-category">${p.category}</p>
+              </div>
+              <p class="new-product-price">${p.price} DH</p>
+              <div class="new-product-bookmark">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+                </svg>
+              </div>
+            </div>`;
+
+          // Place in appropriate row: first 4 in row1, rest in row2
+          (i < 4 ? row1 : row2).appendChild(card);
+
+          // Navigation click
+          card.addEventListener('click', function(e){
+            if (e.target.closest('.new-product-bookmark')) { e.stopPropagation(); return; }
+            const nameEl = card.querySelector('.new-product-name');
+            if (nameEl) {
+              const raw = nameEl.textContent || '';
+              const slug = raw.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+              const aliasMap = { 'gel-nettoyant':'gel-nettoyage', 'ecran-solaire':'creme-solaire', 'huile-capillaire':'hair-oil', 'shampooing':'hair-shampoo', 'demelant':'hair-conditioner', 'serum-capillaire':'hair-serum', 'creme-eclaircissante':'creme-eclaircissante', 'tebrima':'tebrima' };
+              const productId = aliasMap[slug] || slug;
+              try { window.location.href = 'product-details.html?id=' + productId; } catch (err) {}
+            }
+          });
+        }
+      }
+
+    // 7) Featured Selections gallery -> rename and keep only packages
+      const luxSection = document.querySelector('.lux-products');
+      if (luxSection) {
+        const title = luxSection.querySelector('.lux-products-title');
+        if (title) title.textContent = 'Packages';
+        const row = luxSection.querySelector('.lux-products-row');
+        if (row) {
+          const packs = [
+            { id: 'pack-de-cheveux', name: 'Pack de cheveux', price: '473 DH', img: './frontend/public/products/pack-de-cheveux.JPG', sub: 'Huile • Shampoo • Démêlant • Sérum' },
+            { id: 'pack-hamam', name: 'Pack hamam', price: '410 DH', img: './frontend/public/products/pack-de-visage.JPG', sub: 'Huile • Shampoo • Démêlant • Tebrima' }
+          ];
+          row.innerHTML = packs.map(p => `
+            <a class="lux-card" href="product-details.html?id=${p.id}">
+              <img class="lux-card-img" src="${p.img}" alt="${p.name}" />
+              <div class="lux-card-info">
+                <p class="lux-card-name">${p.name}</p>
+                ${p.sub ? `<p class="lux-card-sub">${p.sub}</p>` : ''}
+                <p class="lux-card-price">${p.price} • Livraison gratuite</p>
+              </div>
+            </a>
+          `).join('');
+
+          // Ensure cards navigate on click across all nested elements and in file:// context
+          Array.from(row.querySelectorAll('.lux-card')).forEach(a => {
+            a.style.cursor = 'pointer';
+            a.addEventListener('click', function(e){
+              const href = a.getAttribute('href');
+              if (href) { e.preventDefault(); try { window.location.href = href; } catch(err) {} }
+            });
+          });
+
+          // Center the two package cards in the viewport
+          function centerPacksRow(){
+            const w = window.innerWidth || 1200;
+            row.style.display = 'grid';
+            row.style.justifyContent = 'center';
+            row.style.gridAutoColumns = 'unset';
+            row.style.overflowX = 'visible';
+            if (w < 640) {
+              row.style.gridTemplateColumns = 'minmax(240px, 320px)';
+            } else {
+              row.style.gridTemplateColumns = 'repeat(2, minmax(280px, 340px))';
+            }
+          }
+          centerPacksRow();
+          window.addEventListener('resize', centerPacksRow);
+        }
+      }
+
+    } catch(e) { console.error('Homepage product curation error:', e); }
+  });
+</script>
+</head>
     <body>
-        <div class="loader">
-            <div class="loader-clip clip-top">
-                <div class="marquee">
-                    <div class="marquee-container">
-                        <span>Etlala</span>
-                        <span>Etlala</span>
-                        Etlala
-                        <span>Etlala</span>
-                        <span>Etlala</span>
-                    </div>    
-                </div>
-            </div>
-            <div class="loader-clip clip-bottom">
-                <div class="marquee">
-                    <div class="marquee-container">
-                        <span>Etlala</span>
-                        <span>Etlala</span>
-                        Etlala
-                        <span>Etlala</span>
-                        <span>Etlala</span>
-                    </div>    
-                </div>
-            </div>
-        </div>
-        <div class="clip-center">
-            <div class="marquee">
-                <div class="marquee-container">
-                    <span>Etlala</span>
-                    <span>Etlala</span>
-                    Etlala
-                    <span>Etlala</span>
-                    <span>Etlala</span>
-                </div>    
-            </div>
-        </div>
-        <!-- VitalVisage Content -->
-        <div id="main-content" style="opacity: 0; width: 100%; min-height: 100vh;">
+                        <!-- VitalVisage Content -->
+        <div id="main-content" style="opacity: 1; width: 100%; min-height: 100vh;">
             <div style="width: 100%; margin: 0 auto;">
                 <div class="div-style-dd895c17">
                     <div class="div-style-cb53ac36">
@@ -344,15 +581,15 @@
                                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
-                                            <span class="sidebar-back-text">Back</span>
+                                            <span class="sidebar-back-text">Retour</span>
                                         </button>
                                         <nav class="sidebar-header-nav">
-                                            <a href="/" class="sidebar-header-link active">Homepage</a>
-                                            <a href="/gift-card" class="sidebar-header-link">Gift Card</a>
-                                            <a href="/store-locator" class="sidebar-header-link">Store Locator</a>
-                                            <a href="/contact" class="sidebar-header-link">Contact us</a>
+                                            <a href="/" class="sidebar-header-link active">Accueil</a>
+                                            <a href="/gift-card" class="sidebar-header-link">Carte Cadeau</a>
+                                            <a href="/store-locator" class="sidebar-header-link">Nos Magasins</a>
+                                            <a href="/contact" class="sidebar-header-link">Contactez-nous</a>
                                         </nav>
-                                        <button class="sidebar-close" aria-label="Close Menu">
+                                        <button class="sidebar-close" aria-label="Fermer le menu">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                                             </svg>
@@ -363,7 +600,7 @@
                                     <div class="sidebar-mobile-menu">
                                         <div class="sidebar-menu-item">
                                             <button class="sidebar-menu-link" data-panel="product-categories">
-                                                <span>SKINCARE CATEGORIES</span>
+                                                <span>CATÉGORIES SOINS</span>
                                                 <span class="sidebar-menu-arrow">
                                                     <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -374,7 +611,7 @@
                                         
                                         <div class="sidebar-menu-item">
                                             <button class="sidebar-menu-link" data-panel="collections">
-                                                <span>BY CONCERN</span>
+                                                <span>PAR PRÉOCCUPATION</span>
                                                 <span class="sidebar-menu-arrow">
                                                     <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -385,43 +622,43 @@
                                         
                                         <div class="sidebar-menu-item">
                                             <a href="/best-sellers" class="sidebar-menu-link">
-                                                <span>BEST SELLERS</span>
+                                                <span>MEILLEURES VENTES</span>
                                             </a>
                                         </div>
                                         
                                         <div class="sidebar-menu-item">
                                             <a href="/body-care" class="sidebar-menu-link">
-                                                <span>BODY CARE</span>
+                                                <span>SOINS DU CORPS</span>
                                             </a>
                                         </div>
                                         
                                         <div class="sidebar-menu-item">
                                             <a href="/hair-care" class="sidebar-menu-link">
-                                                <span>HAIR CARE</span>
+                                                <span>SOINS CAPILLAIRES</span>
                                             </a>
                                         </div>
                                         
                                         <div class="sidebar-menu-item">
                                             <a href="/starter-kits" class="sidebar-menu-link">
-                                                <span>STARTER KITS <span style="color: #6E8B72; font-size: 10px; margin-left: 8px;">COMING SOON</span></span>
+                                                <span>KITS DÉCOUVERTE <span style="color: #6E8B72; font-size: 10px; margin-left: 8px;">BIENTÔT</span></span>
                                             </a>
                                         </div>
                                         
                                         <div class="sidebar-menu-item">
                                             <a href="/new-arrivals" class="sidebar-menu-link">
-                                                <span>NEW ARRIVALS</span>
+                                                <span>NOUVEAUTÉS</span>
                                             </a>
                                         </div>
                                         
                                         <div class="sidebar-menu-item">
                                             <a href="/tools-accessories" class="sidebar-menu-link">
-                                                <span>TOOLS &amp; ACCESSORIES</span>
+                                                <span>OUTILS &amp; ACCESSOIRES</span>
                                             </a>
                                         </div>
                                         
                                         <div class="sidebar-menu-item">
                                             <button class="sidebar-menu-link" data-panel="house-of-minas">
-                                                <span>ABOUT ETLALA</span>
+                                                <span>À PROPOS D'ETLALA</span>
                                                 <span class="sidebar-menu-arrow">
                                                     <svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -433,48 +670,48 @@
                                     
                                     <!-- Sub-panels -->
                                     <div class="sidebar-panel" id="panel-product-categories">
-                                        <h2 class="sidebar-subpanel-title">SKINCARE CATEGORIES</h2>
+                                        <h2 class="sidebar-subpanel-title">CATÉGORIES SOINS</h2>
                                         <div class="sidebar-subpanel-list">
-                                            <div class="sidebar-subpanel-item"><a href="/cleansers" class="sidebar-subpanel-link">Cleansers</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/toners" class="sidebar-subpanel-link">Toners</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/serums" class="sidebar-subpanel-link">Serums</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/moisturizers" class="sidebar-subpanel-link">Moisturizers</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/eye-care" class="sidebar-subpanel-link">Eye Care</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/sunscreen" class="sidebar-subpanel-link">Sunscreen</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/exfoliators" class="sidebar-subpanel-link">Exfoliators</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/treatment-oils" class="sidebar-subpanel-link">Treatment Oils</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/face-masks" class="sidebar-subpanel-link">Face Masks</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/night-care" class="sidebar-subpanel-link">Night Care</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/tools-accessories" class="sidebar-subpanel-link">Tools &amp; Accessories</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/cleansers" class="sidebar-subpanel-link">Nettoyants</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/toners" class="sidebar-subpanel-link">Toniques</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/serums" class="sidebar-subpanel-link">Sérums</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/moisturizers" class="sidebar-subpanel-link">Hydratants</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/eye-care" class="sidebar-subpanel-link">Soins des Yeux</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/sunscreen" class="sidebar-subpanel-link">Protection Solaire</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/exfoliators" class="sidebar-subpanel-link">Exfoliants</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/treatment-oils" class="sidebar-subpanel-link">Huiles de Traitement</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/face-masks" class="sidebar-subpanel-link">Masques</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/night-care" class="sidebar-subpanel-link">Soins de Nuit</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/tools-accessories" class="sidebar-subpanel-link">Outils &amp; Accessoires</a></div>
                                         </div>
                                     </div>
                                     
                                     <div class="sidebar-panel" id="panel-collections">
-                                        <h2 class="sidebar-subpanel-title">BY CONCERN</h2>
+                                        <h2 class="sidebar-subpanel-title">PAR PRÉOCCUPATION</h2>
                                         <div class="sidebar-subpanel-list">
-                                            <div class="sidebar-subpanel-item"><a href="/concern/hydration" class="sidebar-subpanel-link">Hydration</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/concern/anti-aging" class="sidebar-subpanel-link">Anti-Aging</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/concern/brightening" class="sidebar-subpanel-link">Brightening</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/concern/acne-blemishes" class="sidebar-subpanel-link">Acne &amp; Blemishes</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/concern/pore-care" class="sidebar-subpanel-link">Pore Care</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/concern/sensitive-skin" class="sidebar-subpanel-link">Sensitive Skin</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/concern/sun-protection" class="sidebar-subpanel-link">Sun Protection</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/concern/dullness" class="sidebar-subpanel-link">Dullness</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/concern/dark-circles" class="sidebar-subpanel-link">Dark Circles</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/concern/hydration" class="sidebar-subpanel-link">Hydratation</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/concern/anti-aging" class="sidebar-subpanel-link">Anti-Âge</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/concern/brightening" class="sidebar-subpanel-link">Éclaircissant</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/concern/acne-blemishes" class="sidebar-subpanel-link">Acné &amp; Imperfections</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/concern/pore-care" class="sidebar-subpanel-link">Soins des Pores</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/concern/sensitive-skin" class="sidebar-subpanel-link">Peau Sensible</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/concern/sun-protection" class="sidebar-subpanel-link">Protection Solaire</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/concern/dullness" class="sidebar-subpanel-link">Teint Terne</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/concern/dark-circles" class="sidebar-subpanel-link">Cernes</a></div>
                                         </div>
                                     </div>
                                     
                                     <div class="sidebar-panel" id="panel-house-of-minas">
-                                        <h2 class="sidebar-subpanel-title">ABOUT ETLALA</h2>
+                                        <h2 class="sidebar-subpanel-title">À PROPOS D'ETLALA</h2>
                                         <div class="sidebar-subpanel-list">
-                                            <div class="sidebar-subpanel-item"><a href="/brand-legacy" class="sidebar-subpanel-link">Brand Legacy</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/craftsmanship" class="sidebar-subpanel-link">Craftsmanship</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/brand-legacy" class="sidebar-subpanel-link">Héritage de la Marque</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/craftsmanship" class="sidebar-subpanel-link">Savoir-Faire</a></div>
                                             <div class="sidebar-subpanel-item"><a href="/collaborations" class="sidebar-subpanel-link">Collaborations</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/news-updates" class="sidebar-subpanel-link">News & Updates</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/press-office" class="sidebar-subpanel-link">Press Office</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/sustainability" class="sidebar-subpanel-link">Sustainability</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/join-our-team" class="sidebar-subpanel-link">Join our team</a></div>
-                                            <div class="sidebar-subpanel-item"><a href="/studio-services" class="sidebar-subpanel-link">Studio Services</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/news-updates" class="sidebar-subpanel-link">Actualités</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/press-office" class="sidebar-subpanel-link">Presse</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/sustainability" class="sidebar-subpanel-link">Durabilité</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/join-our-team" class="sidebar-subpanel-link">Rejoignez-nous</a></div>
+                                            <div class="sidebar-subpanel-item"><a href="/studio-services" class="sidebar-subpanel-link">Services Studio</a></div>
                                         </div>
                                     </div>
                                     
@@ -482,10 +719,10 @@
                                     <div class="sidebar-contact-footer">
                                         <div class="sidebar-contact-content">
                                             <a href="tel:+212762641558" class="sidebar-contact-phone">
-                                                <span class="sidebar-contact-label">T.</span>
+                                                <span class="sidebar-contact-label">Tél.</span>
                                                 <span class="sidebar-contact-value">+212762641558</span>
                                             </a>
-                                            <a href="mailto:info@etlala.com" class="sidebar-contact-email" aria-label="Email us">
+                                            <a href="mailto:info@etlala.com" class="sidebar-contact-email" aria-label="Envoyez-nous un e-mail">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
                                                     <path d="M3 7L12 13L21 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -497,41 +734,41 @@
                                     <div class="sidebar-content">
                                         <!-- Column 1: Product Categories & Collections -->
                                         <div class="sidebar-section">
-                                            <h3 class="sidebar-section-title">PRODUCT CATEGORIES</h3>
+                                            <h3 class="sidebar-section-title">CATÉGORIES DE PRODUITS</h3>
                                             <div class="sidebar-section-content">
                                                 <div class="sidebar-column">
-                                                    <a href="/serums" class="sidebar-link">Serums</a>
-                                                    <a href="/moisturizers" class="sidebar-link">Moisturizers</a>
-                                                    <a href="/cleansers" class="sidebar-link">Cleansers</a>
-                                                    <a href="/face-masks" class="sidebar-link">Face Masks</a>
-                                                    <a href="/eye-care" class="sidebar-link">Eye Care</a>
-                                                    <a href="/sunscreen" class="sidebar-link">Sunscreen</a>
+                                                    <a href="/serums" class="sidebar-link">Sérums</a>
+                                                    <a href="/moisturizers" class="sidebar-link">Hydratants</a>
+                                                    <a href="/cleansers" class="sidebar-link">Nettoyants</a>
+                                                    <a href="/face-masks" class="sidebar-link">Masques</a>
+                                                    <a href="/eye-care" class="sidebar-link">Soins des Yeux</a>
+                                                    <a href="/sunscreen" class="sidebar-link">Protection Solaire</a>
                                                 </div>
                                                 
                                                 <div class="sidebar-column">
-                                                    <a href="/toners" class="sidebar-link">Toners</a>
-                                                    <a href="/exfoliators" class="sidebar-link">Exfoliators</a>
-                                                    <a href="/accessories" class="sidebar-link">Accessories</a>
-                                                    <a href="/zodiac" class="sidebar-link">Zodiac</a>
-                                                    <a href="/mens-accessories" class="sidebar-link">Men's Accessories</a>
+                                                    <a href="/toners" class="sidebar-link">Toniques</a>
+                                                    <a href="/exfoliators" class="sidebar-link">Exfoliants</a>
+                                                    <a href="/treatment-oils" class="sidebar-link">Huiles de Traitement</a>
+                                                    <a href="/night-care" class="sidebar-link">Soins de Nuit</a>
+                                                    <a href="/tools-accessories" class="sidebar-link">Outils &amp; Accessoires</a>
                                                 </div>
                                             </div>
                                             
                                             <h3 class="sidebar-section-title">COLLECTIONS</h3>
                                             <div class="sidebar-section-content">
                                                 <div class="sidebar-column">
-                                                    <a href="/unchained" class="sidebar-link">Unchained</a>
-                                                    <a href="/porcelain-collection" class="sidebar-link">Porcelain Collection</a>
-                                                    <a href="/bebe-collection" class="sidebar-link">BÉBÉ Collection</a>
-                                                    <a href="/symbols" class="sidebar-link">Symbols</a>
-                                                    <a href="/jolly-roger" class="sidebar-link">Jolly Roger</a>
+                                                    <a href="/hydration-collection" class="sidebar-link">Collection Hydratation</a>
+                                                    <a href="/anti-aging-collection" class="sidebar-link">Collection Anti‑Âge</a>
+                                                    <a href="/brightening-collection" class="sidebar-link">Collection Éclaircissante</a>
+                                                    <a href="/sensitive-skin-collection" class="sidebar-link">Collection Peaux Sensibles</a>
+                                                    <a href="/acne-care-collection" class="sidebar-link">Collection Anti‑Acné</a>
                                                 </div>
                                                 
                                                 <div class="sidebar-column">
-                                                    <a href="/black-mamba" class="sidebar-link">Black Mamba</a>
-                                                    <a href="/astra" class="sidebar-link">Astra</a>
-                                                    <a href="/neoprene-form" class="sidebar-link">Neoprene Form</a>
-                                                    <a href="/hearts" class="sidebar-link">Hearts</a>
+                                                    <a href="/natural-glow-collection" class="sidebar-link">Collection Éclat Naturel</a>
+                                                    <a href="/daily-essentials" class="sidebar-link">Essentiels du Quotidien</a>
+                                                    <a href="/luxury-ritual" class="sidebar-link">Rituel de Luxe</a>
+                                                    <a href="/travel-sets" class="sidebar-link">Kits de Voyage</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -540,51 +777,51 @@
                                         <div class="sidebar-section">
                                             <div class="sidebar-featured-grid">
                                                 <div class="sidebar-featured-col">
-                                                    <a href="/collectors-items" class="sidebar-featured-row">
-                                                        <h3 class="sidebar-featured-row-title">COLLECTOR'S ITEMS</h3>
-                                                        <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=128&h=128&fit=crop" alt="Collector's Items" class="sidebar-featured-row-image" />
+                                                    <a href="/best-sellers" class="sidebar-featured-row">
+                                                        <h3 class="sidebar-featured-row-title">MEILLEURES VENTES</h3>
+                                                        <img src="./frontend/public/products/pack-1.JPG" alt="Meilleures ventes" class="sidebar-featured-row-image" />
                                                     </a>
-                                                    <a href="/the-watch" class="sidebar-featured-row">
-                                                        <h3 class="sidebar-featured-row-title">THE WATCH</h3>
-                                                        <img src="https://images.unsplash.com/photo-1509941943102-10c232535736?w=128&h=128&fit=crop" alt="The Watch" class="sidebar-featured-row-image" />
+                                                    <a href="/new-arrivals" class="sidebar-featured-row">
+                                                        <h3 class="sidebar-featured-row-title">NOUVEAUTÉS</h3>
+                                                        <img src="./frontend/public/products/tebrima.JPG" alt="Nouveautés" class="sidebar-featured-row-image" />
                                                     </a>
-                                                    <a href="/lookbooks" class="sidebar-featured-row">
-                                                        <h3 class="sidebar-featured-row-title">LOOKBOOKS</h3>
-                                                        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=128&h=128&fit=crop" alt="Lookbooks" class="sidebar-featured-row-image" />
+                                                    <a href="/skincare-routine" class="sidebar-featured-row">
+                                                        <h3 class="sidebar-featured-row-title">ROUTINE DE SOIN</h3>
+                                                        <img src="./frontend/public/products/pack-de-visage.JPG" alt="Routine de soin" class="sidebar-featured-row-image" />
                                                     </a>
                                                 </div>
                                                 <div class="sidebar-featured-col">
-                                                    <a href="/art-of-living" class="sidebar-featured-row">
-                                                        <h3 class="sidebar-featured-row-title">ART OF LIVING</h3>
-                                                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop" alt="Art of Living" class="sidebar-featured-row-image" />
+                                                    <a href="/gift-sets" class="sidebar-featured-row">
+                                                        <h3 class="sidebar-featured-row-title">COFFRETS CADEAUX</h3>
+                                                        <img src="./frontend/public/products/pack-de-cheveux.JPG" alt="Coffrets cadeaux" class="sidebar-featured-row-image" />
                                                     </a>
-                                                    <a href="/apparel" class="sidebar-featured-row">
+                                                    <a href="/starter-kits" class="sidebar-featured-row">
                                                         <div>
-                                                            <span class="sidebar-featured-row-title">APPAREL</span>
-                                                            <span class="sidebar-featured-row-subtitle">COMING SOON</span>
+                                                            <span class="sidebar-featured-row-title">KITS DÉCOUVERTE</span>
+                                                            <span class="sidebar-featured-row-subtitle">BIENTÔT DISPONIBLE</span>
                                                         </div>
-                                                        <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=128&h=128&fit=crop" alt="Apparel" class="sidebar-featured-row-image" />
+                                                        <img src="./frontend/public/products/pack-1.JPG" alt="Kits découverte" class="sidebar-featured-row-image" />
                                                     </a>
-                                                    <a href="/design-objects" class="sidebar-featured-row">
-                                                        <h3 class="sidebar-featured-row-title">DESIGN OBJECTS</h3>
-                                                        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=128&h=128&fit=crop" alt="Design Objects" class="sidebar-featured-row-image" />
+                                                    <a href="/limited-edition" class="sidebar-featured-row">
+                                                        <h3 class="sidebar-featured-row-title">ÉDITION LIMITÉE</h3>
+                                                        <img src="./frontend/public/products/creme eclaircissante.JPG" alt="Édition limitée" class="sidebar-featured-row-image" />
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="sidebar-divider"></div>
-                                            <h3 class="sidebar-section-title">ABOUT ETLALA</h3>
+                                            <h3 class="sidebar-section-title">À PROPOS D'ETLALA</h3>
                                             <div class="sidebar-section-content">
                                                 <div class="sidebar-column">
-                                                    <a href="/brand-legacy" class="sidebar-link">Brand Legacy</a>
-                                                    <a href="/craftsmanship" class="sidebar-link">Craftsmanship</a>
+                                                    <a href="/brand-legacy" class="sidebar-link">Héritage de la Marque</a>
+                                                    <a href="/craftsmanship" class="sidebar-link">Savoir-Faire</a>
                                                     <a href="/collaborations" class="sidebar-link">Collaborations</a>
-                                                    <a href="/news-updates" class="sidebar-link">News & Updates</a>
+                                                    <a href="/news-updates" class="sidebar-link">Actualités</a>
                                                 </div>
                                                 <div class="sidebar-column">
-                                                    <a href="/press-office" class="sidebar-link">Press Office</a>
-                                                    <a href="/sustainability" class="sidebar-link">Sustainability</a>
-                                                    <a href="/join-our-team" class="sidebar-link">Join our team</a>
-                                                    <a href="/studio-services" class="sidebar-link">Studio Services</a>
+                                                    <a href="/press-office" class="sidebar-link">Presse</a>
+                                                    <a href="/sustainability" class="sidebar-link">Durabilité</a>
+                                                    <a href="/join-our-team" class="sidebar-link">Rejoignez‑nous</a>
+                                                    <a href="/studio-services" class="sidebar-link">Services Studio</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -592,11 +829,11 @@
                                         <!-- Column 3: Promo Card -->
                                         <div class="sidebar-section">
                                             <div class="sidebar-promo-card">
-                                                <img class="sidebar-promo-media" src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=640&h=480&fit=crop" alt="Premium Skincare Collection" />
+                                                <img class="sidebar-promo-media" src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=640&h=480&fit=crop" alt="Collection de soins premium" />
                                                 <div class="sidebar-promo-body">
-                                                    <h4 class="sidebar-promo-title">PREMIUM SKINCARE COLLECTION</h4>
-                                                    <p class="sidebar-promo-desc">Our signature collection crafted with natural ingredients. Designed for radiant skin with timeless beauty rituals.</p>
-                                                    <button class="sidebar-promo-cta">DISCOVER THE LEGACY</button>
+                                                    <h4 class="sidebar-promo-title">COLLECTION SOINS PREMIUM</h4>
+                                                    <p class="sidebar-promo-desc">Notre collection emblématique élaborée avec des ingrédients naturels. Conçue pour une peau éclatante et des rituels de beauté intemporels.</p>
+                                                    <button class="sidebar-promo-cta">DÉCOUVRIR L'HÉRITAGE</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -611,6 +848,38 @@
                                   body.sidebar-open .minimal-navbar { opacity: 0; visibility: hidden; pointer-events: none; z-index: 0 !important; }
                                   @media (max-width: 768px) { .minimal-navbar { padding: 12px 18px !important; } .brand-logo { width: 120px !important; transform: translateX(6px) !important; } }
                                   @media (max-width: 480px) { .minimal-navbar { padding: 12px 16px !important; } .brand-logo { width: 108px !important; transform: translateX(4px) !important; } }
+
+                                  /* Homepage-only: force navbar text and icons to white */
+                                  .minimal-navbar,
+                                  .minimal-navbar * { color: #ffffff !important; }
+
+                                  .minimal-navbar .nav-link,
+                                  .minimal-navbar .cart-text,
+                                  .minimal-navbar .search-text,
+                                  .minimal-navbar .account-icon,
+                                  .minimal-navbar .cart-link,
+                                  .minimal-navbar .navbar-left button,
+                                  .minimal-navbar .navbar-right a { color: #ffffff !important; }
+
+                                  /* Ensure all SVGs in navbar resolve to white */
+                                  .minimal-navbar svg { color: #ffffff !important; }
+
+                                  .minimal-navbar .navbar-left button svg,
+                                  .minimal-navbar .navbar-right a svg,
+                                  .minimal-navbar .account-icon svg,
+                                  .minimal-navbar .cart-link svg { color: #ffffff !important; stroke: currentColor !important; }
+
+                                  /* Explicitly target any nested SVG shapes */
+                                  .minimal-navbar svg *,
+                                  .minimal-navbar svg path,
+                                  .minimal-navbar svg circle,
+                                  .minimal-navbar svg rect,
+                                  .minimal-navbar svg line,
+                                  .minimal-navbar svg polyline,
+                                  .minimal-navbar svg polygon { stroke: currentColor !important; fill: none !important; }
+
+                                  /* Cart badge border and text should be white */
+                                  .minimal-navbar .cart-badge { border-color: #ffffff !important; color: #ffffff !important; background: transparent !important; }
                                 </style>
                                                                 <nav class="minimal-navbar">
                                     <div class="navbar-left">
@@ -619,12 +888,12 @@
                                                 <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                                             </svg>
                                         </button>
-                                        <button class="search-btn" aria-label="Search">
+                                        <button class="search-btn" aria-label="Rechercher">
                                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
                                                 <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                                             </svg>
-                                            <span class="search-text">SEARCH</span>
+                                            <span class="search-text">RECHERCHER</span>
                                         </button>
                                     </div>
                                     <div class="navbar-center">
@@ -633,26 +902,119 @@
                                         </a>
                                     </div>
                                     <div class="navbar-right">
-                                        <a href="/login" class="nav-link">LOGIN / SIGN UP</a>
-                                        <a href="/account" class="account-icon" aria-label="Account">
+                                        <a href="/login" class="nav-link">CONNEXION / INSCRIPTION</a>
+                                        <a href="#" class="account-icon" aria-label="Compte">
                                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
                                                 <path d="M5 20C5 16.134 8.134 13 12 13C15.866 13 19 16.134 19 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                                             </svg>
                                         </a>
-                                        <a href="/cart" class="cart-link">
-                                            <span class="cart-text">CART</span>
+                                        <a href="#" class="cart-link">
+                                            <span class="cart-text">PANIER</span>
                                             <span class="cart-badge">0</span>
                                         </a>
                                     </div>
                                 </nav>
+                                
+                                <!-- Navbar Dropdown Cards -->
+                                <div class="navbar-dropdown-overlay"></div>
+                                
+                                <!-- Cart Dropdown -->
+                                <div class="navbar-dropdown cart-dropdown" id="cart-dropdown">
+                                    <div class="dropdown-header">
+                                        <h3 class="dropdown-title">Panier</h3>
+                                        <button class="dropdown-close" data-dropdown="cart">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="dropdown-body">
+                                        <div class="cart-items" id="cart-items"></div>
+                                        <div class="cart-empty" id="cart-empty">
+                                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9 2L7.17 4H3C1.9 4 1 4.9 1 6V18C1 19.1 1.9 20 3 20H21C22.1 20 23 19.1 23 18V6C23 4.9 22.1 4 21 4H16.83L15 2H9Z" stroke="#6E8B72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <p>Votre panier est vide</p>
+                                            <a href="/products.html" class="shop-now-btn">Acheter maintenant</a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-footer" id="cart-footer">
+                                        <div class="cart-total">
+                                            <span class="total-label">Sous-total&nbsp;:</span>
+                                            <span class="total-amount" id="cart-total">0 DH</span>
+                                        </div>
+                                        <div class="cart-actions">
+                                            <a href="/cart.html" class="btn-view-cart">Voir le panier</a>
+                                            <a href="/checkout.html" class="btn-checkout">Passer au paiement</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                                                
+                                <!-- Account Dropdown -->
+                                <div class="navbar-dropdown account-dropdown" id="account-dropdown">
+                                    <div class="dropdown-header">
+                                        <h3 class="dropdown-title">Mon compte</h3>
+                                        <button class="dropdown-close" data-dropdown="account">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="dropdown-body">
+                                        <div class="account-menu">
+                                            <a href="/account/profile.html" class="account-menu-item">
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                                                    <path d="M5 20C5 16.134 8.134 13 12 13C15.866 13 19 16.134 19 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                                </svg>
+                                                <span>Mon profil</span>
+                                            </a>
+                                            <a href="/account/orders.html" class="account-menu-item">
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                                    <path d="M9 3V6M15 3V6M3 9H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                                </svg>
+                                                <span>Mes commandes</span>
+                                            </a>
+                                            <a href="/account/wishlist.html" class="account-menu-item">
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                                <span>Liste de souhaits</span>
+                                            </a>
+                                            <a href="/account/addresses.html" class="account-menu-item">
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    <path d="M2 17L12 22L22 17M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                                <span>Adresses</span>
+                                            </a>
+                                            <a href="/account/settings.html" class="account-menu-item">
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                                                    <path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                                </svg>
+                                                <span>Paramètres</span>
+                                            </a>
+                                            <div class="account-divider"></div>
+                                            <button class="account-menu-item logout-btn">
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9M16 17L21 12M21 12L16 7M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                                <span>Se déconnecter</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                                 
                                 <!-- Split Hero Brand: ETL on left (no green), ALA on right (green) -->
                                 <style>
                                   .split-hero-brand { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); z-index: 5; display: grid; grid-template-columns: 50vw 50vw; pointer-events: none; }
                                   .split-hero-left, .split-hero-right { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(56px, 12vw, 160px); letter-spacing: 0.03em; text-transform: uppercase; text-shadow: 0 4px 30px rgba(0,0,0,0.4); line-height: 1; }
                                   .split-hero-left { text-align: right; padding-right: 0.08em; color: #ffffff; }
-                                  .split-hero-right { text-align: left; padding-left: 0.08em; color: #000000; }
+                                  .split-hero-right { text-align: left; padding-left: 0.08em; color: #ffffff; }
                                   @media (max-width: 480px) { .split-hero-left, .split-hero-right { font-size: clamp(44px, 14vw, 120px); } }
                                 </style>
                                 <div class="split-hero-brand" aria-hidden="true">
@@ -662,10 +1024,10 @@
                                 
                                 <div class="div-style-bf7de1f0">
                                     <div class="div-style-2a9291c9">
-                                        <p class="p-style-196a0414">Embrace Timeless<br />Beauty</p>
+                                        <p class="p-style-196a0414">Célébrez une beauté<br />intemporelle</p>
                                         <p class="p-style-1e469a35">
-                                            Indulge in the delicate balance of science and nature, <br />elevating your daily ritual to an enriching experience<br />
-                                            of nourishment and renewal.
+                                            Savourez l’équilibre délicat entre science et nature, <br />élevant votre rituel quotidien en une expérience<br />
+                                            de nutrition et de renouveau.
                                         </p>
                                     </div>
                                 </div>
@@ -707,7 +1069,7 @@
                                 </svg>
                             </div>
                             <!-- Duplicate for seamless loop -->
-                            <p class="p-style-802d8898">HYDRATION & MOTION</p>
+                            <p class="p-style-802d8898">HYDRATATION & MOUVEMENT</p>
                             <div class="div-style-7a413c44">
                                 <svg viewBox="0 0 24 24" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g xmlns="http://www.w3.org/2000/svg">
@@ -715,7 +1077,7 @@
                                     </g>
                                 </svg>
                             </div>
-                            <p class="p-style-802d8898">NATURAL INGREDIENTS</p>
+                            <p class="p-style-802d8898">INGRÉDIENTS NATURELS</p>
                             <div class="div-style-7a413c44">
                                 <svg viewBox="0 0 24 24" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g xmlns="http://www.w3.org/2000/svg">
@@ -723,7 +1085,7 @@
                                     </g>
                                 </svg>
                             </div>
-                            <p class="p-style-802d8898">OIL CONTROL</p>
+                            <p class="p-style-802d8898">CONTRÔLE DU SÉBUM</p>
                             <div class="div-style-7a413c44">
                                 <svg viewBox="0 0 24 24" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g xmlns="http://www.w3.org/2000/svg">
@@ -731,7 +1093,7 @@
                                     </g>
                                 </svg>
                             </div>
-                            <p class="p-style-802d8898">UV PROTECTION</p>
+                            <p class="p-style-802d8898">PROTECTION UV</p>
                             <div class="div-style-7a413c44">
                                 <svg viewBox="0 0 24 24" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g xmlns="http://www.w3.org/2000/svg">
@@ -746,14 +1108,14 @@
                     <div class="brand-story-section">
                         <div class="brand-story-container">
                             <div class="brand-story-title-wrapper">
-                                <h2 class="brand-story-main-title scroll-reveal scroll-reveal-text">VITALVISAGE WAS ESTABLISHED IN MOROCCO IN 2024</h2>
+                                <h2 class="brand-story-main-title scroll-reveal scroll-reveal-text">VITALVISAGE A ÉTÉ FONDÉ AU MAROC EN 2024</h2>
                             </div>
                             <div class="brand-story-text-wrapper">
                                 <p class="brand-story-text scroll-reveal scroll-reveal-text">
-                                    The studio follows the strict skincare manufacturing process and maintains a high level of quality control to ensure our vision and philosophy is passed on to the customer. VitalVisage had personally designed and created every single product, crafting it from premium natural ingredients. A family affair that continues to this day through dedication and passion.
+                                    Le studio suit un processus de fabrication de soins rigoureux et maintient un haut niveau de contrôle qualité afin que notre vision et notre philosophie soient transmises au client. VitalVisage a personnellement conçu et créé chacun de ses produits, les élaborant à partir d’ingrédients naturels de première qualité. Une affaire de famille qui se poursuit aujourd’hui encore avec dévouement et passion.
                                 </p>
                                 <p class="brand-story-text scroll-reveal scroll-reveal-text">
-                                    Every step of the process is kept in house, allowing the brand to maintain complete autonomy and freedom. The distinctive VitalVisage style has persisted and evolved over the years, never sacrificing our quality with respect to the craftsmanship and processes, a quality that defines the living heritage of VITALVISAGE.
+                                    Chaque étape du processus est réalisée en interne, permettant à la marque de conserver une autonomie et une liberté totales. Le style distinctif de VitalVisage a perduré et évolué au fil des années, sans jamais sacrifier notre qualité ni notre respect de l’artisanat et des procédés : une qualité qui définit l’héritage vivant de VITALVISAGE.
                                 </p>
                             </div>
                         </div>
@@ -775,29 +1137,29 @@
                             .lux-hero-description { font: 400 16px/1.8 Lato, sans-serif; opacity: 0.92; margin: 0; }
                             .lux-hero-cta-group { display: flex; gap: 16px; margin-top: 8px; }
                             .lux-hero-cta { padding: 14px 34px; letter-spacing: 2px; font: 600 12px Lato, sans-serif; text-transform: uppercase; border: 1px solid #fff; background: transparent; color: #fff; cursor: pointer; transition: all .35s ease; }
-                            .lux-hero-cta.primary { background: #000; border-color: #000; color: #fff; }
+                            .lux-hero-cta.primary { background: #6E8B72; border-color: #6E8B72; color: #fff; }
                             .lux-hero-cta.primary:hover { background: transparent; color: #fff; border-color: #fff; }
                             .lux-hero-cta.ghost { background: transparent; }
-                            .lux-hero-cta.ghost:hover { background: #fff; color: #000; }
+                            .lux-hero-cta.ghost:hover { background: #fff; color: #6E8B72; }
                             @media (max-width: 1200px) { .lux-hero-content{padding:0 60px;} .lux-hero-title{font-size:54px;} }
                             @media (max-width: 768px) { .lux-hero-container{height:70vh;align-items:flex-end;} .lux-hero-content{padding:0 32px 40px;} .lux-hero-accent{display:none;} .lux-hero-title{font-size:40px;letter-spacing:1px;} .lux-hero-overline{letter-spacing:4px;} .lux-hero-description{opacity:0.9;} .lux-hero-cta{padding:12px 24px;} }
                             @media (max-width: 480px) { .lux-hero-container{min-height:520px;} .lux-hero-content{padding:0 24px 32px;} .lux-hero-title{font-size:32px;} .lux-hero-cta-group{gap:12px;flex-wrap:wrap;} }
                         </style>
                         <div class="lux-hero-container">
                             <div class="lux-hero-bg">
-                                <img class="lux-hero-image" src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=1920&h=1080&fit=crop" alt="Monochrome Luxury" />
+                                <img class="lux-hero-image" src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=1920&h=1080&fit=crop" alt="Luxe monochrome" />
                                 <div class="lux-hero-overlay"></div>
                             </div>
                             
                             <div class="lux-hero-content">
                                 <div class="lux-hero-accent"></div>
                                 <div class="lux-hero-text">
-                                    <p class="lux-hero-overline">EXCLUSIVE EDITION</p>
-                                    <h2 class="lux-hero-title">ICONIC. MINIMAL. TIMELESS.</h2>
-                                    <p class="lux-hero-description">Purity in form, precision in detail. A modern curation of essentials engineered for everyday elegance.</p>
+                                    <p class="lux-hero-overline">ÉDITION EXCLUSIVE</p>
+                                    <h2 class="lux-hero-title">ICONIQUE. MINIMAL. INTEMPOREL.</h2>
+                                    <p class="lux-hero-description">La pureté des formes, la précision des détails. Une sélection moderne d’essentiels pensée pour une élégance du quotidien.</p>
                                     <div class="lux-hero-cta-group">
-                                        <button class="lux-hero-cta primary">SHOP THE COLLECTION</button>
-                                        <button class="lux-hero-cta ghost">LEARN MORE</button>
+                                        <button class="lux-hero-cta primary">DÉCOUVRIR LA COLLECTION</button>
+                                        <button class="lux-hero-cta ghost">EN SAVOIR PLUS</button>
                                     </div>
                                 </div>
                             </div>
@@ -808,20 +1170,20 @@
                         <div class="div-style-570497a2">
                             <div class="div-style-24aea4a">
                                 <div class="div-style-eebb0721">
-                                    <p class="p-style-1e1fa26e">Shop By Collection</p>
-                                    <p class="p-style-7516f5f7">Explore our curated selection of skincare essentials</p>
+                                    <p class="p-style-1e1fa26e">Acheter par collection</p>
+                                    <p class="p-style-7516f5f7">Découvrez notre sélection de soins essentiels</p>
                                 </div>
                                 <div class="div-style-a0273da9">
                                     <div class="div-style-b686f8d8">
-                                        <button class="Button-style-51bb650e">MOISTURIZER</button>
+                                        <button class="Button-style-51bb650e">HYDRATANT</button>
                                     </div>
                                     <div class="div-style-69503951">
-                                        <button class="Button-style-51bb650e">CLEANSER</button>
+                                        <button class="Button-style-51bb650e">NETTOYANT</button>
                                     </div>
                                     <div class="div-style-a005d590">
                                         <div class="div-style-9ee1e528">
                                             <div class="div-style-9ac56f">
-                                                <p class="p-style-61334955">SUNSCREEN</p>
+                                                <p class="p-style-61334955">PROTECTION SOLAIRE</p>
                                             </div>
                                         </div>
                                     </div>
@@ -854,7 +1216,7 @@
                                         padding: 0;
                                         margin: 0;
                                         font: 300 64px/64px Poppins, sans-serif;
-                                        color: #000000;
+                                        color: #6E8B72;
                                         text-align: left;
                                         letter-spacing: -3.2px;
                                     }
@@ -867,7 +1229,7 @@
                                         padding-bottom: 4px;
                                         margin: 0;
                                         font: 300 16px Poppins, sans-serif;
-                                        color: #000000;
+                                        color: #6E8B72;
                                         text-align: justify;
                                         letter-spacing: -0.8px;
                                     }
@@ -941,7 +1303,7 @@
                                         padding: 0;
                                         margin: 0;
                                         font: 500 16px Poppins, sans-serif;
-                                        color: #000000;
+                                        color: #6E8B72;
                                         text-transform: uppercase;
                                         letter-spacing: 0.8px;
                                     }
@@ -953,7 +1315,7 @@
                                         padding: 0;
                                         margin: 0;
                                         font: 500 16px Poppins, sans-serif;
-                                        color: #000000;
+                                        color: #6E8B72;
                                     }
                                     .new-product-bookmark {
                                         flex: 0 0 auto;
@@ -1048,7 +1410,7 @@
                                             font: 400 9px 'Lato', sans-serif !important;
                                             letter-spacing: 1.5px !important;
                                             text-transform: uppercase !important;
-                                            color: #000000 !important;
+                                            color: #6E8B72 !important;
                                             text-decoration: underline !important;
                                             text-underline-offset: 1px !important;
                                             order: 1 !important;
@@ -1063,7 +1425,7 @@
                                             font: 400 10px 'Lato', sans-serif !important;
                                             letter-spacing: 0 !important;
                                             text-transform: uppercase !important;
-                                            color: #000000 !important;
+                                            color: #6E8B72 !important;
                                             margin: 0 0 6px 0 !important;
                                             line-height: 1.2 !important;
                                             order: 2 !important;
@@ -1079,7 +1441,7 @@
                                         /* Price below name, full width */
                                         .new-product-price {
                                             font: 400 12px 'Lato', sans-serif !important;
-                                            color: #000000 !important;
+                                            color: #6E8B72 !important;
                                             margin: 0 !important;
                                             order: 3 !important;
                                             white-space: nowrap !important;
@@ -1132,9 +1494,9 @@
                                         background: #ffffff !important;
                                     }
                                     .new-product-details { flex: 1 !important; display: flex !important; flex-direction: column !important; gap: 4px !important; }
-                                    .new-product-category { display: block !important; margin: 0 0 8px 0 !important; font: 400 11px 'Lato', sans-serif !important; letter-spacing: 2px !important; text-transform: uppercase !important; color: #000000 !important; text-decoration: underline !important; text-underline-offset: 2px !important; }
-                                    .new-product-name { padding: 0 !important; margin: 0 0 12px 0 !important; font: 400 16px 'Lato', sans-serif !important; color: #000000 !important; text-transform: uppercase !important; letter-spacing: 0 !important; }
-                                    .new-product-price { padding: 0 !important; margin: 0 !important; font: 400 16px 'Lato', sans-serif !important; color: #000000 !important; }
+                                    .new-product-category { display: block !important; margin: 0 0 8px 0 !important; font: 400 11px 'Lato', sans-serif !important; letter-spacing: 2px !important; text-transform: uppercase !important; color: #6E8B72 !important; text-decoration: underline !important; text-underline-offset: 2px !important; }
+                                    .new-product-name { padding: 0 !important; margin: 0 0 12px 0 !important; font: 400 16px 'Lato', sans-serif !important; color: #6E8B72 !important; text-transform: uppercase !important; letter-spacing: 0 !important; }
+                                    .new-product-price { padding: 0 !important; margin: 0 !important; font: 400 16px 'Lato', sans-serif !important; color: #6E8B72 !important; }
                                     .new-product-bookmark { display: flex !important; width: 20px !important; height: 20px !important; }
                                     .new-product-bookmark svg { width: 100% !important; height: 100% !important; }
                                     @media (max-width: 900px) {
@@ -1149,9 +1511,9 @@
                                         .new-product-card { border-radius: 12px !important; border-color: #e5e5e5 !important; }
                                         .new-product-info { flex-direction: column !important; padding: 6px 8px 10px 8px !important; min-height: auto !important; align-items: stretch !important; }
                                         .new-product-details { display: flex !important; flex-direction: column !important; width: 100% !important; }
-                                        .new-product-category { order: 1 !important; display: block !important; font: 400 9px 'Lato', sans-serif !important; letter-spacing: 1.5px !important; text-transform: uppercase !important; color: #000000 !important; text-decoration: underline !important; text-underline-offset: 1px !important; margin: 0 0 4px 0 !important; }
-                                        .new-product-name { order: 2 !important; font: 400 10px 'Lato', sans-serif !important; margin: 0 0 6px 0 !important; line-height: 1.2 !important; text-transform: uppercase !important; color: #000000 !important; }
-                                        .new-product-price { order: 3 !important; align-self: flex-start !important; font: 400 12px 'Lato', sans-serif !important; margin: 0 !important; color: #000000 !important; }
+                                        .new-product-category { order: 1 !important; display: block !important; font: 400 9px 'Lato', sans-serif !important; letter-spacing: 1.5px !important; text-transform: uppercase !important; color: #6E8B72 !important; text-decoration: underline !important; text-underline-offset: 1px !important; margin: 0 0 4px 0 !important; }
+                                        .new-product-name { order: 2 !important; font: 400 10px 'Lato', sans-serif !important; margin: 0 0 6px 0 !important; line-height: 1.2 !important; text-transform: uppercase !important; color: #6E8B72 !important; }
+                                        .new-product-price { order: 3 !important; align-self: flex-start !important; font: 400 12px 'Lato', sans-serif !important; margin: 0 !important; color: #6E8B72 !important; }
                                     }
                                     @media (max-width: 480px) {
                                         .new-products-section { padding: 40px 6px !important; }
@@ -1198,7 +1560,7 @@
                                       font: 600 10px 'Lato', sans-serif !important;
                                       letter-spacing: 1.5px !important;
                                       text-transform: uppercase !important;
-                                      color: #000000 !important;
+                                      color: #6E8B72 !important;
                                       text-decoration: underline !important;
                                       text-underline-offset: 1px !important;
                                       margin: 0 0 4px 0 !important;
@@ -1207,12 +1569,12 @@
                                     .new-product-name {
                                       font: 700 12px 'Lato', sans-serif !important;
                                       text-transform: uppercase !important;
-                                      color: #000000 !important;
+                                      color: #6E8B72 !important;
                                       margin: 0 0 6px 0 !important;
                                     }
                                     .new-product-price {
                                       font: 700 14px 'Lato', sans-serif !important;
-                                      color: #000000 !important;
+                                      color: #6E8B72 !important;
                                       margin: 0 !important;
                                     }
                                   }
@@ -1221,10 +1583,10 @@
                                   // Normalize prices across cards to Euro format with two decimals
                                   document.addEventListener('DOMContentLoaded', function(){
                                     try {
-                                      document.querySelectorAll('.new-product-price').forEach(function(el){
+                                      document.querySelectorAll('.new-product-price, .lux-card-price').forEach(function(el){
                                         var raw = (el.textContent || '').trim();
                                         var num = parseFloat(raw.replace(/[^0-9.]/g, ''));
-                                        if (!isNaN(num)) { el.textContent = '€' + num.toFixed(2); }
+                                        if (!isNaN(num)) { el.textContent = num.toFixed(2) + ' DH'; }
                                       });
                                     } catch (e) {}
                                   });
@@ -1288,7 +1650,7 @@
                                     /* Make images bigger on small devices */
                                     .new-products-section .new-product-image { height: 200px !important; }
                                     /* Text colors per request */
-                                    .new-products-description { color: #000000 !important; } /* pure black */
+                                    .new-products-description { color: #6E8B72 !important; } /* brand green */
                                     .lux-hero-description { color: #FFFFFF !important; } /* white */
                                   }
                                 </style>
@@ -1302,8 +1664,8 @@
                                 </style>
                                 <div class="new-products-section">
                                     <div class="new-products-header">
-                                        <p class="new-products-title">Discover Your Perfect<br />Skincare Routine</p>
-                                        <p class="new-products-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                        <p class="new-products-title">Découvrez votre routine de soin idéale</p>
+                                        <p class="new-products-description">Découvrez nos nouveautés sélectionnées pour révéler votre éclat naturel et enrichir votre routine de soin.</p>
                                     </div>
                                     <div class="new-products-grid-container">
                                         <div class="new-products-row">
@@ -1499,7 +1861,7 @@
                                     font: 600 11px Poppins, sans-serif !important;
                                     letter-spacing: 0.8px !important;
                                     text-transform: uppercase !important;
-                                    color: #000 !important;
+                                    color: #6E8B72 !important;
                                     text-decoration: underline !important;
                                     text-underline-offset: 2px !important;
                                 }
@@ -1507,12 +1869,12 @@
                                     font: 600 14px Poppins, sans-serif !important;
                                     letter-spacing: 0.5px !important;
                                     text-transform: uppercase !important;
-                                    color: #000 !important;
+                                    color: #6E8B72 !important;
                                     margin: 0 !important;
                                 }
                                 .featured-collection .new-product-price {
                                     font: 600 14px Poppins, sans-serif !important;
-                                    color: #000 !important;
+                                    color: #6E8B72 !important;
                                     margin: 0 !important;
                                 }
                             }
@@ -1520,8 +1882,8 @@
                         <div class="div-style-e55ba7d4">
                             <div class="new-products-section featured-collection">
                                 <div class="new-products-header">
-                                    <p class="new-products-title">Featured<br />Collection</p>
-                                    <p class="new-products-description">Discover our most loved products, carefully selected to bring out your natural radiance and elevate your skincare routine
+                                    <p class="new-products-title">Collection mise en avant</p>
+                                    <p class="new-products-description">Découvrez nos produits les plus appréciés, soigneusement sélectionnés pour révéler votre éclat naturel et sublimer votre routine de soin
                                 </div>
                                 <div class="new-products-grid-container">
                                     <div class="new-products-row">
@@ -1655,18 +2017,18 @@
                         <div class="div-style-e83673c7">
                             <div class="div-style-5886da17">
                                 <div class="div-style-dbf73d53">
-                                    <p class="p-style-777c3bab">About Etlala/p>
+                                    <p class="p-style-777c3bab">About Etlala</p>
                                     <div class="div-style-36d44a56">
-                                        <img src="root/assets/image_c460095a.png" class="img-style-1dfd66a5" />
+                                        <img src="./frontend/public/index/image_c460095a.png" class="img-style-1dfd66a5" />
                                         <div class="div-style-973ce4ea">
                                             <p class="p-style-db134d9e">
                                                 <span>We believe in the transformative power of cosmetics</span><span class="span-style-503a1eb1"><br /></span><span>and skincare, empowering individuals to express their</span><span class="span-style-503a1eb1"><br /></span><span>unique beauty confidently. With a passion for quality</span><span class="span-style-503a1eb1"><br /></span><span>and creativity, we strive to create products that not</span><span class="span-style-503a1eb1"><br /></span><span>only enhance outer beauty but also foster a sense of</span><span class="span-style-503a1eb1"><br /></span><span>self-expression and inner confidence.</span><span></span><span class="span-style-503a1eb1"><br /></span><span>Our journey began with a simple vision to redefine</span><span class="span-style-503a1eb1"><br /></span><span>beauty industry through a combination of cutting-edge</span><span class="span-style-503a1eb1"><br /></span><span>research, premium ingredients and a commitment to</span><span class="span-style-503a1eb1"><br /></span><span>sustainability, Every product in our collection is</span><span class="span-style-503a1eb1"><br /></span><span>carefully crafted to deliver exceptional results.</span>
                                             </p>
                                             <div class="div-style-ea723caf">
-                                                <img src="root/assets/image_ea62dd08.png" class="img-style-1dfd66a5" />
+                                                <img src="./frontend/public/index/image_ea62dd08.png" class="img-style-1dfd66a5" />
                                             </div>
                                         </div>
-                                        <img src="root/assets/image_f01a23d0.png" class="img-style-1dfd66a5" />
+                                        <img src="./frontend/public/index/image_f01a23d0.png" class="img-style-1dfd66a5" />
                                     </div>
                                 </div>
                             </div>
@@ -1680,8 +2042,8 @@
                                     </div>
                                     <div class="porsche-card-hero-content">
                                         <div class="porsche-card-hero-text">
-                                            <p class="porsche-card-hero-subtitle">CRAFTED FOR PERFECTION</p>
-                                            <h2 class="porsche-card-hero-title">TIMELESS<br />ELEGANCE<br />REDEFINED</h2>
+                                            <p class="porsche-card-hero-subtitle">CRÉÉ POUR LA PERFECTION</p>
+                                            <h2 class="porsche-card-hero-title">ÉLÉGANCE<br />INTEMPORELLE<br />REDÉFINIE</h2>
                                             <p class="porsche-card-hero-description">
                                                 Where innovation meets tradition. Our exclusive collection<br />
                                                 represents the pinnacle of skincare excellence, designed<br />
@@ -1975,13 +2337,13 @@
                                     .chanel-hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.05) brightness(0.96); }
                                     .chanel-hero-content { display: flex; flex-direction: column; justify-content: center; gap: 24px; padding: 56px; }
                                     .chanel-hero-overline { margin: 0; font: 600 12px/1 Lato, sans-serif; letter-spacing: 6px; text-transform: uppercase; color: rgba(0,0,0,0.7); }
-                                    .chanel-hero-title { margin: 0; font: 700 64px/1.08 "Playfair Display", serif; color: #000; letter-spacing: 1px; text-transform: uppercase; }
-                                    .chanel-hero-description { margin: 0; font: 400 16px/1.8 Lato, sans-serif; color: #000000; max-width: 560px; }
+                                    .chanel-hero-title { margin: 0; font: 700 64px/1.08 "Playfair Display", serif; color: #6E8B72; letter-spacing: 1px; text-transform: uppercase; }
+                                    .chanel-hero-description { margin: 0; font: 400 16px/1.8 Lato, sans-serif; color: #6E8B72; max-width: 560px; }
                                     .chanel-hero-cta-group { display: flex; gap: 14px; margin-top: 8px; flex-wrap: wrap; }
-                                    .chanel-hero-cta { padding: 12px 28px; font: 600 12px Lato, sans-serif; text-transform: uppercase; letter-spacing: 2px; background: #fff; color: #000; border: 1px solid #000; cursor: pointer; transition: all .3s ease; }
-                                    .chanel-hero-cta.primary { background: #000; color: #fff; }
-                                    .chanel-hero-cta.primary:hover { background: #fff; color: #000; }
-                                    .chanel-hero-cta.ghost:hover { background: #000; color: #fff; }
+                                    .chanel-hero-cta { padding: 12px 28px; font: 600 12px Lato, sans-serif; text-transform: uppercase; letter-spacing: 2px; background: #fff; color: #6E8B72; border: 1px solid #6E8B72; cursor: pointer; transition: all .3s ease; }
+                                    .chanel-hero-cta.primary { background: #6E8B72; color: #fff; border-color: #6E8B72; }
+                                    .chanel-hero-cta.primary:hover { background: #fff; color: #6E8B72; }
+                                    .chanel-hero-cta.ghost:hover { background: #6E8B72; color: #fff; }
                                     @media (max-width: 1200px) { .chanel-hero { padding: 0 60px 60px 60px; } .chanel-hero-title{ font-size: 48px; } }
                                     @media (max-width: 900px) { 
                                         .chanel-hero { padding: 0 24px 40px 24px; margin-top: -20px; } 
@@ -2138,15 +2500,15 @@
                                 </style>
                                 <div class="chanel-hero-container">
                                     <div class="chanel-hero-content">
-                                        <p class="chanel-hero-overline">CRAFTED FOR PERFECTION</p>
-                                        <h2 class="chanel-hero-title">TIMELESS<br/>ELEGANCE<br/>REDEFINED</h2>
-                                        <p class="chanel-hero-description">Where innovation meets tradition. Our exclusive collection represents the pinnacle of skincare excellence, designed for those who demand nothing but the best.</p>
+                                        <p class="chanel-hero-overline">CRÉÉ POUR LA PERFECTION</p>
+                                        <h2 class="chanel-hero-title">ÉLÉGANCE<br/>INTEMPORELLE<br/>REDÉFINIE</h2>
+                                        <p class="chanel-hero-description">Là où l’innovation rencontre la tradition. Notre collection exclusive incarne l’excellence des soins, pensée pour celles et ceux qui n’acceptent que le meilleur.</p>
                                         <div class="chanel-hero-cta-group">
                                             <button class="chanel-hero-cta primary">DISCOVER MORE</button>
                                         </div>
                                     </div>
                                     <div class="chanel-hero-media">
-                                        <img class="chanel-hero-image" src="./frontend/public/image_a31f1231.png" alt="Luxury Skincare Product" />
+                                        <img class="chanel-hero-image" src="./frontend/public/products/IMG_1927.JPG" alt="Luxury Skincare Product" />
                                     </div>
                                 </div>
                             </section>
@@ -2304,14 +2666,14 @@
                                       box-shadow: none !important;
                                     }
                                     .feature-card + .feature-card { border-top: 1px solid #EEEEEE !important; }
-                                    .feature-icon { width: 28px !important; height: 28px !important; color: #000 !important; display: flex !important; align-items: center !important; justify-content: center !important; }
+                                    .feature-icon { width: 28px !important; height: 28px !important; color: #6E8B72 !important; display: flex !important; align-items: center !important; justify-content: center !important; }
                                     .feature-icon svg { width: 28px !important; height: 28px !important; stroke-width: 1.5 !important; }
                                     .feature-title {
                                       margin: 0 !important;
                                       font: 700 12px/1.2 'Lato', sans-serif !important;
                                       letter-spacing: 1px !important;
                                       text-transform: uppercase !important;
-                                      color: #000 !important;
+                                      color: #6E8B72 !important;
                                       text-align: left !important;      /* move text left */
                                       justify-self: start !important;    /* align to left in grid cell */
                                       padding-right: 28px !important;    /* keep distance from arrow */
@@ -2326,7 +2688,7 @@
                                       align-items: center !important;
                                       justify-content: center !important;
                                       gap: 0 !important;
-                                      color: #000 !important;
+                                      color: #6E8B72 !important;
                                       text-decoration: none !important;
                                       width: 26px !important;            /* fixed touch target aligned to column */
                                       height: 26px !important;
@@ -2351,8 +2713,8 @@
                                                 <circle cx="12" cy="14" r="1.5" fill="currentColor"/>
                                             </svg>
                                         </div>
-                                        <h3 class="feature-title">SECURE PAYMENT</h3>
-                                        <p class="feature-description">Our safety is our top priority, thus your payment information is processed securely.</p>
+                                        <h3 class="feature-title" style="color: #6E8B72;">SECURE PAYMENT</h3>
+                                        <p class="feature-description" style="color: #6E8B72;">Our safety is our top priority, thus your payment information is processed securely.</p>
                                         <a href="#" class="feature-link">
                                             <span>Learn more</span>
                                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2371,8 +2733,8 @@
                                     <circle cx="17" cy="18" r="2" stroke="currentColor" stroke-width="1.5"/>
                                     </svg>
                                     </div>
-                                    <h3 class="feature-title">FREE SHIPPING</h3>
-                                    <p class="feature-description">Free domestic shipping and returns for purchases over €500.</p>
+                                    <h3 class="feature-title" style="color: #6E8B72;">FREE SHIPPING</h3>
+                                    <p class="feature-description" style="color: #6E8B72;">Free domestic shipping and returns for purchases over 500 DH.</p>
                                     <a href="#" class="feature-link">
                                     <span>Learn more</span>
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2389,8 +2751,8 @@
                                     <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="1.5"/>
                                     </svg>
                                     </div>
-                                    <h3 class="feature-title">STORES & RETAILERS</h3>
-                                    <p class="feature-description">Discover our stores and find a location near you.</p>
+                                    <h3 class="feature-title" style="color: #6E8B72;">STORES & RETAILERS</h3>
+                                    <p class="feature-description" style="color: #6E8B72;">Discover our stores and find a location near you.</p>
                                     <a href="#" class="feature-link">
                                     <span>Learn more</span>
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2406,8 +2768,8 @@
                                     <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="currentColor" stroke-width="1.5"/>
                                     </svg>
                                     </div>
-                                    <h3 class="feature-title">SUPPORT</h3>
-                                    <p class="feature-description">We are more than happy to reply to any questions and tell you more about our products.</p>
+                                    <h3 class="feature-title" style="color: #6E8B72;">SUPPORT</h3>
+                                    <p class="feature-description" style="color: #6E8B72;">We are more than happy to reply to any questions and tell you more about our products.</p>
                                     <a href="#" class="feature-link">
                                     <span>Learn more</span>
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
