@@ -2212,6 +2212,62 @@
                                             min-height: 300px;
                                         }
                                     }
+                                    
+                                    /* Responsive grid for packages section (2-column layout) */
+                                    .lux-products-row[style*="grid-template-columns"] {
+                                        display: grid !important;
+                                        justify-content: center !important;
+                                        overflow-x: visible !important;
+                                        grid-template-columns: repeat(2, minmax(280px, 340px)) !important;
+                                        gap: 30px !important;
+                                    }
+                                    
+                                    @media (max-width: 900px) {
+                                        .lux-products-row[style*="grid-template-columns"] {
+                                            grid-template-columns: repeat(2, minmax(240px, 1fr)) !important;
+                                            gap: 20px !important;
+                                        }
+                                    }
+                                    
+                                    @media (max-width: 768px) {
+                                        .lux-products-row[style*="grid-template-columns"] {
+                                            grid-template-columns: repeat(2, minmax(200px, 1fr)) !important;
+                                            gap: 16px !important;
+                                        }
+                                        .lux-card-info {
+                                            padding: 16px !important;
+                                        }
+                                        .lux-card-name {
+                                            font-size: 12px !important;
+                                        }
+                                        .lux-card-sub {
+                                            font-size: 10px !important;
+                                        }
+                                        .lux-card-price {
+                                            font-size: 11px !important;
+                                        }
+                                    }
+                                    
+                                    @media (max-width: 600px) {
+                                        .lux-products-row[style*="grid-template-columns"] {
+                                            grid-template-columns: 1fr !important;
+                                            gap: 16px !important;
+                                            max-width: 400px !important;
+                                            margin: 0 auto !important;
+                                        }
+                                    }
+                                    
+                                    @media (max-width: 480px) {
+                                        .lux-products-row[style*="grid-template-columns"] {
+                                            grid-template-columns: 1fr !important;
+                                            gap: 12px !important;
+                                            max-width: 100% !important;
+                                        }
+                                        .lux-card-info {
+                                            padding: 14px !important;
+                                        }
+                                    }
+                                    
                                     /* drag-to-scroll only */
                                     .lux-products-row { cursor: grab; user-select: none; }
                                     .lux-products-row.dragging { cursor: grabbing; scroll-behavior: auto !important; }
@@ -2508,7 +2564,7 @@
                                         </div>
                                     </div>
                                     <div class="chanel-hero-media">
-                                        <img class="chanel-hero-image" src="./frontend/public/products/IMG_1927.JPG" alt="Luxury Skincare Product" />
+                                        <img class="chanel-hero-image" src="./frontend/public/products/creme eclaircissante.JPG" alt="Luxury Skincare Product" />
                                     </div>
                                 </div>
                             </section>
@@ -2519,7 +2575,7 @@
                         <style>
                         .features-section {
                         width: 100%;
-                        background: #ffffff;
+                        background: transparent;
                         padding: 80px 0;
                         margin: 0;
                         }
@@ -2536,18 +2592,18 @@
                         flex-direction: column;
                         align-items: center;
                         text-align: center;
-                        background: #ffffff;
-                        border: 1px solid #e5e5e5;
-                        border-radius: 12px;
+                        background: transparent;
+                        border: none;
+                        border-radius: 0;
                         padding: 48px 32px;
                         gap: 24px;
                         transition: all 0.3s ease;
-                        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+                        box-shadow: none;
                         }
                         .feature-card:hover {
-                        transform: translateY(-4px);
-                        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-                        border-color: #000;
+                        transform: none;
+                        box-shadow: none;
+                        border-color: transparent;
                         }
                         .feature-icon {
                         width: 64px;
@@ -2555,14 +2611,14 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        background: #f8f8f8;
+                        background: transparent;
                         border-radius: 50%;
                         margin-bottom: 8px;
                         }
                         .feature-icon svg {
                         width: 32px;
                         height: 32px;
-                        stroke: #000;
+                        stroke: #6E8B72;
                         stroke-width: 1.5;
                         }
                         .feature-title {
@@ -2570,12 +2626,12 @@
                         font: 600 15px/1.2 'Lato', sans-serif;
                         letter-spacing: 1.8px;
                         text-transform: uppercase;
-                        color: #000;
+                        color: #6E8B72;
                         }
                         .feature-description {
                         margin: 0;
                         font: 400 15px/1.7 'Lato', sans-serif;
-                        color: #666;
+                        color: #6E8B72;
                         flex: 1;
                         }
                         .feature-link {
@@ -2584,18 +2640,18 @@
                         gap: 8px;
                         margin-top: 12px;
                         font: 500 13px/1 'Lato', sans-serif;
-                        color: #000;
+                        color: #6E8B72;
                         text-decoration: none;
                         transition: gap 0.3s ease;
                         padding: 10px 20px;
-                        border: 1px solid #e5e5e5;
+                        border: 1px solid #6E8B72;
                         border-radius: 6px;
                         }
                         .feature-link:hover {
                         gap: 12px;
-                        background: #000;
+                        background: #6E8B72;
                         color: #fff;
-                        border-color: #000;
+                        border-color: #6E8B72;
                         }
                         .feature-link svg {
                         width: 16px;
@@ -2641,7 +2697,7 @@
                                 <style>
                                   /* Mobile-first feature list redesign */
                                   @media (max-width: 900px) {
-                                    .features-section { padding: 16px 12px 24px !important; background: #000 !important; }
+                                    .features-section { padding: 16px 12px 24px !important; background: transparent !important; }
                                     .features-container {
                                       display: grid !important;
                                       grid-template-columns: 1fr !important;

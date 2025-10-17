@@ -305,10 +305,86 @@ function bootstrapComingSoonRedirects(){
     }
 })();
 
+// Background color transition on scroll (index page only)
+function initScrollBackgroundTransition() {
+    // Only run on index page
+    if (!window.location.pathname.match(/^\/(index\.html)?$/)) return;
+    
+    const body = document.body;
+
+    // Inject strong overrides to force text/icons white while in green mode
+    (function injectScrollGreenStyles(){
+        if (document.getElementById('scroll-green-style')) return;
+        const style = document.createElement('style');
+        style.id = 'scroll-green-style';
+        style.textContent = `
+body.scroll-green-mode,
+body.scroll-green-mode * { color: #FFFFFF !important; }
+body.scroll-green-mode a,
+body.scroll-green-mode a:link,
+body.scroll-green-mode a:visited { color: #FFFFFF !important; }
+body.scroll-green-mode svg, 
+body.scroll-green-mode svg * { stroke: #FFFFFF !important; fill: none !important; color: #FFFFFF !important; }
+body.scroll-green-mode .cart-badge { color: #FFFFFF !important; border-color: #FFFFFF !important; background: transparent !important; }
+body.scroll-green-mode .minimal-navbar,
+body.scroll-green-mode .minimal-navbar *,
+body.scroll-green-mode .hamburger-menu,
+body.scroll-green-mode .search-btn,
+body.scroll-green-mode .account-icon { color: #FFFFFF !important; border-color: #FFFFFF !important; }
+
+/* Make product card text white on green background */
+body.scroll-green-mode .new-product-name,
+body.scroll-green-mode .new-product-category,
+body.scroll-green-mode .new-product-price,
+body.scroll-green-mode .new-product-info,
+body.scroll-green-mode .new-product-info * { color: #FFFFFF !important; }
+
+/* Make product cards transparent */
+body.scroll-green-mode .new-product-card,
+body.scroll-green-mode .new-product-card *,
+body.scroll-green-mode .new-product-info,
+body.scroll-green-mode .new-product-details { background: transparent !important; background-color: transparent !important; }
+`;
+        document.head.appendChild(style);
+    })();
+    
+    function handleScroll() {
+        // Find the "Acheter par collection" section (Shop By Collection)
+        const shopByCollectionSection = document.querySelector('.div-style-24aea4a');
+        
+        if (!shopByCollectionSection) {
+            // Fallback: if section not found, don't change background
+            return;
+        }
+        
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const sectionRect = shopByCollectionSection.getBoundingClientRect();
+        const sectionBottom = scrollTop + sectionRect.bottom;
+        
+        // Change background to green and force text/icons to white after passing the section
+        if (scrollTop >= sectionBottom) {
+            body.style.backgroundColor = '#6E8B72';
+            body.style.transition = 'background-color 0.8s ease';
+            body.classList.add('scroll-green-mode');
+        } else {
+            body.style.backgroundColor = '#FFFFFF';
+            body.style.transition = 'background-color 0.8s ease';
+            body.classList.remove('scroll-green-mode');
+        }
+    }
+    
+    window.addEventListener('scroll', handleScroll);
+    // Delay initial check to ensure section is loaded
+    setTimeout(handleScroll, 100);
+}
+
 // Load footer after page animations complete
 window.addEventListener('DOMContentLoaded', function() {
     // Enable Coming Soon redirects for non-existing links
     bootstrapComingSoonRedirects();
+    
+    // Initialize scroll background transition
+    initScrollBackgroundTransition();
 
     // Inject unified Sidebar on every page, replacing any existing markup
     (function injectSidebar(){

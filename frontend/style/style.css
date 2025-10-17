@@ -1088,6 +1088,29 @@ h1,h2,h3,h4,h5,h6, .p-style-802d8898 {
     border-radius: 0 !important;
 }
 
+/* Make all product cards transparent with white text (both rows) */
+.new-products-section:not(.featured-collection) .new-products-row .new-product-card,
+.new-products-section:not(.featured-collection) .new-products-row .new-product-card *,
+.new-products-section:not(.featured-collection) .new-products-row .new-product-card .new-product-info,
+.new-products-section:not(.featured-collection) .new-products-row .new-product-card .new-product-details,
+.new-products-section:not(.featured-collection) .new-products-row-2 .new-product-card,
+.new-products-section:not(.featured-collection) .new-products-row-2 .new-product-card *,
+.new-products-section:not(.featured-collection) .new-products-row-2 .new-product-card .new-product-info,
+.new-products-section:not(.featured-collection) .new-products-row-2 .new-product-card .new-product-details {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Make the text white for all product cards (both rows) */
+.new-products-section:not(.featured-collection) .new-products-row .new-product-card .new-product-name,
+.new-products-section:not(.featured-collection) .new-products-row .new-product-card .new-product-category,
+.new-products-section:not(.featured-collection) .new-products-row .new-product-card .new-product-price,
+.new-products-section:not(.featured-collection) .new-products-row-2 .new-product-card .new-product-name,
+.new-products-section:not(.featured-collection) .new-products-row-2 .new-product-card .new-product-category,
+.new-products-section:not(.featured-collection) .new-products-row-2 .new-product-card .new-product-price {
+    color: #FFFFFF !important;
+}
+
 /* Responsive Design for Product Cards */
 @media (max-width: 768px) {
     .new-products-section {
@@ -1888,35 +1911,70 @@ h1,h2,h3,h4,h5,h6, .p-style-802d8898 {
     background: transparent !important;
 }
 
-/* Featured Collection - Clean Minimal Cards */
+/* Features Section - Transparent Background */
+.features-section {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+.features-container {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+.feature-card {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.feature-card:hover {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.feature-card * {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Hide Features Section on Small Devices */
+@media (max-width: 900px) {
+    .features-section {
+        display: none !important;
+    }
+}
+
+/* Featured Collection - Clean Minimal Cards with Transparent Background */
 .featured-collection .new-products-row,
 .featured-collection .new-products-row-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 16px;
+    gap: 0;
 }
 
 .featured-collection .new-product-card {
-    background: #FFFFFF;
-    border: 1px solid #E3E1D0;
+    background: transparent !important;
+    border: none;
     border-radius: 0;
     box-shadow: none;
-    padding: 30px;
+    padding: 0 0 30px 0;
     transition: all 0.2s ease;
     overflow: visible;
 }
 
 .featured-collection .new-product-card:hover {
     transform: none;
-    border-color: #6E8B72;
-    box-shadow: 0 2px 12px rgba(110, 139, 114, 0.08);
+    box-shadow: none;
 }
 
 .featured-collection .new-product-image {
-    height: 260px;
+    height: 400px;
     width: 100%;
-    background: #FFFFFF;
+    margin: 0;
+    background: transparent !important;
     border-radius: 0;
-    object-fit: contain;
+    object-fit: cover;
     margin-bottom: 24px;
     padding: 0;
 }
@@ -1926,7 +1984,11 @@ h1,h2,h3,h4,h5,h6, .p-style-802d8898 {
     gap: 6px;
     flex-direction: column;
     align-items: flex-start;
-    background: transparent;
+    background: transparent !important;
+}
+
+.featured-collection .new-product-details {
+    background: transparent !important;
 }
 
 .featured-collection .new-product-category {
@@ -1934,7 +1996,7 @@ h1,h2,h3,h4,h5,h6, .p-style-802d8898 {
     font: 400 11px/1.2 Lato, sans-serif;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #6E8B72;
+    color: #FFFFFF !important;
     text-decoration: underline;
     text-underline-offset: 2px;
     margin: 0 0 6px 0;
@@ -1943,7 +2005,7 @@ h1,h2,h3,h4,h5,h6, .p-style-802d8898 {
 
 .featured-collection .new-product-name {
     font: 400 14px/1.3 Lato, sans-serif;
-    color: #6E8B72;
+    color: #FFFFFF !important;
     letter-spacing: 0;
     text-transform: uppercase;
     margin: 0 0 6px 0;
@@ -1952,7 +2014,7 @@ h1,h2,h3,h4,h5,h6, .p-style-802d8898 {
 
 .featured-collection .new-product-price {
     font: 400 14px/1.3 Lato, sans-serif;
-    color: #6E8B72;
+    color: #FFFFFF !important;
     margin: 0;
     padding: 0;
 }
@@ -1963,11 +2025,11 @@ h1,h2,h3,h4,h5,h6, .p-style-802d8898 {
 
 @media (max-width: 1024px) {
     .featured-collection .new-product-image {
-        height: 240px;
+        height: 360px;
     }
     
     .featured-collection .new-product-card {
-        padding: 24px;
+        padding: 0 0 24px 0;
     }
 }
 
@@ -1975,26 +2037,26 @@ h1,h2,h3,h4,h5,h6, .p-style-802d8898 {
     .featured-collection .new-products-row,
     .featured-collection .new-products-row-2 {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 0;
     }
     
     .featured-collection .new-product-card {
-        padding: 20px;
+        padding: 0 0 20px 0;
     }
     
     .featured-collection .new-product-image {
-        height: 220px;
+        height: 320px;
         margin-bottom: 20px;
     }
 }
 
 @media (max-width: 480px) {
     .featured-collection .new-product-image {
-        height: 200px;
+        height: 280px;
         margin-bottom: 16px;
     }
     
     .featured-collection .new-product-card {
-        padding: 16px;
+        padding: 0 0 16px 0;
     }
 }
